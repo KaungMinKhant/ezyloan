@@ -154,19 +154,4 @@ See detailed [Collateral Liquidation](collateral_liquidation.md) process.
 - **Push Protocol Video**:
   - Facilitate video calls for negotiations or conflict resolution.
 
----
-
-### **9. Analytics and Reporting**
-#### **Flow**:
-- Provide borrowers and lenders with:
-  - Portfolio performance.
-  - Loan history.
-  - Credit score updates.
-
-#### **Integrations**:
-- **1inch Portfolio API**:
-  - Generate insights into user balances, profits, and collateral performance.
-- **Push Protocol**:
-  - Send periodic summaries (e.g., “Your portfolio grew by 10% this month”).
-
----
+See detailed [Communication Features](communication_features.md) process.
