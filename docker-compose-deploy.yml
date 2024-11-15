@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ezy_loan
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+
+  web:
+    image: kaungmin/ezyloan_backend:latest
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/ezy_loan
+      SECRET_KEY: your_secret_key
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  nginx:
+    image: kaungmin/ezyloan_frontend:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
+      - ./frontend/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+
+volumes:
+  postgres_data:

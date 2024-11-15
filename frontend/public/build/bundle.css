@@ -1,0 +1,12 @@
+@import './variables.css';
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+:root {
+    --primary-color: #0a214a;
+    --secondary-color: #ffffff;
+    --tertiary-color: #e9af41;
+}
+

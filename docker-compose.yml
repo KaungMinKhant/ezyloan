@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: ezy_loan
+      POSTGRES_PASSWORD: ezy_loan
+      POSTGRES_DB: ezy_loan
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
+    volumes:
+      - ./backend:/app/backend
+      - ./db:/app/db
+    environment:
+      DATABASE_URL: postgresql://ezy_loan:ezy_loan@db:5432/ezy_loan
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+
+volumes:
+  postgres_data:
