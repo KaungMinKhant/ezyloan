@@ -20,7 +20,7 @@
      - Assign a mock value based on borrower-provided data or pre-defined categories (e.g., gold = $50/gram).
 
 4. **Loan-to-Value (LTV) Ratio**:
-   - Calculate the maximum loan amount based on collateral value.
+   - Calculate the maximum loan amount based on collateral value and borrower's credit scores.
    - Example:
      - Crypto LTV: 70% of collateral value.
      - Real-World Asset LTV: 50% of tokenized asset value.
