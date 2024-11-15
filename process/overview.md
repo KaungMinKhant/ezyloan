@@ -49,6 +49,7 @@ See detailed [User Onboarding](user_onboarding.md) process.
   - Notifications to inform borrowers of loan request status.
 - **Credit Score**:
   - AI evaluates borrower reliability using on-chain and off-chain data.
+See detailed [Borrower Requests Loan](borrower_requests_loan.md) process.
 
 ---
 
