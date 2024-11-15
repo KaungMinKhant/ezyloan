@@ -1,17 +1,13 @@
 ### **Summary of Technology Integrations**
+
 | **Flow Step**             | **Tool/Technology**                                      | **Purpose**                                                      |
 |---------------------------|---------------------------------------------------------|------------------------------------------------------------------|
-| User Onboarding           | Coinbase, Push Protocol, vlayer, Credit Score           | Wallet creation, KYC, credit evaluation.                        |
-| Borrower Requests Loan    | Chainlink, vlayer, 1inch Dev API, Push Protocol, Credit Score | Risk assessment, price feeds, loan evaluation.                  |
-| Collateral Submission     | Kinto, Chainlink CCIP, vlayer, Push Protocol            | Secure deposits, cross-chain collateral management.             |
-| Loan Approval & Disbursement | Chainlink CCIP, 1inch Fusion+, Push Protocol           | Cross-chain fund disbursement, borrower notifications.          |
-| Loan Management           | 1inch Portfolio API, Chainlink Automation, Push Protocol | Loan tracking, automation, and updates.                        |
-| Loan Repayment            | 1inch Fusion+, Chainlink Automation, Push Protocol      | Token swaps, repayment automation, collateral release.          |
-| Collateral Liquidation    | Chainlink Price Feeds, 1inch Fusion+, Push Protocol     | Accurate valuation, cross-chain swaps, fund transfers.          |
-| Communication Features    | Push Protocol Chat & Video                              | Messaging and video calls for negotiations.                     |
-| Analytics and Reporting   | 1inch Portfolio API, Push Protocol                      | Portfolio insights, periodic summaries, credit updates.         |
-
----
+| **User Onboarding**       | Coinbase, Push Protocol, vlayer                         | Wallet creation, KYC, and onboarding notifications.              |
+| **Borrower Requests Loan**| Chainlink Price Feeds, vlayer, Push Protocol            | Loan request processing, crypto valuation, and notifications.    |
+| **Collateral Submission** | Kinto, vlayer Web Proofs, Chainlink CCIP, Push Protocol | Secure collateral deposits, NFT tokenization, cross-chain collateral management, and updates. |
+| **Loan Approval & Disbursement** | Chainlink CCIP, 1inch Fusion+, Push Protocol           | Cross-chain loan disbursement, token swaps, and borrower notifications. |
+| **Loan Management**       | Chainlink Automation, 1inch Portfolio API, Push Protocol| Loan tracking, automation of reminders, and updates.             |
+| **Loan Repayment**        | 1inch Fusion+, Chainlink Automation, Push Protocol      | Token swaps for repayments, automation of collateral release, and repayment updates. |
 
 ### **Feature Prioritization**
 
@@ -21,100 +17,119 @@
 | **Borrower Loan Request**      | High         | Core functionality for the demo.            |
 | **Collateral Submission**      | High         | Show both crypto and tokenized asset flows. |
 | **Loan Approval & Disbursement** | High         | End-to-end loan experience is key.          |
+| **Loan Management**             | Medium       | Manage and track the loan status.  |
 | **Loan Repayment**             | Medium       | Demonstrate token swap and repayment flow.  |
-| **Collateral Liquidation**     | Medium       | Optional if time permits.                   |
-| **Messaging/Video Calls**      | Low          | Can be skipped unless critical for pitch.   |
-| **Analytics and Reporting**    | None         | Removed due to time constraints.            |
 
 ---
 
 See the schedule for the [project development](schedule.md) timeline.
 
 ### **1. User Onboarding**
+
 #### **Flow**:
-- Users sign up and create wallets.
-- KYC processes validate borrower and lender identities.
+- Users sign up by providing basic details such as name, email, and phone number.
+- Wallets are created using Coinbase MPC or connected via MetaMask.
+- Simplified KYC is conducted using email verification and identity checks.
+- Users receive notifications for milestone events like wallet creation and KYC completion.
 
 #### **Integrations**:
 - **Coinbase**:
-  - For MPC wallet creation and fiat-to-crypto funding.
+  - Enables secure wallet creation with MPC technology.
 - **Push Protocol**:
-  - Notifications to confirm wallet creation and KYC completion.
+  - Sends notifications to confirm wallet creation and KYC status.
 - **vlayer**:
-  - Use **Email Proofs** for verifying email domains as part of KYC.
-- **Credit Score**:
-  - AI assesses basic financial data to generate an initial credit score.
+  - Uses **Email Proofs** for verifying email ownership during the KYC process.
+- **Credit Scoring**:
+  - Simplified scoring evaluates user financial data like income and wallet activity to generate an initial credit score.
 
-See detailed [User Onboarding](user_onboarding_short.md) process.
+See detailed [User Onboarding](1.user_onboarding_short.md) process.
 
 ---
 
 ### **2. Borrower Requests Loan**
+
 #### **Flow**:
-- Borrowers fill in a loan request form specifying:
-  - Loan amount.
-  - Collateral type (crypto or tokenized real-world asset).
-  - Loan duration.
+- Borrowers access the loan request form and provide:
+  - Loan amount, personal information, monthly income and expenses, and purpose of the loan.
+- Borrowers select a collateral type:
+  - **Crypto Collateral**: Digital assets like ETH or USDT.
+  - **Real-World Assets**: Items like gold, electronics, or vehicles, which are tokenized into NFTs.
+- Loan details, including duration and collateral, are submitted for processing.
+- The platform calculates the Loan-to-Value (LTV) ratio and evaluates borrower creditworthiness.
 
 #### **Integrations**:
 - **Chainlink Price Feeds**:
-  - Fetch real-time token prices for crypto collateral valuation.
-- **vlayer Web Proofs**:
-  - Verify off-chain data such as bank balances or income.
-- **1inch Dev Portal APIs**:
-  - Fetch borrower’s wallet transaction history for risk assessment.
+  - Provides real-time pricing for crypto assets to determine collateral value.
+- **vlayer**:
+  - Uses **Web Proofs** for verifying and tokenizing real-world asset ownership into NFTs.
 - **Push Protocol**:
-  - Notifications to inform borrowers of loan request status.
-- **Credit Score**:
-  - AI evaluates borrower reliability using on-chain and off-chain data.
+  - Sends notifications to borrowers for status updates, such as "Loan request submitted" or "Loan approved."
+- **Credit Scoring**:
+  - Assesses borrower eligibility based on financial and collateral data.
 
-See detailed [Borrower Requests Loan](borrower_requests_loan_short.md) process.
+See detailed [Borrower Requests Loan](2.borrower_requests_loan_short.md) process.
 
 ---
 
 ### **3. Collateral Submission**
+
 #### **Flow**:
-- Borrowers deposit collateral as:
-  - **Crypto**: Transferred directly to a smart contract.
-  - **Real-World Assets**: Tokenized as NFTs.
+- Borrowers select their collateral type:
+  - **Crypto Collateral**: Deposited directly into a secure smart contract.
+  - **Real-World Assets**: Descriptions and proof of ownership are submitted for verification and tokenization.
+- Real-world assets are tokenized into NFTs to represent ownership and value.
+- Cross-chain compatibility is ensured if collateral is pledged on one chain and the loan is issued on another.
+- Borrowers are notified of the collateral submission and verification status.
 
 #### **Integrations**:
 - **Kinto**:
-  - For fast, cost-effective Layer 2 transactions for crypto collateral deposits.
+  - Manages crypto collateral deposits efficiently on a Layer 2 network.
 - **vlayer**:
-  - **Web Proofs**: Validate tokenized real-world assets (e.g., gold, electronics).
+  - Uses **Web Proofs** to verify real-world assets and tokenize them into NFTs.
+- **Chainlink Price Feeds**:
+  - Fetches real-time valuations for crypto collateral to ensure accuracy.
 - **Chainlink CCIP**:
-  - Facilitate cross-chain collateral deposits if the borrower operates on a different blockchain.
+  - Handles cross-chain collateral transfers seamlessly.
 - **Push Protocol**:
-  - Notify borrowers once collateral is submitted and verified.
+  - Sends updates to borrowers, such as "Collateral submitted successfully" and "Real-world asset verified."
 
-See detailed [Collateral Submission](collateral_submission_short.md) process.
+See detailed [Collateral Submission](3.collateral_submission_short.md) process.
 
 ---
 
-### **4. Loan Approval and Disbursement**
+### **4. Loan Approval & Disbursement**
+
 #### **Flow**:
-- Once collateral is verified and the loan is approved, funds are disbursed to the borrower.
+- Collateral is verified to ensure it meets platform requirements.
+- The Loan-to-Value (LTV) ratio is calculated, and borrower creditworthiness is assessed.
+- Approved loans are disbursed to the borrower in their preferred token and blockchain.
+  - **Token Swap**: Converts lender-provided tokens to borrower-preferred tokens.
+  - **Cross-Chain Transfer**: Transfers funds to the borrower’s specified blockchain.
+- Borrowers receive notifications about loan approval, token swaps, and disbursement completion.
 
 #### **Integrations**:
 - **Chainlink CCIP**:
-  - Enable cross-chain disbursements, transferring funds seamlessly across blockchains.
+  - Enables seamless cross-chain transfers for loan disbursement.
 - **1inch Fusion+**:
-  - Swap collateral into borrower’s preferred token for disbursement.
+  - Handles token swaps to ensure borrowers receive their preferred repayment token.
 - **Push Protocol**:
-  - Notify borrowers that the loan has been disbursed.
+  - Sends notifications to borrowers for loan approval, token swap status, and fund disbursement.
 
-See detailed [Loan Approval and Disbursement](loan_approval_and_disbursement_short.md) process.
+See detailed [Loan Approval and Disbursement](4.loan_approval_and_disbursement_short.md) process.
 
 ---
 
 ### **5. Loan Management**
+
 #### **Flow**:
 - Borrowers and lenders track:
-  - Loan status.
-  - Collateral value.
-  - Interest accrued.
-  - Repayment schedules.
+  - Loan status: Active, Repaid, or Defaulted.
+  - Loan balance and remaining repayment amount.
+  - Due dates for upcoming payments.
+- Real-time updates on collateral value are provided for both crypto and tokenized real-world assets.
+- Alerts are triggered if collateral value drops below the Loan-to-Value (LTV) threshold.
+- Interest accrues dynamically based on loan terms and repayment schedules.
+- Automated reminders for repayment deadlines are sent to borrowers.
 
 #### **Integrations**:
 - **1inch Portfolio API**:
@@ -124,51 +139,28 @@ See detailed [Loan Approval and Disbursement](loan_approval_and_disbursement_sho
 - **Push Protocol**:
   - Notify users of loan progress (e.g., “Loan due in 3 days”).
 
-See detailed [Loan Management](loan_management_short.md) process.
+See detailed [Loan Management](5.loan_management_short.md) process.
 
 ---
 
 ### **6. Loan Repayment**
+
 #### **Flow**:
-- Borrowers repay loans in installments or in full.
-- Collateral is released upon full repayment.
+- Borrowers can choose between:
+  - **Installments**: Partial repayment according to the loan schedule.
+  - **Full Repayment**: Pay off the loan early to recover collateral quickly.
+- Borrowers can repay using any token they hold, with token swaps facilitated automatically if necessary.
+- Upon full repayment, the system releases the borrower’s collateral:
+  - Crypto collateral is returned to the borrower’s wallet.
+  - Tokenized real-world assets are transferred back to the borrower.
+- Notifications keep borrowers and lenders updated on repayment and collateral release statuses.
 
 #### **Integrations**:
 - **1inch Fusion+**:
-  - Allow borrowers to swap any token they hold into the repayment token.
+  - Enables borrowers to swap their held tokens into the required repayment token seamlessly.
 - **Chainlink Automation (Keepers)**:
-  - Automatically release collateral once the repayment is complete.
+  - Automates collateral release when loans are fully repaid, ensuring efficiency and transparency.
 - **Push Protocol**:
-  - Notify borrowers and lenders when a repayment is successful, and collateral is released.
+  - Sends notifications for successful repayments, collateral release, and lender crediting.
 
-See detailed [Loan Repayment](loan_repayment_short.md) process.
-
----
-
-### **7. Collateral Liquidation (In Case of Default)**
-#### **Flow**:
-- If the borrower defaults, the system liquidates the collateral and transfers the proceeds to the lender.
-
-#### **Integrations**:
-- **Chainlink Price Feeds**:
-  - Fetch real-time collateral value to ensure accurate liquidation pricing.
-- **1inch Fusion+**:
-  - Swap collateral into the lender’s preferred token.
-- **Push Protocol**:
-  - Notify borrowers of liquidation and lenders of fund transfer.
-
-See detailed [Collateral Liquidation](collateral_liquidation.md) process.
-
----
-
-### **8. Communication Features**
-#### **Flow**:
-- Borrowers and lenders communicate to negotiate terms or resolve disputes.
-
-#### **Integrations**:
-- **Push Protocol Chat**:
-  - Enable direct messaging between borrowers and lenders.
-- **Push Protocol Video**:
-  - Facilitate video calls for negotiations or conflict resolution.
-
-See detailed [Communication Features](communication_features.md) process.
+See detailed [Loan Repayment](6.loan_repayment_short.md) process.
