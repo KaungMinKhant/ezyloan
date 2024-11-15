@@ -124,6 +124,8 @@ See detailed [Loan Management](loan_management.md) process.
 - **Push Protocol**:
   - Notify borrowers and lenders when a repayment is successful, and collateral is released.
 
+See detailed [Loan Repayment](loan_repayment.md) process.
+
 ---
 
 ### **7. Collateral Liquidation (In Case of Default)**
@@ -137,6 +139,8 @@ See detailed [Loan Management](loan_management.md) process.
   - Swap collateral into the lender’s preferred token.
 - **Push Protocol**:
   - Notify borrowers of liquidation and lenders of fund transfer.
+
+See detailed [Collateral Liquidation](collateral_liquidation.md) process.
 
 ---
 
