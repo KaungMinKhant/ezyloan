@@ -28,6 +28,8 @@
 
 ---
 
+See the schedule for the [project development](schedule.md) timeline.
+
 ### **1. User Onboarding**
 #### **Flow**:
 - Users sign up and create wallets.
