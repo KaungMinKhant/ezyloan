@@ -1,6 +1,7 @@
 1. **Loan Request Form**:
    - Borrowers access the loan request feature and provide:
      - **Loan Amount**: Desired loan value.
+     - **Personal Information**: Age, Occupation, Monthly Income, Monthly Expense, Purpose of Loan.
      - **Collateral Type**:
        - **Crypto**: Deposit digital assets (e.g., ETH, USDC).
        - **Real-World Asset**: Items like gold, electronics, or vehicles are tokenized as NFTs.
