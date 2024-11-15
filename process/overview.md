@@ -1,3 +1,18 @@
+### **Summary of Technology Integrations**
+| **Flow Step**             | **Tool/Technology**                                      | **Purpose**                                                      |
+|---------------------------|---------------------------------------------------------|------------------------------------------------------------------|
+| User Onboarding           | Coinbase, Push Protocol, vlayer, Credit Score           | Wallet creation, KYC, credit evaluation.                        |
+| Borrower Requests Loan    | Chainlink, vlayer, 1inch Dev API, Push Protocol, Credit Score | Risk assessment, price feeds, loan evaluation.                  |
+| Collateral Submission     | Kinto, Chainlink CCIP, vlayer, Push Protocol            | Secure deposits, cross-chain collateral management.             |
+| Loan Approval & Disbursement | Chainlink CCIP, 1inch Fusion+, Push Protocol           | Cross-chain fund disbursement, borrower notifications.          |
+| Loan Management           | 1inch Portfolio API, Chainlink Automation, Push Protocol | Loan tracking, automation, and updates.                        |
+| Loan Repayment            | 1inch Fusion+, Chainlink Automation, Push Protocol      | Token swaps, repayment automation, collateral release.          |
+| Collateral Liquidation    | Chainlink Price Feeds, 1inch Fusion+, Push Protocol     | Accurate valuation, cross-chain swaps, fund transfers.          |
+| Communication Features    | Push Protocol Chat & Video                              | Messaging and video calls for negotiations.                     |
+| Analytics and Reporting   | 1inch Portfolio API, Push Protocol                      | Portfolio insights, periodic summaries, credit updates.         |
+
+---
+
 ### **1. User Onboarding**
 #### **Flow**:
 - Users sign up and create wallets.
@@ -139,20 +154,5 @@
   - Generate insights into user balances, profits, and collateral performance.
 - **Push Protocol**:
   - Send periodic summaries (e.g., “Your portfolio grew by 10% this month”).
-
----
-
-### **Summary of Technology Integrations**
-| **Flow Step**             | **Tool/Technology**                                      | **Purpose**                                                      |
-|---------------------------|---------------------------------------------------------|------------------------------------------------------------------|
-| User Onboarding           | Coinbase, Push Protocol, vlayer, Credit Score           | Wallet creation, KYC, credit evaluation.                        |
-| Borrower Requests Loan    | Chainlink, vlayer, 1inch Dev API, Push Protocol, Credit Score | Risk assessment, price feeds, loan evaluation.                  |
-| Collateral Submission     | Kinto, Chainlink CCIP, vlayer, Push Protocol            | Secure deposits, cross-chain collateral management.             |
-| Loan Approval & Disbursement | Chainlink CCIP, 1inch Fusion+, Push Protocol           | Cross-chain fund disbursement, borrower notifications.          |
-| Loan Management           | 1inch Portfolio API, Chainlink Automation, Push Protocol | Loan tracking, automation, and updates.                        |
-| Loan Repayment            | 1inch Fusion+, Chainlink Automation, Push Protocol      | Token swaps, repayment automation, collateral release.          |
-| Collateral Liquidation    | Chainlink Price Feeds, 1inch Fusion+, Push Protocol     | Accurate valuation, cross-chain swaps, fund transfers.          |
-| Communication Features    | Push Protocol Chat & Video                              | Messaging and video calls for negotiations.                     |
-| Analytics and Reporting   | 1inch Portfolio API, Push Protocol                      | Portfolio insights, periodic summaries, credit updates.         |
 
 ---
