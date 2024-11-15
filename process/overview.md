@@ -13,6 +13,21 @@
 
 ---
 
+### **Feature Prioritization**
+
+| **Feature**                   | **Priority** | **Notes**                                    |
+|-------------------------------|--------------|---------------------------------------------|
+| **User Onboarding**            | High         | Essential for creating wallets and KYC.     |
+| **Borrower Loan Request**      | High         | Core functionality for the demo.            |
+| **Collateral Submission**      | High         | Show both crypto and tokenized asset flows. |
+| **Loan Approval & Disbursement** | High         | End-to-end loan experience is key.          |
+| **Loan Repayment**             | Medium       | Demonstrate token swap and repayment flow.  |
+| **Collateral Liquidation**     | Medium       | Optional if time permits.                   |
+| **Messaging/Video Calls**      | Low          | Can be skipped unless critical for pitch.   |
+| **Analytics and Reporting**    | None         | Removed due to time constraints.            |
+
+---
+
 ### **1. User Onboarding**
 #### **Flow**:
 - Users sign up and create wallets.
@@ -28,7 +43,7 @@
 - **Credit Score**:
   - AI assesses basic financial data to generate an initial credit score.
 
-See detailed [User Onboarding](user_onboarding.md) process.
+See detailed [User Onboarding](user_onboarding_short.md) process.
 
 ---
 
@@ -51,7 +66,7 @@ See detailed [User Onboarding](user_onboarding.md) process.
 - **Credit Score**:
   - AI evaluates borrower reliability using on-chain and off-chain data.
 
-See detailed [Borrower Requests Loan](borrower_requests_loan.md) process.
+See detailed [Borrower Requests Loan](borrower_requests_loan_short.md) process.
 
 ---
 
@@ -71,7 +86,7 @@ See detailed [Borrower Requests Loan](borrower_requests_loan.md) process.
 - **Push Protocol**:
   - Notify borrowers once collateral is submitted and verified.
 
-See detailed [Collateral Submission](collateral_submission.md) process.
+See detailed [Collateral Submission](collateral_submission_short.md) process.
 
 ---
 
@@ -87,7 +102,7 @@ See detailed [Collateral Submission](collateral_submission.md) process.
 - **Push Protocol**:
   - Notify borrowers that the loan has been disbursed.
 
-See detailed [Loan Approval and Disbursement](loan_approval_and_disbursement.md) process.
+See detailed [Loan Approval and Disbursement](loan_approval_and_disbursement_short.md) process.
 
 ---
 
@@ -107,7 +122,7 @@ See detailed [Loan Approval and Disbursement](loan_approval_and_disbursement.md)
 - **Push Protocol**:
   - Notify users of loan progress (e.g., “Loan due in 3 days”).
 
-See detailed [Loan Management](loan_management.md) process.
+See detailed [Loan Management](loan_management_short.md) process.
 
 ---
 
@@ -124,7 +139,7 @@ See detailed [Loan Management](loan_management.md) process.
 - **Push Protocol**:
   - Notify borrowers and lenders when a repayment is successful, and collateral is released.
 
-See detailed [Loan Repayment](loan_repayment.md) process.
+See detailed [Loan Repayment](loan_repayment_short.md) process.
 
 ---
 
