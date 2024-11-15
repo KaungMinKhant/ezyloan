@@ -1,1 +1,5 @@
-backend/app/__pycache__/
+backend/app/__pycache__/*
+backend/app/database/__pycache__/*
+backend/app/main/__pycache__/*
+.env
+
