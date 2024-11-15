@@ -71,6 +71,8 @@ See detailed [Borrower Requests Loan](borrower_requests_loan.md) process.
 - **Push Protocol**:
   - Notify borrowers once collateral is submitted and verified.
 
+See detailed [Collateral Submission](collateral_submission.md) process.
+
 ---
 
 ### **4. Loan Approval and Disbursement**
