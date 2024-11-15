@@ -28,6 +28,7 @@
 - **Credit Score**:
   - AI assesses basic financial data to generate an initial credit score.
 
+See detailed [User Onboarding](user_onboarding.md) process.
 ---
 
 ### **2. Borrower Requests Loan**
