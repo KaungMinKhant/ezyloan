@@ -19,8 +19,8 @@ services:
     volumes:
       - ./backend:/app/backend
       - ./db:/app/db
-    environment:
-      DATABASE_URL: postgresql://ezy_loan:ezy_loan@db:5432/ezy_loan
+    env_file:
+      - .env
     ports:
       - "8000:8000"
     depends_on:
