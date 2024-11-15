@@ -87,6 +87,8 @@ See detailed [Collateral Submission](collateral_submission.md) process.
 - **Push Protocol**:
   - Notify borrowers that the loan has been disbursed.
 
+See detailed [Loan Approval and Disbursement](loan_approval_and_disbursement.md) process.
+
 ---
 
 ### **5. Loan Management**
@@ -104,6 +106,8 @@ See detailed [Collateral Submission](collateral_submission.md) process.
   - Automate loan status updates and send reminders for upcoming repayments.
 - **Push Protocol**:
   - Notify users of loan progress (e.g., “Loan due in 3 days”).
+
+See detailed [Loan Management](loan_management.md) process.
 
 ---
 
