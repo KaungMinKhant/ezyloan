@@ -1,6 +1,19 @@
 from pydantic import BaseModel, UUID4
 
 
+class UserBase(BaseModel):
+    name: str
+    email: str
+
+class UserCreate(UserBase):
+    pass
+
+class User(UserBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
 class LoanBase(BaseModel):
     age: int
     amount: float

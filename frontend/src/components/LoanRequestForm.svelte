@@ -18,11 +18,14 @@
         duration: "",
         realWorldDescription: "",
         realWorldPhoto: null,
+        cryptoCollateralToken: "",
+        cryptoCollateralAmount: "",
     };
 
     const tokens = ["ETH", "USDC", "DAI"];
     const fiatCurrencies = ["USD", "EUR", "THB"];
     const durations = ["3 months", "6 months", "12 months"];
+    const realWorldCollateralOptions = ["Phone", "Laptop"];
 
     function handleNextStep() {
         if (step < totalSteps) step++;
@@ -80,6 +83,7 @@
 </script>
 
 <section class="loan-form-container">
+    <!-- Progress Bar -->
     <div class="progress-bar">
         <div
             class="progress-bar-fill"
@@ -200,14 +204,37 @@
                 </select>
             </label>
 
+            {#if loanDetails.collateralType === "crypto"}
+            <label>
+                Select Token for Collateral:
+                <select bind:value={loanDetails.cryptoCollateralToken} required>
+                    <option value="" disabled>Select a token</option>
+                    {#each tokens as token}
+                        <option value={token}>{token}</option>
+                    {/each}
+                </select>
+            </label>
+
+            <label>
+                Collateral Amount:
+                <input
+                    type="number"
+                    bind:value={loanDetails.cryptoCollateralAmount}
+                    placeholder="Enter amount to pledge"
+                    required
+                />
+            </label>
+            {/if}
+
             {#if loanDetails.collateralType === "real-world"}
             <label>
-                Description of Asset:
-                <textarea
-                    bind:value={loanDetails.realWorldDescription}
-                    placeholder="Describe the asset (e.g., gold, electronics)"
-                    required
-                ></textarea>
+                Select Asset Type:
+                <select bind:value={loanDetails.realWorldDescription} required>
+                    <option value="" disabled>Select an asset</option>
+                    {#each realWorldCollateralOptions as option}
+                        <option value={option}>{option}</option>
+                    {/each}
+                </select>
             </label>
 
             <label>

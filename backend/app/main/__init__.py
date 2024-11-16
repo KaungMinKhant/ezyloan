@@ -12,6 +12,7 @@ from typing import Optional
 import os
 import uuid
 from .wallet import router as wallet_router
+from .users import router as login_router
 from .loan_form import router as loan_form_router
 
 SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key")
@@ -46,4 +47,5 @@ def get_db():
         db.close()
 
 app.include_router(wallet_router, prefix="/api/v1")
+app.include_router(login_router, prefix="/api/v1")
 app.include_router(loan_form_router, prefix="/api/v1")
