@@ -1,3 +1,4 @@
+from decimal import Decimal
 from backend.app.schemas.nft_tokenization import NFTDeploymentRequest,\
     LoanRequest, LendRequest
 from web3 import Web3
@@ -250,7 +251,8 @@ async def get_crypto_valuation(
 @router.post("/loan/crypto/approve-reject")
 async def loan_approve_reject(request: LoanRequest):
     """
-    Approve or reject a loan request based on the value of crypto collateral.
+    Approve or reject a loan request, handle token mismatch, deploy a smart contract,
+    and transfer the loan amount to the borrower.
 
     Args:
         request (LoanRequest): Loan request details, including collateral amount and loan amount.
@@ -263,12 +265,11 @@ async def loan_approve_reject(request: LoanRequest):
         if not request.wallet_id or not request.requested_loan_token or not request.collateral_token or not request.collateral_amount or not request.requested_loan_amount:
             raise HTTPException(status_code=400, detail="Missing required fields in the request.")
 
-        # Call valuation API or function to calculate collateral value
+        # Step 1: Calculate collateral valuation
         collateral_valuation = await get_crypto_valuation(
             token=request.collateral_token,
             amount=request.collateral_amount
         )
-        
         loan_valuation = await get_crypto_valuation(
             token=request.requested_loan_token,
             amount=request.requested_loan_amount
@@ -281,22 +282,94 @@ async def loan_approve_reject(request: LoanRequest):
         collateral_value = collateral_valuation["usd_value"]
         max_loan_amount = collateral_value * 0.7  # 70% of collateral value
 
-        # Determine approval or rejection
-        if loan_valuation["usd_value"] <= max_loan_amount:
-            return {
-                "status": "approved",
-                "approved_loan_amount": request.requested_loan_amount,
-                "approved_loan_token": request.requested_loan_token,
-                "max_loan_amount_in_usd": max_loan_amount,
-                "collateral_value_in_usd": collateral_value,
-            }
-        else:
+        if loan_valuation["usd_value"] > max_loan_amount:
             return {
                 "status": "rejected",
                 "reason": "Requested loan amount exceeds the maximum allowable loan amount.",
                 "max_loan_amount_in_usd": max_loan_amount,
                 "collateral_value_in_usd": collateral_value,
             }
+
+        # Step 2: Find matching lender
+        with open("data/lend_requests.json", "r") as file:
+            lend_requests = json.load(file)
+
+        print("Lend Requests: ", lend_requests)
+        # Prioritize lenders with the same token
+        matched_lender = next(
+            (lender for lender in lend_requests
+            if lender["loan_token"] == request.requested_loan_token and
+                lender["loan_valuation_in_usd"] >= loan_valuation["usd_value"]),
+            None
+        )
+
+        # If no exact token match is found, fallback to general match
+        if not matched_lender:
+            matched_lender = next(
+                (lender for lender in lend_requests
+                if lender["loan_valuation_in_usd"] >= loan_valuation["usd_value"]),
+                None
+            )
+
+        if not matched_lender:
+            return {"status": "rejected", "reason": "No matching lender found."}
+
+        # Fetch lender's wallet
+        lender_wallet = cdp.Wallet.fetch(matched_lender["wallet_id"])
+        lender_wallet = fetch_seed(matched_lender["wallet_id"], lender_wallet)
+
+        # Step 3: Handle token mismatch
+        if matched_lender["loan_token"] != request.requested_loan_token:
+            try:
+                from_asset_id = matched_lender["loan_token"].lower()
+                to_asset_id = request.requested_loan_token.lower()
+                trade_response = lender_wallet.trade(
+                    amount=request.requested_loan_amount,
+                    from_asset_id=from_asset_id,
+                    to_asset_id=to_asset_id
+                )
+                trade_response.wait()  # Wait for the trade to complete
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Token trade failed: {str(e)}")
+
+        # Step 4: Deploy a smart contract
+        try:
+            borrower_wallet = cdp.Wallet.fetch(request.wallet_id)
+            borrower_wallet = fetch_seed(request.wallet_id, borrower_wallet)
+            faucet_response = borrower_wallet.faucet(asset_id="eth")
+            faucet_response.wait()
+            # 1USDC = 1000 LTT
+            total_supply = int(request.requested_loan_amount * 1000)
+            smart_contract = borrower_wallet.deploy_token(
+                name="LoanTrackingToken",
+                symbol="LTT",
+                total_supply=total_supply
+            )
+            smart_contract.wait()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Smart contract deployment failed: {str(e)}")
+
+        # Step 5: Transfer funds to borrower
+        try:
+            transfer_response = lender_wallet.transfer(
+                amount=request.requested_loan_amount,
+                asset_id=request.requested_loan_token.lower(),
+                destination=borrower_wallet.default_address.address_id
+            )
+            transfer_response.wait()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Fund transfer failed: {str(e)}")
+
+        return {
+            "status": "approved",
+            "approved_loan_amount": request.requested_loan_amount,
+            "approved_loan_token": request.requested_loan_token,
+            "max_loan_amount_in_usd": max_loan_amount,
+            "collateral_value_in_usd": collateral_value,
+            "message": f"Loan approved. Funds transferred successfully.",
+            "smart_contract_address": smart_contract.contract_address,
+        }
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing loan request: {str(e)}")
 
