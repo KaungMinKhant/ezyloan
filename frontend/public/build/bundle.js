@@ -3470,7 +3470,7 @@ var app = (function () {
 	}
 
 	// (158:8) {#if step === 3}
-	function create_if_block_2(ctx) {
+	function create_if_block_2$1(ctx) {
 		let div;
 		let h2;
 		let t1;
@@ -3670,7 +3670,7 @@ var app = (function () {
 
 		dispatch_dev("SvelteRegisterBlock", {
 			block,
-			id: create_if_block_2.name,
+			id: create_if_block_2$1.name,
 			type: "if",
 			source: "(158:8) {#if step === 3}",
 			ctx
@@ -4206,7 +4206,7 @@ var app = (function () {
 		let t6;
 		let if_block0 = /*step*/ ctx[0] === 1 && create_if_block_6(ctx);
 		let if_block1 = /*step*/ ctx[0] === 2 && create_if_block_5(ctx);
-		let if_block2 = /*step*/ ctx[0] === 3 && create_if_block_2(ctx);
+		let if_block2 = /*step*/ ctx[0] === 3 && create_if_block_2$1(ctx);
 		let if_block3 = /*step*/ ctx[0] > 1 && create_if_block_1$2(ctx);
 
 		function select_block_type(ctx, dirty) {
@@ -4307,7 +4307,7 @@ var app = (function () {
 					if (if_block2) {
 						if_block2.p(ctx, dirty);
 					} else {
-						if_block2 = create_if_block_2(ctx);
+						if_block2 = create_if_block_2$1(ctx);
 						if_block2.c();
 						if_block2.m(form, t5);
 					}
@@ -4666,17 +4666,17 @@ var app = (function () {
 
 	function get_each_context(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[11] = list[i];
+		child_ctx[12] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_1(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[14] = list[i];
+		child_ctx[15] = list[i];
 		return child_ctx;
 	}
 
-	// (64:4) {:else}
+	// (88:4) {:else}
 	function create_else_block$2(ctx) {
 		let form;
 		let label0;
@@ -4694,6 +4694,8 @@ var app = (function () {
 		let option1;
 		let t7;
 		let button;
+		let t9;
+		let if_block_anchor;
 		let mounted;
 		let dispose;
 		let each_value_1 = ensure_array_like_dev(/*wallets*/ ctx[0]);
@@ -4703,12 +4705,14 @@ var app = (function () {
 			each_blocks_1[i] = create_each_block_1(get_each_context_1(ctx, each_value_1, i));
 		}
 
-		let each_value = ensure_array_like_dev(/*tokens*/ ctx[5]);
+		let each_value = ensure_array_like_dev(/*tokens*/ ctx[6]);
 		let each_blocks = [];
 
 		for (let i = 0; i < each_value.length; i += 1) {
 			each_blocks[i] = create_each_block(get_each_context(ctx, each_value, i));
 		}
+
+		let if_block = /*resultMessage*/ ctx[5] && create_if_block_2(ctx);
 
 		const block = {
 			c: function create() {
@@ -4741,38 +4745,41 @@ var app = (function () {
 				t7 = space();
 				button = element("button");
 				button.textContent = "Submit";
+				t9 = space();
+				if (if_block) if_block.c();
+				if_block_anchor = empty();
 				option0.__value = "";
 				set_input_value(option0, option0.__value);
 				option0.disabled = true;
-				add_location(option0, file$3, 68, 20, 2065);
+				add_location(option0, file$3, 92, 20, 2944);
 				select0.required = true;
-				attr_dev(select0, "class", "svelte-1r39pjj");
-				if (/*selectedWallet*/ ctx[1] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[7].call(select0));
-				add_location(select0, file$3, 67, 16, 1999);
-				attr_dev(label0, "class", "svelte-1r39pjj");
-				add_location(label0, file$3, 65, 12, 1944);
+				attr_dev(select0, "class", "svelte-xosryq");
+				if (/*selectedWallet*/ ctx[1] === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[8].call(select0));
+				add_location(select0, file$3, 91, 16, 2878);
+				attr_dev(label0, "class", "svelte-xosryq");
+				add_location(label0, file$3, 89, 12, 2823);
 				attr_dev(input, "type", "number");
 				attr_dev(input, "placeholder", "Enter loan amount");
 				input.required = true;
-				attr_dev(input, "class", "svelte-1r39pjj");
-				add_location(input, file$3, 77, 16, 2374);
-				attr_dev(label1, "class", "svelte-1r39pjj");
-				add_location(label1, file$3, 75, 12, 2321);
+				attr_dev(input, "class", "svelte-xosryq");
+				add_location(input, file$3, 101, 16, 3253);
+				attr_dev(label1, "class", "svelte-xosryq");
+				add_location(label1, file$3, 99, 12, 3200);
 				option1.__value = "";
 				set_input_value(option1, option1.__value);
 				option1.disabled = true;
-				add_location(option1, file$3, 88, 20, 2717);
+				add_location(option1, file$3, 112, 20, 3596);
 				select1.required = true;
-				attr_dev(select1, "class", "svelte-1r39pjj");
-				if (/*loanDetails*/ ctx[2].token === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[9].call(select1));
-				add_location(select1, file$3, 87, 16, 2648);
-				attr_dev(label2, "class", "svelte-1r39pjj");
-				add_location(label2, file$3, 85, 12, 2601);
+				attr_dev(select1, "class", "svelte-xosryq");
+				if (/*loanDetails*/ ctx[2].token === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[10].call(select1));
+				add_location(select1, file$3, 111, 16, 3527);
+				attr_dev(label2, "class", "svelte-xosryq");
+				add_location(label2, file$3, 109, 12, 3480);
 				attr_dev(button, "type", "submit");
-				attr_dev(button, "class", "btn btn-primary svelte-1r39pjj");
-				add_location(button, file$3, 95, 12, 2962);
-				attr_dev(form, "class", "svelte-1r39pjj");
-				add_location(form, file$3, 64, 8, 1885);
+				attr_dev(button, "class", "btn btn-primary svelte-xosryq");
+				add_location(button, file$3, 119, 12, 3841);
+				attr_dev(form, "class", "svelte-xosryq");
+				add_location(form, file$3, 88, 8, 2764);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, form, anchor);
@@ -4808,13 +4815,16 @@ var app = (function () {
 				select_option(select1, /*loanDetails*/ ctx[2].token, true);
 				append_dev(form, t7);
 				append_dev(form, button);
+				insert_dev(target, t9, anchor);
+				if (if_block) if_block.m(target, anchor);
+				insert_dev(target, if_block_anchor, anchor);
 
 				if (!mounted) {
 					dispose = [
-						listen_dev(select0, "change", /*select0_change_handler*/ ctx[7]),
-						listen_dev(input, "input", /*input_input_handler*/ ctx[8]),
-						listen_dev(select1, "change", /*select1_change_handler*/ ctx[9]),
-						listen_dev(form, "submit", prevent_default(/*handleSubmit*/ ctx[6]), false, true, false, false)
+						listen_dev(select0, "change", /*select0_change_handler*/ ctx[8]),
+						listen_dev(input, "input", /*input_input_handler*/ ctx[9]),
+						listen_dev(select1, "change", /*select1_change_handler*/ ctx[10]),
+						listen_dev(form, "submit", prevent_default(/*handleSubmit*/ ctx[7]), false, true, false, false)
 					];
 
 					mounted = true;
@@ -4848,12 +4858,12 @@ var app = (function () {
 					select_option(select0, /*selectedWallet*/ ctx[1]);
 				}
 
-				if (dirty & /*loanDetails, tokens*/ 36 && to_number(input.value) !== /*loanDetails*/ ctx[2].amount) {
+				if (dirty & /*loanDetails, tokens*/ 68 && to_number(input.value) !== /*loanDetails*/ ctx[2].amount) {
 					set_input_value(input, /*loanDetails*/ ctx[2].amount);
 				}
 
-				if (dirty & /*tokens*/ 32) {
-					each_value = ensure_array_like_dev(/*tokens*/ ctx[5]);
+				if (dirty & /*tokens*/ 64) {
+					each_value = ensure_array_like_dev(/*tokens*/ ctx[6]);
 					let i;
 
 					for (i = 0; i < each_value.length; i += 1) {
@@ -4875,17 +4885,33 @@ var app = (function () {
 					each_blocks.length = each_value.length;
 				}
 
-				if (dirty & /*loanDetails, tokens*/ 36) {
+				if (dirty & /*loanDetails, tokens*/ 68) {
 					select_option(select1, /*loanDetails*/ ctx[2].token);
+				}
+
+				if (/*resultMessage*/ ctx[5]) {
+					if (if_block) {
+						if_block.p(ctx, dirty);
+					} else {
+						if_block = create_if_block_2(ctx);
+						if_block.c();
+						if_block.m(if_block_anchor.parentNode, if_block_anchor);
+					}
+				} else if (if_block) {
+					if_block.d(1);
+					if_block = null;
 				}
 			},
 			d: function destroy(detaching) {
 				if (detaching) {
 					detach_dev(form);
+					detach_dev(t9);
+					detach_dev(if_block_anchor);
 				}
 
 				destroy_each(each_blocks_1, detaching);
 				destroy_each(each_blocks, detaching);
+				if (if_block) if_block.d(detaching);
 				mounted = false;
 				run_all(dispose);
 			}
@@ -4895,14 +4921,14 @@ var app = (function () {
 			block,
 			id: create_else_block$2.name,
 			type: "else",
-			source: "(64:4) {:else}",
+			source: "(88:4) {:else}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (62:27) 
+	// (86:27) 
 	function create_if_block_1$1(ctx) {
 		let p;
 		let t;
@@ -4911,8 +4937,8 @@ var app = (function () {
 			c: function create() {
 				p = element("p");
 				t = text(/*errorMessage*/ ctx[4]);
-				attr_dev(p, "class", "error-text svelte-1r39pjj");
-				add_location(p, file$3, 62, 8, 1824);
+				attr_dev(p, "class", "error-text svelte-xosryq");
+				add_location(p, file$3, 86, 8, 2703);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, p, anchor);
@@ -4932,14 +4958,14 @@ var app = (function () {
 			block,
 			id: create_if_block_1$1.name,
 			type: "if",
-			source: "(62:27) ",
+			source: "(86:27) ",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (60:4) {#if isLoading}
+	// (84:4) {#if isLoading}
 	function create_if_block$2(ctx) {
 		let p;
 
@@ -4947,8 +4973,8 @@ var app = (function () {
 			c: function create() {
 				p = element("p");
 				p.textContent = "Loading wallets...";
-				attr_dev(p, "class", "loading-text svelte-1r39pjj");
-				add_location(p, file$3, 60, 8, 1741);
+				attr_dev(p, "class", "loading-text svelte-xosryq");
+				add_location(p, file$3, 84, 8, 2620);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, p, anchor);
@@ -4965,17 +4991,17 @@ var app = (function () {
 			block,
 			id: create_if_block$2.name,
 			type: "if",
-			source: "(60:4) {#if isLoading}",
+			source: "(84:4) {#if isLoading}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (70:20) {#each wallets as wallet}
+	// (94:20) {#each wallets as wallet}
 	function create_each_block_1(ctx) {
 		let option;
-		let t_value = /*wallet*/ ctx[14].id + "";
+		let t_value = /*wallet*/ ctx[15].id + "";
 		let t;
 		let option_value_value;
 
@@ -4983,18 +5009,18 @@ var app = (function () {
 			c: function create() {
 				option = element("option");
 				t = text(t_value);
-				option.__value = option_value_value = /*wallet*/ ctx[14].id;
+				option.__value = option_value_value = /*wallet*/ ctx[15].id;
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 70, 24, 2186);
+				add_location(option, file$3, 94, 24, 3065);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
 				append_dev(option, t);
 			},
 			p: function update(ctx, dirty) {
-				if (dirty & /*wallets*/ 1 && t_value !== (t_value = /*wallet*/ ctx[14].id + "")) set_data_dev(t, t_value);
+				if (dirty & /*wallets*/ 1 && t_value !== (t_value = /*wallet*/ ctx[15].id + "")) set_data_dev(t, t_value);
 
-				if (dirty & /*wallets*/ 1 && option_value_value !== (option_value_value = /*wallet*/ ctx[14].id)) {
+				if (dirty & /*wallets*/ 1 && option_value_value !== (option_value_value = /*wallet*/ ctx[15].id)) {
 					prop_dev(option, "__value", option_value_value);
 					set_input_value(option, option.__value);
 				}
@@ -5010,26 +5036,26 @@ var app = (function () {
 			block,
 			id: create_each_block_1.name,
 			type: "each",
-			source: "(70:20) {#each wallets as wallet}",
+			source: "(94:20) {#each wallets as wallet}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (90:20) {#each tokens as token}
+	// (114:20) {#each tokens as token}
 	function create_each_block(ctx) {
 		let option;
-		let t_value = /*token*/ ctx[11] + "";
+		let t_value = /*token*/ ctx[12] + "";
 		let t;
 
 		const block = {
 			c: function create() {
 				option = element("option");
 				t = text(t_value);
-				option.__value = /*token*/ ctx[11];
+				option.__value = /*token*/ ctx[12];
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 90, 24, 2835);
+				add_location(option, file$3, 114, 24, 3714);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
@@ -5047,7 +5073,44 @@ var app = (function () {
 			block,
 			id: create_each_block.name,
 			type: "each",
-			source: "(90:20) {#each tokens as token}",
+			source: "(114:20) {#each tokens as token}",
+			ctx
+		});
+
+		return block;
+	}
+
+	// (123:8) {#if resultMessage}
+	function create_if_block_2(ctx) {
+		let p;
+		let t;
+
+		const block = {
+			c: function create() {
+				p = element("p");
+				t = text(/*resultMessage*/ ctx[5]);
+				attr_dev(p, "class", "result-text svelte-xosryq");
+				add_location(p, file$3, 123, 12, 3960);
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, p, anchor);
+				append_dev(p, t);
+			},
+			p: function update(ctx, dirty) {
+				if (dirty & /*resultMessage*/ 32) set_data_dev(t, /*resultMessage*/ ctx[5]);
+			},
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach_dev(p);
+				}
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_if_block_2.name,
+			type: "if",
+			source: "(123:8) {#if resultMessage}",
 			ctx
 		});
 
@@ -5080,12 +5143,12 @@ var app = (function () {
 				p.textContent = "Provide loans to borrowers securely.";
 				t3 = space();
 				if_block.c();
-				attr_dev(h1, "class", "svelte-1r39pjj");
-				add_location(h1, file$3, 56, 4, 1643);
-				attr_dev(p, "class", "svelte-1r39pjj");
-				add_location(p, file$3, 57, 4, 1668);
-				attr_dev(section, "class", "lender-form-container svelte-1r39pjj");
-				add_location(section, file$3, 55, 0, 1599);
+				attr_dev(h1, "class", "svelte-xosryq");
+				add_location(h1, file$3, 80, 4, 2522);
+				attr_dev(p, "class", "svelte-xosryq");
+				add_location(p, file$3, 81, 4, 2547);
+				attr_dev(section, "class", "lender-form-container svelte-xosryq");
+				add_location(section, file$3, 79, 0, 2478);
 			},
 			l: function claim(nodes) {
 				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5141,6 +5204,7 @@ var app = (function () {
 		let loanDetails = { amount: "", token: "" };
 		let isLoading = true;
 		let errorMessage = "";
+		let resultMessage = ""; // To display the result from the API
 		const tokens = ["ETH", "USDC", "DAI"];
 
 		// Fetch wallets from the backend
@@ -5166,20 +5230,36 @@ var app = (function () {
 			}
 		}
 
-		function handleSubmit() {
+		async function handleSubmit() {
 			if (!selectedWallet || !loanDetails.amount || !loanDetails.token) {
 				alert("Please fill in all fields.");
 				return;
 			}
 
-			alert("Submitting lender data...");
+			try {
+				$$invalidate(5, resultMessage = "Processing your request...");
 
-			console.log("Lender Submission:", {
-				walletId: selectedWallet,
-				loanAmount: loanDetails.amount,
-				token: loanDetails.token
-			});
-		} // TODO: Submit this data to the backend API
+				const response = await fetch(`${urlRoot}/api/v1/wallet/${selectedWallet}/accept-reject-lend-request`, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						loan_amount: loanDetails.amount,
+						loan_token: loanDetails.token
+					})
+				});
+
+				const result = await response.json();
+
+				if (response.ok) {
+					$$invalidate(5, resultMessage = `Status: ${result.status}. ${result.reason || result.message}`);
+				} else {
+					$$invalidate(5, resultMessage = `Error: ${result.detail || "Something went wrong."}`);
+				}
+			} catch(error) {
+				$$invalidate(5, resultMessage = `Error: ${error.message}`);
+				console.error("Error submitting lender data:", error);
+			}
+		}
 
 		onMount(() => {
 			fetchWallets();
@@ -5200,13 +5280,13 @@ var app = (function () {
 		function input_input_handler() {
 			loanDetails.amount = to_number(this.value);
 			$$invalidate(2, loanDetails);
-			$$invalidate(5, tokens);
+			$$invalidate(6, tokens);
 		}
 
 		function select1_change_handler() {
 			loanDetails.token = select_value(this);
 			$$invalidate(2, loanDetails);
-			$$invalidate(5, tokens);
+			$$invalidate(6, tokens);
 		}
 
 		$$self.$capture_state = () => ({
@@ -5217,6 +5297,7 @@ var app = (function () {
 			loanDetails,
 			isLoading,
 			errorMessage,
+			resultMessage,
 			tokens,
 			fetchWallets,
 			handleSubmit
@@ -5228,6 +5309,7 @@ var app = (function () {
 			if ('loanDetails' in $$props) $$invalidate(2, loanDetails = $$props.loanDetails);
 			if ('isLoading' in $$props) $$invalidate(3, isLoading = $$props.isLoading);
 			if ('errorMessage' in $$props) $$invalidate(4, errorMessage = $$props.errorMessage);
+			if ('resultMessage' in $$props) $$invalidate(5, resultMessage = $$props.resultMessage);
 		};
 
 		if ($$props && "$$inject" in $$props) {
@@ -5240,6 +5322,7 @@ var app = (function () {
 			loanDetails,
 			isLoading,
 			errorMessage,
+			resultMessage,
 			tokens,
 			handleSubmit,
 			select0_change_handler,

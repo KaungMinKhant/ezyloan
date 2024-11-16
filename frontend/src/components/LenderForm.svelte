@@ -10,6 +10,7 @@
     };
     let isLoading = true;
     let errorMessage = "";
+    let resultMessage = ""; // To display the result from the API
 
     const tokens = ["ETH", "USDC", "DAI"];
 
@@ -34,18 +35,41 @@
         }
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         if (!selectedWallet || !loanDetails.amount || !loanDetails.token) {
             alert("Please fill in all fields.");
             return;
         }
-        alert("Submitting lender data...");
-        console.log("Lender Submission:", {
-            walletId: selectedWallet,
-            loanAmount: loanDetails.amount,
-            token: loanDetails.token,
-        });
-        // TODO: Submit this data to the backend API
+
+        try {
+            resultMessage = "Processing your request...";
+            const response = await fetch(
+                `${urlRoot}/api/v1/wallet/${selectedWallet}/accept-reject-lend-request`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        loan_amount: loanDetails.amount,
+                        loan_token: loanDetails.token,
+                    }),
+                }
+            );
+
+            const result = await response.json();
+
+            if (response.ok) {
+                resultMessage = `Status: ${result.status}. ${
+                    result.reason || result.message
+                }`;
+            } else {
+                resultMessage = `Error: ${result.detail || "Something went wrong."}`;
+            }
+        } catch (error) {
+            resultMessage = `Error: ${error.message}`;
+            console.error("Error submitting lender data:", error);
+        }
     }
 
     onMount(() => {
@@ -95,6 +119,10 @@
 
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        {#if resultMessage}
+            <p class="result-text">{resultMessage}</p>
+        {/if}
     {/if}
 </section>
 
@@ -124,6 +152,13 @@
         text-align: center;
         font-size: 1rem;
         color: red;
+    }
+
+    .result-text {
+        text-align: center;
+        font-size: 1rem;
+        color: #000000;
+        margin-top: 20px;
     }
 
     form {

@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from decimal import Decimal
 
 class NFTDeploymentRequest(BaseModel):
     name: str
@@ -27,3 +28,7 @@ class LoanRequest(BaseModel):
     collateral_amount: float
     requested_loan_amount: float
     requested_loan_token: str
+
+class LendRequest(BaseModel):
+    loan_amount: float
+    loan_token: str

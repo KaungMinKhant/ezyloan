@@ -1,7 +1,8 @@
 from backend.app.schemas.nft_tokenization import NFTDeploymentRequest,\
-    LoanRequest
+    LoanRequest, LendRequest
 from web3 import Web3
 from fastapi import APIRouter, HTTPException, Query
+import json
 import cdp as cdp
 import os
 
@@ -294,3 +295,79 @@ async def loan_approve_reject(request: LoanRequest):
             }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing loan request: {str(e)}")
+
+
+@router.post("/wallet/{wallet_id}/accept-reject-lend-request")
+async def accept_reject_lend_request(wallet_id: str, request: LendRequest):
+    """
+    Endpoint to evaluate and approve/reject a loan request based on wallet valuation.
+
+    Args:
+        wallet_id (str): The ID of the lender's wallet.
+        request (LendRequest): The loan request details including loan_amount and loan_token.
+
+    Returns:
+        dict: The result of the loan evaluation (accepted/rejected and reasons).
+    """
+    try:
+        # Fetch the wallet details
+        wallet = await get_wallet(wallet_id)
+
+        if not wallet:
+            raise HTTPException(status_code=404, detail="Wallet not found")
+
+        # Calculate the wallet's total valuation in USD
+        wallet_balance = wallet.get("balance", {})
+        wallet_total_valuation = 0.0
+
+        for token, amount in wallet_balance.items():
+            token = token.upper()
+            amount = float(amount)
+            token_valuation = await get_crypto_valuation(token, amount)
+            wallet_total_valuation += token_valuation['usd_value']
+
+        # Calculate the max loan amount (50% of wallet valuation)
+        max_loan_amount = wallet_total_valuation * 0.5
+
+        # Get the valuation of the loan request
+        loan_valuation = await get_crypto_valuation(
+            request.loan_token,
+            float(request.loan_amount)
+        )
+        
+        loan_valuation = loan_valuation['usd_value']
+
+        # Decision logic
+        if loan_valuation > max_loan_amount:
+            return {
+                "status": "rejected",
+                "reason": f"Lending amount exceeds maximum allowed. "
+                          f"Maximum loan amount is ${max_loan_amount} (50% of wallet valuation: ${wallet_total_valuation})."
+            }
+        else:
+            return {
+                "status": "accepted",
+                "message": f"Lend request approved. Loan amount is ${loan_valuation}."
+            }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing lend request: {str(e)}")
+
+
+def save_lend_request(data, file_path="data/lend_requests.json"):
+    try:
+        if not os.path.exists("data"):
+            os.makedirs("data")
+        
+        if os.path.exists(file_path):
+            with open(file_path, "r") as file:
+                existing_data = json.load(file)
+        else:
+            existing_data = []
+
+        existing_data.append(data)
+
+        with open(file_path, "w") as file:
+            json.dump(existing_data, file, indent=4)
+    except Exception as e:
+        raise Exception(f"Error saving lend request: {str(e)}")
