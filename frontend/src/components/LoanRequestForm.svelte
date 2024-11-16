@@ -2,6 +2,8 @@
     import { onMount } from "svelte";
 
     let step = 1;
+    const totalSteps = 3;
+
     let loanDetails = {
         amount: "",
         token: "",
@@ -23,7 +25,7 @@
     const durations = ["3 months", "6 months", "12 months"];
 
     function handleNextStep() {
-        if (step < 3) step++;
+        if (step < totalSteps) step++;
     }
 
     function handlePreviousStep() {
@@ -35,13 +37,19 @@
     }
 
     function handleSubmit() {
-        alert("Loan Details Submitted: " + JSON.stringify(loanDetails, null, 2));
         console.log("Loan Details Submitted:", loanDetails);
         // TODO: Submit `loanDetails` to the backend API.
     }
 </script>
 
 <section class="loan-form-container">
+    <div class="progress-bar">
+        <div
+            class="progress-bar-fill"
+            style="width: {step / totalSteps * 100}%"
+        ></div>
+    </div>
+
     <h1>Loan Request Form</h1>
     <form>
         {#if step === 1}
@@ -193,7 +201,7 @@
                 <button type="button" class="btn btn-secondary" on:click={handlePreviousStep}>Back</button>
             {/if}
 
-            {#if step < 3}
+            {#if step < totalSteps}
                 <button type="button" class="btn btn-primary" on:click={handleNextStep}>Next</button>
             {:else}
                 <button type="button" class="btn btn-primary" on:click={handleSubmit}>Submit</button>
@@ -211,6 +219,21 @@
         border-radius: 8px;
         background-color: #FFFFFF;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .progress-bar {
+        height: 10px;
+        background-color: #FCE74A;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-bottom: 20px;
+    }
+
+    .progress-bar-fill {
+        height: 100%;
+        background-color: #000000;
+        width: 0;
+        transition: width 0.3s ease-in-out;
     }
 
     h1, h2 {

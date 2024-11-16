@@ -365,6 +365,16 @@ var app = (function () {
 
 	/**
 	 * @returns {void} */
+	function set_style(node, key, value, important) {
+		if (value == null) {
+			node.style.removeProperty(key);
+		} else {
+			node.style.setProperty(key, value, '');
+		}
+	}
+
+	/**
+	 * @returns {void} */
 	function select_option(select, value, mounting) {
 		for (let i = 0; i < select.options.length; i += 1) {
 			const option = select.options[i];
@@ -2844,7 +2854,7 @@ var app = (function () {
 		return child_ctx;
 	}
 
-	// (47:8) {#if step === 1}
+	// (55:8) {#if step === 1}
 	function create_if_block_5(ctx) {
 		let div;
 		let h2;
@@ -2902,41 +2912,41 @@ var app = (function () {
 				label3 = element("label");
 				t9 = text("Occupation:\n                ");
 				input2 = element("input");
-				attr_dev(h2, "class", "svelte-k5g4i8");
-				add_location(h2, file$3, 48, 12, 1212);
+				attr_dev(h2, "class", "svelte-1djcpp2");
+				add_location(h2, file$3, 56, 12, 1330);
 				attr_dev(input0, "type", "number");
 				attr_dev(input0, "placeholder", "Enter loan amount");
 				input0.required = true;
-				attr_dev(input0, "class", "svelte-k5g4i8");
-				add_location(input0, file$3, 51, 16, 1320);
-				attr_dev(label0, "class", "svelte-k5g4i8");
-				add_location(label0, file$3, 49, 12, 1267);
+				attr_dev(input0, "class", "svelte-1djcpp2");
+				add_location(input0, file$3, 59, 16, 1438);
+				attr_dev(label0, "class", "svelte-1djcpp2");
+				add_location(label0, file$3, 57, 12, 1385);
 				option.__value = "";
 				set_input_value(option, option.__value);
 				option.disabled = true;
-				add_location(option, file$3, 62, 20, 1670);
+				add_location(option, file$3, 70, 20, 1788);
 				select.required = true;
-				attr_dev(select, "class", "svelte-k5g4i8");
+				attr_dev(select, "class", "svelte-1djcpp2");
 				if (/*loanDetails*/ ctx[1].token === void 0) add_render_callback(() => /*select_change_handler*/ ctx[10].call(select));
-				add_location(select, file$3, 61, 16, 1601);
-				attr_dev(label1, "class", "svelte-k5g4i8");
-				add_location(label1, file$3, 59, 12, 1547);
+				add_location(select, file$3, 69, 16, 1719);
+				attr_dev(label1, "class", "svelte-1djcpp2");
+				add_location(label1, file$3, 67, 12, 1665);
 				attr_dev(input1, "type", "number");
 				attr_dev(input1, "placeholder", "Enter your age");
 				input1.required = true;
-				attr_dev(input1, "class", "svelte-k5g4i8");
-				add_location(input1, file$3, 71, 16, 1960);
-				attr_dev(label2, "class", "svelte-k5g4i8");
-				add_location(label2, file$3, 69, 12, 1915);
+				attr_dev(input1, "class", "svelte-1djcpp2");
+				add_location(input1, file$3, 79, 16, 2078);
+				attr_dev(label2, "class", "svelte-1djcpp2");
+				add_location(label2, file$3, 77, 12, 2033);
 				attr_dev(input2, "type", "text");
 				attr_dev(input2, "placeholder", "Enter your occupation");
 				input2.required = true;
-				attr_dev(input2, "class", "svelte-k5g4i8");
-				add_location(input2, file$3, 81, 16, 2233);
-				attr_dev(label3, "class", "svelte-k5g4i8");
-				add_location(label3, file$3, 79, 12, 2181);
+				attr_dev(input2, "class", "svelte-1djcpp2");
+				add_location(input2, file$3, 89, 16, 2351);
+				attr_dev(label3, "class", "svelte-1djcpp2");
+				add_location(label3, file$3, 87, 12, 2299);
 				attr_dev(div, "class", "form-step");
-				add_location(div, file$3, 47, 8, 1176);
+				add_location(div, file$3, 55, 8, 1294);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -3036,14 +3046,14 @@ var app = (function () {
 			block,
 			id: create_if_block_5.name,
 			type: "if",
-			source: "(47:8) {#if step === 1}",
+			source: "(55:8) {#if step === 1}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (64:20) {#each tokens as token}
+	// (72:20) {#each tokens as token}
 	function create_each_block_3(ctx) {
 		let option;
 		let t_value = /*token*/ ctx[29] + "";
@@ -3055,7 +3065,7 @@ var app = (function () {
 				t = text(t_value);
 				option.__value = /*token*/ ctx[29];
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 64, 24, 1788);
+				add_location(option, file$3, 72, 24, 1906);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
@@ -3073,14 +3083,14 @@ var app = (function () {
 			block,
 			id: create_each_block_3.name,
 			type: "each",
-			source: "(64:20) {#each tokens as token}",
+			source: "(72:20) {#each tokens as token}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (92:8) {#if step === 2}
+	// (100:8) {#if step === 2}
 	function create_if_block_4(ctx) {
 		let div;
 		let h2;
@@ -3161,50 +3171,50 @@ var app = (function () {
 				label4 = element("label");
 				t12 = text("Purpose of Loan:\n                ");
 				textarea = element("textarea");
-				attr_dev(h2, "class", "svelte-k5g4i8");
-				add_location(h2, file$3, 93, 12, 2552);
+				attr_dev(h2, "class", "svelte-1djcpp2");
+				add_location(h2, file$3, 101, 12, 2670);
 				attr_dev(input0, "type", "number");
 				attr_dev(input0, "placeholder", "Enter your income");
 				input0.required = true;
-				attr_dev(input0, "class", "svelte-k5g4i8");
-				add_location(input0, file$3, 96, 16, 2655);
-				attr_dev(label0, "class", "svelte-k5g4i8");
-				add_location(label0, file$3, 94, 12, 2599);
+				attr_dev(input0, "class", "svelte-1djcpp2");
+				add_location(input0, file$3, 104, 16, 2773);
+				attr_dev(label0, "class", "svelte-1djcpp2");
+				add_location(label0, file$3, 102, 12, 2717);
 				option0.__value = "";
 				set_input_value(option0, option0.__value);
 				option0.disabled = true;
-				add_location(option0, file$3, 107, 20, 3017);
+				add_location(option0, file$3, 115, 20, 3135);
 				select0.required = true;
-				attr_dev(select0, "class", "svelte-k5g4i8");
+				attr_dev(select0, "class", "svelte-1djcpp2");
 				if (/*loanDetails*/ ctx[1].incomeCurrency === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[14].call(select0));
-				add_location(select0, file$3, 106, 16, 2939);
-				attr_dev(label1, "class", "svelte-k5g4i8");
-				add_location(label1, file$3, 104, 12, 2882);
+				add_location(select0, file$3, 114, 16, 3057);
+				attr_dev(label1, "class", "svelte-1djcpp2");
+				add_location(label1, file$3, 112, 12, 3000);
 				attr_dev(input1, "type", "number");
 				attr_dev(input1, "placeholder", "Enter your expense");
 				input1.required = true;
-				attr_dev(input1, "class", "svelte-k5g4i8");
-				add_location(input1, file$3, 116, 16, 3339);
-				attr_dev(label2, "class", "svelte-k5g4i8");
-				add_location(label2, file$3, 114, 12, 3282);
+				attr_dev(input1, "class", "svelte-1djcpp2");
+				add_location(input1, file$3, 124, 16, 3457);
+				attr_dev(label2, "class", "svelte-1djcpp2");
+				add_location(label2, file$3, 122, 12, 3400);
 				option1.__value = "";
 				set_input_value(option1, option1.__value);
 				option1.disabled = true;
-				add_location(option1, file$3, 127, 20, 3705);
+				add_location(option1, file$3, 135, 20, 3823);
 				select1.required = true;
-				attr_dev(select1, "class", "svelte-k5g4i8");
+				attr_dev(select1, "class", "svelte-1djcpp2");
 				if (/*loanDetails*/ ctx[1].expenseCurrency === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[16].call(select1));
-				add_location(select1, file$3, 126, 16, 3626);
-				attr_dev(label3, "class", "svelte-k5g4i8");
-				add_location(label3, file$3, 124, 12, 3568);
+				add_location(select1, file$3, 134, 16, 3744);
+				attr_dev(label3, "class", "svelte-1djcpp2");
+				add_location(label3, file$3, 132, 12, 3686);
 				attr_dev(textarea, "placeholder", "Why do you need this loan?");
 				textarea.required = true;
-				attr_dev(textarea, "class", "svelte-k5g4i8");
-				add_location(textarea, file$3, 136, 16, 4027);
-				attr_dev(label4, "class", "svelte-k5g4i8");
-				add_location(label4, file$3, 134, 12, 3970);
+				attr_dev(textarea, "class", "svelte-1djcpp2");
+				add_location(textarea, file$3, 144, 16, 4145);
+				attr_dev(label4, "class", "svelte-1djcpp2");
+				add_location(label4, file$3, 142, 12, 4088);
 				attr_dev(div, "class", "form-step");
-				add_location(div, file$3, 92, 8, 2516);
+				add_location(div, file$3, 100, 8, 2634);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -3346,14 +3356,14 @@ var app = (function () {
 			block,
 			id: create_if_block_4.name,
 			type: "if",
-			source: "(92:8) {#if step === 2}",
+			source: "(100:8) {#if step === 2}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (109:20) {#each fiatCurrencies as currency}
+	// (117:20) {#each fiatCurrencies as currency}
 	function create_each_block_2(ctx) {
 		let option;
 		let t_value = /*currency*/ ctx[24] + "";
@@ -3365,7 +3375,7 @@ var app = (function () {
 				t = text(t_value);
 				option.__value = /*currency*/ ctx[24];
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 109, 24, 3149);
+				add_location(option, file$3, 117, 24, 3267);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
@@ -3383,14 +3393,14 @@ var app = (function () {
 			block,
 			id: create_each_block_2.name,
 			type: "each",
-			source: "(109:20) {#each fiatCurrencies as currency}",
+			source: "(117:20) {#each fiatCurrencies as currency}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (129:20) {#each fiatCurrencies as currency}
+	// (137:20) {#each fiatCurrencies as currency}
 	function create_each_block_1(ctx) {
 		let option;
 		let t_value = /*currency*/ ctx[24] + "";
@@ -3402,7 +3412,7 @@ var app = (function () {
 				t = text(t_value);
 				option.__value = /*currency*/ ctx[24];
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 129, 24, 3837);
+				add_location(option, file$3, 137, 24, 3955);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
@@ -3420,14 +3430,14 @@ var app = (function () {
 			block,
 			id: create_each_block_1.name,
 			type: "each",
-			source: "(129:20) {#each fiatCurrencies as currency}",
+			source: "(137:20) {#each fiatCurrencies as currency}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (146:8) {#if step === 3}
+	// (154:8) {#if step === 3}
 	function create_if_block_2(ctx) {
 		let div;
 		let h2;
@@ -3482,36 +3492,36 @@ var app = (function () {
 					each_blocks[i].c();
 				}
 
-				attr_dev(h2, "class", "svelte-k5g4i8");
-				add_location(h2, file$3, 147, 12, 4329);
+				attr_dev(h2, "class", "svelte-1djcpp2");
+				add_location(h2, file$3, 155, 12, 4447);
 				option0.__value = "";
 				set_input_value(option0, option0.__value);
 				option0.disabled = true;
-				add_location(option0, file$3, 151, 20, 4512);
+				add_location(option0, file$3, 159, 20, 4630);
 				option1.__value = "crypto";
 				set_input_value(option1, option1.__value);
-				add_location(option1, file$3, 152, 20, 4581);
+				add_location(option1, file$3, 160, 20, 4699);
 				option2.__value = "real-world";
 				set_input_value(option2, option2.__value);
-				add_location(option2, file$3, 153, 20, 4640);
+				add_location(option2, file$3, 161, 20, 4758);
 				select0.required = true;
-				attr_dev(select0, "class", "svelte-k5g4i8");
+				attr_dev(select0, "class", "svelte-1djcpp2");
 				if (/*loanDetails*/ ctx[1].collateralType === void 0) add_render_callback(() => /*select0_change_handler_1*/ ctx[18].call(select0));
-				add_location(select0, file$3, 150, 16, 4434);
-				attr_dev(label0, "class", "svelte-k5g4i8");
-				add_location(label0, file$3, 148, 12, 4377);
+				add_location(select0, file$3, 158, 16, 4552);
+				attr_dev(label0, "class", "svelte-1djcpp2");
+				add_location(label0, file$3, 156, 12, 4495);
 				option3.__value = "";
 				set_input_value(option3, option3.__value);
 				option3.disabled = true;
-				add_location(option3, file$3, 181, 20, 5531);
+				add_location(option3, file$3, 189, 20, 5649);
 				select1.required = true;
-				attr_dev(select1, "class", "svelte-k5g4i8");
+				attr_dev(select1, "class", "svelte-1djcpp2");
 				if (/*loanDetails*/ ctx[1].duration === void 0) add_render_callback(() => /*select1_change_handler_1*/ ctx[20].call(select1));
-				add_location(select1, file$3, 180, 16, 5459);
-				attr_dev(label1, "class", "svelte-k5g4i8");
-				add_location(label1, file$3, 178, 12, 5404);
+				add_location(select1, file$3, 188, 16, 5577);
+				attr_dev(label1, "class", "svelte-1djcpp2");
+				add_location(label1, file$3, 186, 12, 5522);
 				attr_dev(div, "class", "form-step");
-				add_location(div, file$3, 146, 8, 4293);
+				add_location(div, file$3, 154, 8, 4411);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -3610,14 +3620,14 @@ var app = (function () {
 			block,
 			id: create_if_block_2.name,
 			type: "if",
-			source: "(146:8) {#if step === 3}",
+			source: "(154:8) {#if step === 3}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (158:12) {#if loanDetails.collateralType === "real-world"}
+	// (166:12) {#if loanDetails.collateralType === "real-world"}
 	function create_if_block_3(ctx) {
 		let label0;
 		let t0;
@@ -3640,17 +3650,17 @@ var app = (function () {
 				input = element("input");
 				attr_dev(textarea, "placeholder", "Describe the asset (e.g., gold, electronics)");
 				textarea.required = true;
-				attr_dev(textarea, "class", "svelte-k5g4i8");
-				add_location(textarea, file$3, 160, 16, 4877);
-				attr_dev(label0, "class", "svelte-k5g4i8");
-				add_location(label0, file$3, 158, 12, 4815);
+				attr_dev(textarea, "class", "svelte-1djcpp2");
+				add_location(textarea, file$3, 168, 16, 4995);
+				attr_dev(label0, "class", "svelte-1djcpp2");
+				add_location(label0, file$3, 166, 12, 4933);
 				attr_dev(input, "type", "file");
 				attr_dev(input, "accept", "image/*");
 				input.required = true;
-				attr_dev(input, "class", "svelte-k5g4i8");
-				add_location(input, file$3, 169, 16, 5178);
-				attr_dev(label1, "class", "svelte-k5g4i8");
-				add_location(label1, file$3, 167, 12, 5124);
+				attr_dev(input, "class", "svelte-1djcpp2");
+				add_location(input, file$3, 177, 16, 5296);
+				attr_dev(label1, "class", "svelte-1djcpp2");
+				add_location(label1, file$3, 175, 12, 5242);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, label0, anchor);
@@ -3692,14 +3702,14 @@ var app = (function () {
 			block,
 			id: create_if_block_3.name,
 			type: "if",
-			source: "(158:12) {#if loanDetails.collateralType === \\\"real-world\\\"}",
+			source: "(166:12) {#if loanDetails.collateralType === \\\"real-world\\\"}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (183:20) {#each durations as duration}
+	// (191:20) {#each durations as duration}
 	function create_each_block(ctx) {
 		let option;
 		let t_value = /*duration*/ ctx[21] + "";
@@ -3711,7 +3721,7 @@ var app = (function () {
 				t = text(t_value);
 				option.__value = /*duration*/ ctx[21];
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 183, 24, 5656);
+				add_location(option, file$3, 191, 24, 5774);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
@@ -3729,14 +3739,14 @@ var app = (function () {
 			block,
 			id: create_each_block.name,
 			type: "each",
-			source: "(183:20) {#each durations as duration}",
+			source: "(191:20) {#each durations as duration}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (192:12) {#if step > 1}
+	// (200:12) {#if step > 1}
 	function create_if_block_1$1(ctx) {
 		let button;
 		let mounted;
@@ -3747,8 +3757,8 @@ var app = (function () {
 				button = element("button");
 				button.textContent = "Back";
 				attr_dev(button, "type", "button");
-				attr_dev(button, "class", "btn btn-secondary svelte-k5g4i8");
-				add_location(button, file$3, 192, 16, 5887);
+				attr_dev(button, "class", "btn btn-secondary svelte-1djcpp2");
+				add_location(button, file$3, 200, 16, 6005);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
@@ -3773,14 +3783,14 @@ var app = (function () {
 			block,
 			id: create_if_block_1$1.name,
 			type: "if",
-			source: "(192:12) {#if step > 1}",
+			source: "(200:12) {#if step > 1}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (198:12) {:else}
+	// (206:12) {:else}
 	function create_else_block$2(ctx) {
 		let button;
 		let mounted;
@@ -3791,8 +3801,8 @@ var app = (function () {
 				button = element("button");
 				button.textContent = "Submit";
 				attr_dev(button, "type", "button");
-				attr_dev(button, "class", "btn btn-primary svelte-k5g4i8");
-				add_location(button, file$3, 198, 16, 6163);
+				attr_dev(button, "class", "btn btn-primary svelte-1djcpp2");
+				add_location(button, file$3, 206, 16, 6290);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
@@ -3817,14 +3827,14 @@ var app = (function () {
 			block,
 			id: create_else_block$2.name,
 			type: "else",
-			source: "(198:12) {:else}",
+			source: "(206:12) {:else}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (196:12) {#if step < 3}
+	// (204:12) {#if step < totalSteps}
 	function create_if_block$2(ctx) {
 		let button;
 		let mounted;
@@ -3835,8 +3845,8 @@ var app = (function () {
 				button = element("button");
 				button.textContent = "Next";
 				attr_dev(button, "type", "button");
-				attr_dev(button, "class", "btn btn-primary svelte-k5g4i8");
-				add_location(button, file$3, 196, 16, 6041);
+				attr_dev(button, "class", "btn btn-primary svelte-1djcpp2");
+				add_location(button, file$3, 204, 16, 6168);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
@@ -3861,7 +3871,7 @@ var app = (function () {
 			block,
 			id: create_if_block$2.name,
 			type: "if",
-			source: "(196:12) {#if step < 3}",
+			source: "(204:12) {#if step < totalSteps}",
 			ctx
 		});
 
@@ -3870,21 +3880,24 @@ var app = (function () {
 
 	function create_fragment$4(ctx) {
 		let section;
+		let div1;
+		let div0;
+		let t0;
 		let h1;
-		let t1;
-		let form;
 		let t2;
+		let form;
 		let t3;
 		let t4;
-		let div;
 		let t5;
+		let div2;
+		let t6;
 		let if_block0 = /*step*/ ctx[0] === 1 && create_if_block_5(ctx);
 		let if_block1 = /*step*/ ctx[0] === 2 && create_if_block_4(ctx);
 		let if_block2 = /*step*/ ctx[0] === 3 && create_if_block_2(ctx);
 		let if_block3 = /*step*/ ctx[0] > 1 && create_if_block_1$1(ctx);
 
 		function select_block_type(ctx, dirty) {
-			if (/*step*/ ctx[0] < 3) return create_if_block$2;
+			if (/*step*/ ctx[0] < totalSteps) return create_if_block$2;
 			return create_else_block$2;
 		}
 
@@ -3894,55 +3907,70 @@ var app = (function () {
 		const block = {
 			c: function create() {
 				section = element("section");
+				div1 = element("div");
+				div0 = element("div");
+				t0 = space();
 				h1 = element("h1");
 				h1.textContent = "Loan Request Form";
-				t1 = space();
+				t2 = space();
 				form = element("form");
 				if (if_block0) if_block0.c();
-				t2 = space();
-				if (if_block1) if_block1.c();
 				t3 = space();
-				if (if_block2) if_block2.c();
+				if (if_block1) if_block1.c();
 				t4 = space();
-				div = element("div");
-				if (if_block3) if_block3.c();
+				if (if_block2) if_block2.c();
 				t5 = space();
+				div2 = element("div");
+				if (if_block3) if_block3.c();
+				t6 = space();
 				if_block4.c();
-				attr_dev(h1, "class", "svelte-k5g4i8");
-				add_location(h1, file$3, 44, 4, 1105);
-				attr_dev(div, "class", "form-navigation svelte-k5g4i8");
-				add_location(div, file$3, 190, 8, 5814);
-				add_location(form, file$3, 45, 4, 1136);
-				attr_dev(section, "class", "loan-form-container svelte-k5g4i8");
-				add_location(section, file$3, 43, 0, 1063);
+				attr_dev(div0, "class", "progress-bar-fill svelte-1djcpp2");
+				set_style(div0, "width", /*step*/ ctx[0] / totalSteps * 100 + "%");
+				add_location(div0, file$3, 46, 8, 1094);
+				attr_dev(div1, "class", "progress-bar svelte-1djcpp2");
+				add_location(div1, file$3, 45, 4, 1059);
+				attr_dev(h1, "class", "svelte-1djcpp2");
+				add_location(h1, file$3, 52, 4, 1223);
+				attr_dev(div2, "class", "form-navigation svelte-1djcpp2");
+				add_location(div2, file$3, 198, 8, 5932);
+				add_location(form, file$3, 53, 4, 1254);
+				attr_dev(section, "class", "loan-form-container svelte-1djcpp2");
+				add_location(section, file$3, 44, 0, 1017);
 			},
 			l: function claim(nodes) {
 				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, section, anchor);
+				append_dev(section, div1);
+				append_dev(div1, div0);
+				append_dev(section, t0);
 				append_dev(section, h1);
-				append_dev(section, t1);
+				append_dev(section, t2);
 				append_dev(section, form);
 				if (if_block0) if_block0.m(form, null);
-				append_dev(form, t2);
-				if (if_block1) if_block1.m(form, null);
 				append_dev(form, t3);
-				if (if_block2) if_block2.m(form, null);
+				if (if_block1) if_block1.m(form, null);
 				append_dev(form, t4);
-				append_dev(form, div);
-				if (if_block3) if_block3.m(div, null);
-				append_dev(div, t5);
-				if_block4.m(div, null);
+				if (if_block2) if_block2.m(form, null);
+				append_dev(form, t5);
+				append_dev(form, div2);
+				if (if_block3) if_block3.m(div2, null);
+				append_dev(div2, t6);
+				if_block4.m(div2, null);
 			},
 			p: function update(ctx, dirty) {
+				if (dirty[0] & /*step*/ 1) {
+					set_style(div0, "width", /*step*/ ctx[0] / totalSteps * 100 + "%");
+				}
+
 				if (/*step*/ ctx[0] === 1) {
 					if (if_block0) {
 						if_block0.p(ctx, dirty);
 					} else {
 						if_block0 = create_if_block_5(ctx);
 						if_block0.c();
-						if_block0.m(form, t2);
+						if_block0.m(form, t3);
 					}
 				} else if (if_block0) {
 					if_block0.d(1);
@@ -3955,7 +3983,7 @@ var app = (function () {
 					} else {
 						if_block1 = create_if_block_4(ctx);
 						if_block1.c();
-						if_block1.m(form, t3);
+						if_block1.m(form, t4);
 					}
 				} else if (if_block1) {
 					if_block1.d(1);
@@ -3968,7 +3996,7 @@ var app = (function () {
 					} else {
 						if_block2 = create_if_block_2(ctx);
 						if_block2.c();
-						if_block2.m(form, t4);
+						if_block2.m(form, t5);
 					}
 				} else if (if_block2) {
 					if_block2.d(1);
@@ -3981,7 +4009,7 @@ var app = (function () {
 					} else {
 						if_block3 = create_if_block_1$1(ctx);
 						if_block3.c();
-						if_block3.m(div, t5);
+						if_block3.m(div2, t6);
 					}
 				} else if (if_block3) {
 					if_block3.d(1);
@@ -3996,7 +4024,7 @@ var app = (function () {
 
 					if (if_block4) {
 						if_block4.c();
-						if_block4.m(div, null);
+						if_block4.m(div2, null);
 					}
 				}
 			},
@@ -4026,6 +4054,8 @@ var app = (function () {
 		return block;
 	}
 
+	const totalSteps = 3;
+
 	function instance$4($$self, $$props, $$invalidate) {
 		let { $$slots: slots = {}, $$scope } = $$props;
 		validate_slots('LoanRequestForm', slots, []);
@@ -4052,7 +4082,7 @@ var app = (function () {
 		const durations = ["3 months", "6 months", "12 months"];
 
 		function handleNextStep() {
-			if (step < 3) $$invalidate(0, step++, step);
+			if (step < totalSteps) $$invalidate(0, step++, step);
 		}
 
 		function handlePreviousStep() {
@@ -4064,7 +4094,6 @@ var app = (function () {
 		}
 
 		function handleSubmit() {
-			alert("Loan Details Submitted: " + JSON.stringify(loanDetails, null, 2));
 			console.log("Loan Details Submitted:", loanDetails);
 		} // TODO: Submit `loanDetails` to the backend API.
 
@@ -4149,6 +4178,7 @@ var app = (function () {
 		$$self.$capture_state = () => ({
 			onMount,
 			step,
+			totalSteps,
 			loanDetails,
 			tokens,
 			fiatCurrencies,
