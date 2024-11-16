@@ -5,3 +5,5 @@ backend/app/models/__pycache__/*
 backend/app/schemas/__pycache__/*
 backend/app/crud/__pycache__/*
 .env
+backend/app/data/
+

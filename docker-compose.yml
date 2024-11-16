@@ -19,6 +19,7 @@ services:
     volumes:
       - ./backend:/app/backend
       - ./db:/app/db
+      - ./data:/app/data
     env_file:
       - .env
     ports:

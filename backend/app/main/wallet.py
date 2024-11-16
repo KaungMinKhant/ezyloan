@@ -28,7 +28,7 @@ async def create_wallet():
             'wallet_id': wallet.default_address.wallet_id,
             'network_id': wallet.default_address.network_id
         }
-        file_path = f"{wallet.id}.json"
+        file_path = f"data/{wallet.id}.json"
         wallet.save_seed(file_path, encrypt=True)
         return {
             "balance": wallet.balance,
@@ -68,8 +68,8 @@ async def get_wallet(wallet_id: str):
         balance = hydrated_wallet.balance
         default_address = {
              'address_id': hydrated_wallet.default_address.address_id,
-            'wallet_id': hydrated_wallet.default_address.wallet_id,
-            'network_id': hydrated_wallet.default_address.network_id
+             'wallet_id': hydrated_wallet.default_address.wallet_id,
+             'network_id': hydrated_wallet.default_address.network_id
         }
 
         # Prepare response data
@@ -102,7 +102,7 @@ def fetch_seed(wallet_id: str,
     """
     try:
         # Construct the file path where the seed is stored
-        file_path = f"{wallet_id}.json"
+        file_path = f"data/{wallet_id}.json"
 
         # Check if the file exists
         if not os.path.exists(file_path):
