@@ -1,5 +1,5 @@
-<script>
-    import { onMount } from "svelte";
+<script lang='ts'>
+    import { urlRoot } from "../constants";
 
     let step = 1;
     const totalSteps = 3;
@@ -36,9 +36,37 @@
         loanDetails.realWorldPhoto = event.target.files[0];
     }
 
-    function handleSubmit() {
+    async function handleSubmit() {
         console.log("Loan Details Submitted:", loanDetails);
         // TODO: Submit `loanDetails` to the backend API.
+        const { age, amount, duration, occupation, token } = loanDetails;
+
+        const payload = {
+            amount,
+            token,
+            age,
+            occupation
+        };
+        console.log('paylo', payload)
+
+        try {
+        const response = await fetch(`${urlRoot}/api/v1/loans/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "Failed to create loan.");
+        }
+
+        const data = await response.json();
+        alert("Loan created successfully!");
+        fetchLoans(); // Refresh the loans list
+        } catch (err) {
+        error = err.message;
+        }
     }
 </script>
 

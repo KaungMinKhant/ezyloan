@@ -2,7 +2,7 @@
 
 BEGIN;
 
-SELECT id, user_id, loan_amount, token, age, occupation
+SELECT id, user_id, amount, token, age, occupation
 FROM user_loan_data
 WHERE FALSE;
 
