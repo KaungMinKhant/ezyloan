@@ -39,14 +39,23 @@
     async function handleSubmit() {
         console.log("Loan Details Submitted:", loanDetails);
         // TODO: Submit `loanDetails` to the backend API.
-        const { age, amount, duration, occupation, token } = loanDetails;
+        const { age, amount, duration, occupation, token, income, expense, incomeCurrency, expenseCurrency,
+            purpose, collateralType
+         } = loanDetails;
 
         const payload = {
-            amount,
-            token,
-            age,
-            occupation
-        };
+            amount: amount,
+            token: token,
+            age: age,
+            occupation: occupation,
+            monthly_income: income,
+            income_currency: incomeCurrency,
+            monthly_expense: expense,
+            expene_currency: expenseCurrency,
+            purpose_of_loan: purpose,
+            collateral_type: collateralType,
+            loan_duration: duration,
+            };
         console.log('paylo', payload)
 
         try {
@@ -63,9 +72,9 @@
 
         const data = await response.json();
         alert("Loan created successfully!");
-        fetchLoans(); // Refresh the loans list
+        //fetchLoans(); // Refresh the loans list
         } catch (err) {
-        error = err.message;
+        //error = err.message;
         }
     }
 </script>
