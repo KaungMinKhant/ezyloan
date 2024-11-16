@@ -83,12 +83,15 @@ async def get_wallet(wallet_id: str):
             hydrated_wallet = fetch_seed(wallet_id, fetched_wallet)
 
         # Retrieve wallet balances
-        balance = hydrated_wallet.balance
+        balance = hydrated_wallet.balances()
+        print("Balance: ", balance)
         default_address = {
              'address_id': hydrated_wallet.default_address.address_id,
              'wallet_id': hydrated_wallet.default_address.wallet_id,
              'network_id': hydrated_wallet.default_address.network_id
         }
+        
+        print("Hydrated Wallet: ", hydrated_wallet)
 
         # Prepare response data
         return {
