@@ -186,3 +186,8 @@ See detailed [Loan Repayment](6.loan_repayment_short.md) process.
 
 ### To serve the frontend;
 - in /frontend directory, run `yarn serve`
+
+# Team Members
+- Yamin Thazin Oo (Product Manager)
+- Kaung Min Khant (Fullstack Developer)
+- Khin Khant Khant Hlaing (Fullstack Developer)
