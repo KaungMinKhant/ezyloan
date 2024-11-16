@@ -1,10 +1,30 @@
 #  Project Background
+Two persons - May (SME Business Owner) and April (Individual Lender with tangible proof of assets). 
+
+May: She’s a small business owner with multiple assets, eager to expand her business. But her journey to secure a loan was far from easy. Traditional banks burdened her with endless paperwork and uncertainty. Crypto loans felt overwhelming due to her lack of expertise. Finally, she turned to informal lenders, exchanging assets for funds in a risky trust-based system. While she managed to get the loan, it came with unnecessary hardship & risks.
+
+April: She's an individual lender with extra funds earning low interest in a savings account. While she sees potential in lending locally, she worrys about scams and defaults. 
+
+**This kind of individual loan is popular in developing countries such as Myanmar.**
 
 ##  Problem
+Both borrowers and lenders are stuck in an outdated, inefficient loan system.
 
 ##  Solution
+Ezy Loan is revolutionizing lending: Peer-to-peer loan platform which provides seamless loans secured by crypto or tokenized real-world assets through blockchain.
+
+Unlike the other platforms, our system directly benefits lenders with higher returns while giving flexibility the borrowers need.
 
 #  Key Features 
+
+- Real-world assets as collateral
+- Flexible Token Swap 
+- Unified valuation of collateral in both crypto and real-world assets
+- Unique calculation on max available loans based on collateral and credit score
+- Instant loan request and approval - quick and efficient process 
+- Fair and Square interest benefits for lenders and borrowers
+- Decentralized platform led by peers to peers 
+
 
 #  The Process 
 ### **Summary of Technology Integrations**
@@ -186,3 +206,8 @@ See detailed [Loan Repayment](6.loan_repayment_short.md) process.
 
 ### To serve the frontend;
 - in /frontend directory, run `yarn serve`
+
+# Team Members
+- Yamin Thazin Oo (Product Manager)
+- Kaung Min Khant (Fullstack Developer)
+- Khin Khant Khant Hlaing (Fullstack Developer)
