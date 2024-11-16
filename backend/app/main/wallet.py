@@ -1,3 +1,4 @@
+from backend.app.schemas.nft_tokenization import NFTDeploymentRequest
 from fastapi import APIRouter, HTTPException
 import cdp as cdp
 import os
@@ -116,3 +117,28 @@ def fetch_seed(wallet_id: str,
         raise e
     except Exception as e:
         raise Exception(f"Error fetching seed for wallet {wallet_id}: {str(e)}")
+
+
+@router.post("/wallet/{wallet_id}/deploy-nft")
+async def deploy_nft(wallet_id: str, request: NFTDeploymentRequest):
+    try:
+        # Fetch the wallet
+        wallet = cdp.Wallet.fetch(wallet_id)
+        wallet = fetch_seed(wallet_id, wallet)
+
+         # Ensure the wallet has sufficient balance by requesting faucet funds
+        faucet_response = wallet.faucet(asset_id="eth")
+        faucet_response.wait()  # Wait for the faucet transaction to complete
+        print("Entire Faucet Response: ", faucet_response)
+        print(f"Faucet transaction: {faucet_response.transaction_hash}")
+        # Deploy NFT contract
+        nft_contract = wallet.deploy_nft(request.name, request.symbol, request.base_uri)
+        print(nft_contract)
+        return {
+            "contract_address": nft_contract.contract_address,
+            "name": request.name,
+            "symbol": request.symbol,
+            "base_uri": request.base_uri
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error deploying NFT: {str(e)}")
