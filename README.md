@@ -31,8 +31,6 @@
 
 ---
 
-See the schedule for the [project development](schedule.md) timeline.
-
 ### **1. User Onboarding**
 
 #### **Flow**:
@@ -173,8 +171,6 @@ See detailed [Loan Management](5.loan_management_short.md) process.
   - Sends notifications for successful repayments, collateral release, and lender crediting.
 
 See detailed [Loan Repayment](6.loan_repayment_short.md) process.
-
-
 
 #  How to get started
 
