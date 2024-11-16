@@ -11,7 +11,7 @@
         <a href="/wallet" class="btn btn-tertiary">View Wallets</a>
         <a href="/wallet/create" class="btn btn-secondary">Create a Wallet</a>
         <a href="/loan/request" class="btn btn-tertiary">Request a Loan</a>
-        <a href="/lend" class="btn btn-secondary">Lend</a>
+        <a href="/lend" class="btn btn-secondary">Invest & Lend</a>
     </div>
 </section>
 

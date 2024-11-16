@@ -1675,7 +1675,7 @@ var app = (function () {
 				a2.textContent = "Request a Loan";
 				t10 = space();
 				a3 = element("a");
-				a3.textContent = "Lend";
+				a3.textContent = "Invest & Lend";
 				add_location(h1, file$c, 6, 4, 124);
 				add_location(p, file$c, 7, 4, 158);
 				attr_dev(a0, "href", "/wallet");
