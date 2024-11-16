@@ -120,8 +120,12 @@ async def list_wallets():
         for file in wallet_files:
             # remove the .json extension to get the wallet ID
             wallet_id = file.replace(".json", "")
-            wallet = await get_wallet(wallet_id)
-            wallets.append(wallet)
+            try:
+                wallet = await get_wallet(wallet_id)
+                wallets.append(wallet)
+            except Exception as e:
+                print(f"Error fetching wallet")
+                continue
         return wallets
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error listing wallets: {str(e)}")
@@ -345,6 +349,15 @@ async def accept_reject_lend_request(wallet_id: str, request: LendRequest):
                           f"Maximum loan amount is ${max_loan_amount} (50% of wallet valuation: ${wallet_total_valuation})."
             }
         else:
+            lend_request_data = {
+                "wallet_id": wallet_id,
+                "loan_amount": request.loan_amount,
+                "loan_token": request.loan_token,
+                "status": "approved",
+                "loan_valuation_in_usd": loan_valuation,
+                "lender_address": wallet.get("default_address", {}).get("address_id")
+            }
+            save_lend_request(lend_request_data)
             return {
                 "status": "accepted",
                 "message": f"Lend request approved. Loan amount is ${loan_valuation}."
