@@ -2,6 +2,7 @@ import os
 from sqlalchemy import Column, String, Numeric, Integer, ForeignKey, Text
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.dialects.postgresql import UUID
+import uuid
 
 Base = declarative_base()
 
@@ -10,6 +11,7 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
+
 
 class UserLoanData(Base):
     __tablename__ = "user_loan_data"
