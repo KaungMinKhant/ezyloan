@@ -4322,41 +4322,47 @@ var app = (function () {
 
 	function get_each_context$1(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[24] = list[i];
+		child_ctx[28] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_1$1(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[27] = list[i];
+		child_ctx[31] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_2(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[30] = list[i];
+		child_ctx[34] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_3(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[33] = list[i];
+		child_ctx[37] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_4(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[33] = list[i];
+		child_ctx[40] = list[i];
 		return child_ctx;
 	}
 
 	function get_each_context_5(ctx, list, i) {
 		const child_ctx = ctx.slice();
-		child_ctx[30] = list[i];
+		child_ctx[40] = list[i];
 		return child_ctx;
 	}
 
-	// (59:8) {#if step === 1}
+	function get_each_context_6(ctx, list, i) {
+		const child_ctx = ctx.slice();
+		child_ctx[37] = list[i];
+		return child_ctx;
+	}
+
+	// (84:8) {#if step === 1}
 	function create_if_block_6(ctx) {
 		let div;
 		let h2;
@@ -4379,11 +4385,11 @@ var app = (function () {
 		let input2;
 		let mounted;
 		let dispose;
-		let each_value_5 = ensure_array_like_dev(/*tokens*/ ctx[2]);
+		let each_value_6 = ensure_array_like_dev(/*tokens*/ ctx[4]);
 		let each_blocks = [];
 
-		for (let i = 0; i < each_value_5.length; i += 1) {
-			each_blocks[i] = create_each_block_5(get_each_context_5(ctx, each_value_5, i));
+		for (let i = 0; i < each_value_6.length; i += 1) {
+			each_blocks[i] = create_each_block_6(get_each_context_6(ctx, each_value_6, i));
 		}
 
 		const block = {
@@ -4415,40 +4421,40 @@ var app = (function () {
 				t9 = text("Occupation:\n                ");
 				input2 = element("input");
 				attr_dev(h2, "class", "svelte-1djcpp2");
-				add_location(h2, file$6, 60, 12, 1525);
+				add_location(h2, file$6, 85, 12, 2315);
 				attr_dev(input0, "type", "number");
 				attr_dev(input0, "placeholder", "Enter loan amount");
 				input0.required = true;
 				attr_dev(input0, "class", "svelte-1djcpp2");
-				add_location(input0, file$6, 63, 16, 1633);
+				add_location(input0, file$6, 88, 16, 2423);
 				attr_dev(label0, "class", "svelte-1djcpp2");
-				add_location(label0, file$6, 61, 12, 1580);
+				add_location(label0, file$6, 86, 12, 2370);
 				option_1.__value = "";
 				set_input_value(option_1, option_1.__value);
 				option_1.disabled = true;
-				add_location(option_1, file$6, 74, 20, 1983);
+				add_location(option_1, file$6, 99, 20, 2773);
 				select.required = true;
 				attr_dev(select, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].token === void 0) add_render_callback(() => /*select_change_handler*/ ctx[11].call(select));
-				add_location(select, file$6, 73, 16, 1914);
+				if (/*loanDetails*/ ctx[3].token === void 0) add_render_callback(() => /*select_change_handler*/ ctx[13].call(select));
+				add_location(select, file$6, 98, 16, 2704);
 				attr_dev(label1, "class", "svelte-1djcpp2");
-				add_location(label1, file$6, 71, 12, 1860);
+				add_location(label1, file$6, 96, 12, 2650);
 				attr_dev(input1, "type", "number");
 				attr_dev(input1, "placeholder", "Enter your age");
 				input1.required = true;
 				attr_dev(input1, "class", "svelte-1djcpp2");
-				add_location(input1, file$6, 83, 16, 2273);
+				add_location(input1, file$6, 108, 16, 3063);
 				attr_dev(label2, "class", "svelte-1djcpp2");
-				add_location(label2, file$6, 81, 12, 2228);
+				add_location(label2, file$6, 106, 12, 3018);
 				attr_dev(input2, "type", "text");
 				attr_dev(input2, "placeholder", "Enter your occupation");
 				input2.required = true;
 				attr_dev(input2, "class", "svelte-1djcpp2");
-				add_location(input2, file$6, 93, 16, 2546);
+				add_location(input2, file$6, 118, 16, 3336);
 				attr_dev(label3, "class", "svelte-1djcpp2");
-				add_location(label3, file$6, 91, 12, 2494);
+				add_location(label3, file$6, 116, 12, 3284);
 				attr_dev(div, "class", "form-step");
-				add_location(div, file$6, 59, 8, 1489);
+				add_location(div, file$6, 84, 8, 2279);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4457,7 +4463,7 @@ var app = (function () {
 				append_dev(div, label0);
 				append_dev(label0, t2);
 				append_dev(label0, input0);
-				set_input_value(input0, /*loanDetails*/ ctx[1].amount);
+				set_input_value(input0, /*loanDetails*/ ctx[3].amount);
 				append_dev(div, t3);
 				append_dev(div, label1);
 				append_dev(label1, t4);
@@ -4470,45 +4476,45 @@ var app = (function () {
 					}
 				}
 
-				select_option(select, /*loanDetails*/ ctx[1].token, true);
+				select_option(select, /*loanDetails*/ ctx[3].token, true);
 				append_dev(div, t6);
 				append_dev(div, label2);
 				append_dev(label2, t7);
 				append_dev(label2, input1);
-				set_input_value(input1, /*loanDetails*/ ctx[1].age);
+				set_input_value(input1, /*loanDetails*/ ctx[3].age);
 				append_dev(div, t8);
 				append_dev(div, label3);
 				append_dev(label3, t9);
 				append_dev(label3, input2);
-				set_input_value(input2, /*loanDetails*/ ctx[1].occupation);
+				set_input_value(input2, /*loanDetails*/ ctx[3].occupation);
 
 				if (!mounted) {
 					dispose = [
-						listen_dev(input0, "input", /*input0_input_handler*/ ctx[10]),
-						listen_dev(select, "change", /*select_change_handler*/ ctx[11]),
-						listen_dev(input1, "input", /*input1_input_handler*/ ctx[12]),
-						listen_dev(input2, "input", /*input2_input_handler*/ ctx[13])
+						listen_dev(input0, "input", /*input0_input_handler*/ ctx[12]),
+						listen_dev(select, "change", /*select_change_handler*/ ctx[13]),
+						listen_dev(input1, "input", /*input1_input_handler*/ ctx[14]),
+						listen_dev(input2, "input", /*input2_input_handler*/ ctx[15])
 					];
 
 					mounted = true;
 				}
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*loanDetails, tokens*/ 6 && to_number(input0.value) !== /*loanDetails*/ ctx[1].amount) {
-					set_input_value(input0, /*loanDetails*/ ctx[1].amount);
+				if (dirty[0] & /*loanDetails, tokens*/ 24 && to_number(input0.value) !== /*loanDetails*/ ctx[3].amount) {
+					set_input_value(input0, /*loanDetails*/ ctx[3].amount);
 				}
 
-				if (dirty[0] & /*tokens*/ 4) {
-					each_value_5 = ensure_array_like_dev(/*tokens*/ ctx[2]);
+				if (dirty[0] & /*tokens*/ 16) {
+					each_value_6 = ensure_array_like_dev(/*tokens*/ ctx[4]);
 					let i;
 
-					for (i = 0; i < each_value_5.length; i += 1) {
-						const child_ctx = get_each_context_5(ctx, each_value_5, i);
+					for (i = 0; i < each_value_6.length; i += 1) {
+						const child_ctx = get_each_context_6(ctx, each_value_6, i);
 
 						if (each_blocks[i]) {
 							each_blocks[i].p(child_ctx, dirty);
 						} else {
-							each_blocks[i] = create_each_block_5(child_ctx);
+							each_blocks[i] = create_each_block_6(child_ctx);
 							each_blocks[i].c();
 							each_blocks[i].m(select, null);
 						}
@@ -4518,19 +4524,19 @@ var app = (function () {
 						each_blocks[i].d(1);
 					}
 
-					each_blocks.length = each_value_5.length;
+					each_blocks.length = each_value_6.length;
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select, /*loanDetails*/ ctx[1].token);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select, /*loanDetails*/ ctx[3].token);
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6 && to_number(input1.value) !== /*loanDetails*/ ctx[1].age) {
-					set_input_value(input1, /*loanDetails*/ ctx[1].age);
+				if (dirty[0] & /*loanDetails, tokens*/ 24 && to_number(input1.value) !== /*loanDetails*/ ctx[3].age) {
+					set_input_value(input1, /*loanDetails*/ ctx[3].age);
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6 && input2.value !== /*loanDetails*/ ctx[1].occupation) {
-					set_input_value(input2, /*loanDetails*/ ctx[1].occupation);
+				if (dirty[0] & /*loanDetails, tokens*/ 24 && input2.value !== /*loanDetails*/ ctx[3].occupation) {
+					set_input_value(input2, /*loanDetails*/ ctx[3].occupation);
 				}
 			},
 			d: function destroy(detaching) {
@@ -4548,26 +4554,26 @@ var app = (function () {
 			block,
 			id: create_if_block_6.name,
 			type: "if",
-			source: "(59:8) {#if step === 1}",
+			source: "(84:8) {#if step === 1}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (76:20) {#each tokens as token}
-	function create_each_block_5(ctx) {
+	// (101:20) {#each tokens as token}
+	function create_each_block_6(ctx) {
 		let option_1;
-		let t_value = /*token*/ ctx[30] + "";
+		let t_value = /*token*/ ctx[37] + "";
 		let t;
 
 		const block = {
 			c: function create() {
 				option_1 = element("option");
 				t = text(t_value);
-				option_1.__value = /*token*/ ctx[30];
+				option_1.__value = /*token*/ ctx[37];
 				set_input_value(option_1, option_1.__value);
-				add_location(option_1, file$6, 76, 24, 2101);
+				add_location(option_1, file$6, 101, 24, 2891);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option_1, anchor);
@@ -4583,16 +4589,16 @@ var app = (function () {
 
 		dispatch_dev("SvelteRegisterBlock", {
 			block,
-			id: create_each_block_5.name,
+			id: create_each_block_6.name,
 			type: "each",
-			source: "(76:20) {#each tokens as token}",
+			source: "(101:20) {#each tokens as token}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (104:8) {#if step === 2}
+	// (129:8) {#if step === 2}
 	function create_if_block_5(ctx) {
 		let div;
 		let h2;
@@ -4620,18 +4626,18 @@ var app = (function () {
 		let textarea;
 		let mounted;
 		let dispose;
-		let each_value_4 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[3]);
+		let each_value_5 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[5]);
 		let each_blocks_1 = [];
 
-		for (let i = 0; i < each_value_4.length; i += 1) {
-			each_blocks_1[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
+		for (let i = 0; i < each_value_5.length; i += 1) {
+			each_blocks_1[i] = create_each_block_5(get_each_context_5(ctx, each_value_5, i));
 		}
 
-		let each_value_3 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[3]);
+		let each_value_4 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[5]);
 		let each_blocks = [];
 
-		for (let i = 0; i < each_value_3.length; i += 1) {
-			each_blocks[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
+		for (let i = 0; i < each_value_4.length; i += 1) {
+			each_blocks[i] = create_each_block_4(get_each_context_4(ctx, each_value_4, i));
 		}
 
 		const block = {
@@ -4674,49 +4680,49 @@ var app = (function () {
 				t12 = text("Purpose of Loan:\n                ");
 				textarea = element("textarea");
 				attr_dev(h2, "class", "svelte-1djcpp2");
-				add_location(h2, file$6, 105, 12, 2865);
+				add_location(h2, file$6, 130, 12, 3655);
 				attr_dev(input0, "type", "number");
 				attr_dev(input0, "placeholder", "Enter your income");
 				input0.required = true;
 				attr_dev(input0, "class", "svelte-1djcpp2");
-				add_location(input0, file$6, 108, 16, 2968);
+				add_location(input0, file$6, 133, 16, 3758);
 				attr_dev(label0, "class", "svelte-1djcpp2");
-				add_location(label0, file$6, 106, 12, 2912);
+				add_location(label0, file$6, 131, 12, 3702);
 				option0.__value = "";
 				set_input_value(option0, option0.__value);
 				option0.disabled = true;
-				add_location(option0, file$6, 119, 20, 3330);
+				add_location(option0, file$6, 144, 20, 4120);
 				select0.required = true;
 				attr_dev(select0, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].incomeCurrency === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[15].call(select0));
-				add_location(select0, file$6, 118, 16, 3252);
+				if (/*loanDetails*/ ctx[3].incomeCurrency === void 0) add_render_callback(() => /*select0_change_handler*/ ctx[17].call(select0));
+				add_location(select0, file$6, 143, 16, 4042);
 				attr_dev(label1, "class", "svelte-1djcpp2");
-				add_location(label1, file$6, 116, 12, 3195);
+				add_location(label1, file$6, 141, 12, 3985);
 				attr_dev(input1, "type", "number");
 				attr_dev(input1, "placeholder", "Enter your expense");
 				input1.required = true;
 				attr_dev(input1, "class", "svelte-1djcpp2");
-				add_location(input1, file$6, 128, 16, 3652);
+				add_location(input1, file$6, 153, 16, 4442);
 				attr_dev(label2, "class", "svelte-1djcpp2");
-				add_location(label2, file$6, 126, 12, 3595);
+				add_location(label2, file$6, 151, 12, 4385);
 				option1.__value = "";
 				set_input_value(option1, option1.__value);
 				option1.disabled = true;
-				add_location(option1, file$6, 139, 20, 4018);
+				add_location(option1, file$6, 164, 20, 4808);
 				select1.required = true;
 				attr_dev(select1, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].expenseCurrency === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[17].call(select1));
-				add_location(select1, file$6, 138, 16, 3939);
+				if (/*loanDetails*/ ctx[3].expenseCurrency === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[19].call(select1));
+				add_location(select1, file$6, 163, 16, 4729);
 				attr_dev(label3, "class", "svelte-1djcpp2");
-				add_location(label3, file$6, 136, 12, 3881);
+				add_location(label3, file$6, 161, 12, 4671);
 				attr_dev(textarea, "placeholder", "Why do you need this loan?");
 				textarea.required = true;
 				attr_dev(textarea, "class", "svelte-1djcpp2");
-				add_location(textarea, file$6, 148, 16, 4340);
+				add_location(textarea, file$6, 173, 16, 5130);
 				attr_dev(label4, "class", "svelte-1djcpp2");
-				add_location(label4, file$6, 146, 12, 4283);
+				add_location(label4, file$6, 171, 12, 5073);
 				attr_dev(div, "class", "form-step");
-				add_location(div, file$6, 104, 8, 2829);
+				add_location(div, file$6, 129, 8, 3619);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -4725,7 +4731,7 @@ var app = (function () {
 				append_dev(div, label0);
 				append_dev(label0, t2);
 				append_dev(label0, input0);
-				set_input_value(input0, /*loanDetails*/ ctx[1].income);
+				set_input_value(input0, /*loanDetails*/ ctx[3].income);
 				append_dev(div, t3);
 				append_dev(div, label1);
 				append_dev(label1, t4);
@@ -4738,12 +4744,12 @@ var app = (function () {
 					}
 				}
 
-				select_option(select0, /*loanDetails*/ ctx[1].incomeCurrency, true);
+				select_option(select0, /*loanDetails*/ ctx[3].incomeCurrency, true);
 				append_dev(div, t6);
 				append_dev(div, label2);
 				append_dev(label2, t7);
 				append_dev(label2, input1);
-				set_input_value(input1, /*loanDetails*/ ctx[1].expense);
+				set_input_value(input1, /*loanDetails*/ ctx[3].expense);
 				append_dev(div, t8);
 				append_dev(div, label3);
 				append_dev(label3, t9);
@@ -4756,41 +4762,41 @@ var app = (function () {
 					}
 				}
 
-				select_option(select1, /*loanDetails*/ ctx[1].expenseCurrency, true);
+				select_option(select1, /*loanDetails*/ ctx[3].expenseCurrency, true);
 				append_dev(div, t11);
 				append_dev(div, label4);
 				append_dev(label4, t12);
 				append_dev(label4, textarea);
-				set_input_value(textarea, /*loanDetails*/ ctx[1].purpose);
+				set_input_value(textarea, /*loanDetails*/ ctx[3].purpose);
 
 				if (!mounted) {
 					dispose = [
-						listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[14]),
-						listen_dev(select0, "change", /*select0_change_handler*/ ctx[15]),
-						listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[16]),
-						listen_dev(select1, "change", /*select1_change_handler*/ ctx[17]),
-						listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[18])
+						listen_dev(input0, "input", /*input0_input_handler_1*/ ctx[16]),
+						listen_dev(select0, "change", /*select0_change_handler*/ ctx[17]),
+						listen_dev(input1, "input", /*input1_input_handler_1*/ ctx[18]),
+						listen_dev(select1, "change", /*select1_change_handler*/ ctx[19]),
+						listen_dev(textarea, "input", /*textarea_input_handler*/ ctx[20])
 					];
 
 					mounted = true;
 				}
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*loanDetails, tokens*/ 6 && to_number(input0.value) !== /*loanDetails*/ ctx[1].income) {
-					set_input_value(input0, /*loanDetails*/ ctx[1].income);
+				if (dirty[0] & /*loanDetails, tokens*/ 24 && to_number(input0.value) !== /*loanDetails*/ ctx[3].income) {
+					set_input_value(input0, /*loanDetails*/ ctx[3].income);
 				}
 
-				if (dirty[0] & /*fiatCurrencies*/ 8) {
-					each_value_4 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[3]);
+				if (dirty[0] & /*fiatCurrencies*/ 32) {
+					each_value_5 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[5]);
 					let i;
 
-					for (i = 0; i < each_value_4.length; i += 1) {
-						const child_ctx = get_each_context_4(ctx, each_value_4, i);
+					for (i = 0; i < each_value_5.length; i += 1) {
+						const child_ctx = get_each_context_5(ctx, each_value_5, i);
 
 						if (each_blocks_1[i]) {
 							each_blocks_1[i].p(child_ctx, dirty);
 						} else {
-							each_blocks_1[i] = create_each_block_4(child_ctx);
+							each_blocks_1[i] = create_each_block_5(child_ctx);
 							each_blocks_1[i].c();
 							each_blocks_1[i].m(select0, null);
 						}
@@ -4800,28 +4806,28 @@ var app = (function () {
 						each_blocks_1[i].d(1);
 					}
 
-					each_blocks_1.length = each_value_4.length;
+					each_blocks_1.length = each_value_5.length;
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select0, /*loanDetails*/ ctx[1].incomeCurrency);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select0, /*loanDetails*/ ctx[3].incomeCurrency);
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6 && to_number(input1.value) !== /*loanDetails*/ ctx[1].expense) {
-					set_input_value(input1, /*loanDetails*/ ctx[1].expense);
+				if (dirty[0] & /*loanDetails, tokens*/ 24 && to_number(input1.value) !== /*loanDetails*/ ctx[3].expense) {
+					set_input_value(input1, /*loanDetails*/ ctx[3].expense);
 				}
 
-				if (dirty[0] & /*fiatCurrencies*/ 8) {
-					each_value_3 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[3]);
+				if (dirty[0] & /*fiatCurrencies*/ 32) {
+					each_value_4 = ensure_array_like_dev(/*fiatCurrencies*/ ctx[5]);
 					let i;
 
-					for (i = 0; i < each_value_3.length; i += 1) {
-						const child_ctx = get_each_context_3(ctx, each_value_3, i);
+					for (i = 0; i < each_value_4.length; i += 1) {
+						const child_ctx = get_each_context_4(ctx, each_value_4, i);
 
 						if (each_blocks[i]) {
 							each_blocks[i].p(child_ctx, dirty);
 						} else {
-							each_blocks[i] = create_each_block_3(child_ctx);
+							each_blocks[i] = create_each_block_4(child_ctx);
 							each_blocks[i].c();
 							each_blocks[i].m(select1, null);
 						}
@@ -4831,15 +4837,15 @@ var app = (function () {
 						each_blocks[i].d(1);
 					}
 
-					each_blocks.length = each_value_3.length;
+					each_blocks.length = each_value_4.length;
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select1, /*loanDetails*/ ctx[1].expenseCurrency);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select1, /*loanDetails*/ ctx[3].expenseCurrency);
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					set_input_value(textarea, /*loanDetails*/ ctx[1].purpose);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					set_input_value(textarea, /*loanDetails*/ ctx[3].purpose);
 				}
 			},
 			d: function destroy(detaching) {
@@ -4858,26 +4864,63 @@ var app = (function () {
 			block,
 			id: create_if_block_5.name,
 			type: "if",
-			source: "(104:8) {#if step === 2}",
+			source: "(129:8) {#if step === 2}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (121:20) {#each fiatCurrencies as currency}
-	function create_each_block_4(ctx) {
+	// (146:20) {#each fiatCurrencies as currency}
+	function create_each_block_5(ctx) {
 		let option_1;
-		let t_value = /*currency*/ ctx[33] + "";
+		let t_value = /*currency*/ ctx[40] + "";
 		let t;
 
 		const block = {
 			c: function create() {
 				option_1 = element("option");
 				t = text(t_value);
-				option_1.__value = /*currency*/ ctx[33];
+				option_1.__value = /*currency*/ ctx[40];
 				set_input_value(option_1, option_1.__value);
-				add_location(option_1, file$6, 121, 24, 3462);
+				add_location(option_1, file$6, 146, 24, 4252);
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, option_1, anchor);
+				append_dev(option_1, t);
+			},
+			p: noop,
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach_dev(option_1);
+				}
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_each_block_5.name,
+			type: "each",
+			source: "(146:20) {#each fiatCurrencies as currency}",
+			ctx
+		});
+
+		return block;
+	}
+
+	// (166:20) {#each fiatCurrencies as currency}
+	function create_each_block_4(ctx) {
+		let option_1;
+		let t_value = /*currency*/ ctx[40] + "";
+		let t;
+
+		const block = {
+			c: function create() {
+				option_1 = element("option");
+				t = text(t_value);
+				option_1.__value = /*currency*/ ctx[40];
+				set_input_value(option_1, option_1.__value);
+				add_location(option_1, file$6, 166, 24, 4940);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option_1, anchor);
@@ -4895,51 +4938,14 @@ var app = (function () {
 			block,
 			id: create_each_block_4.name,
 			type: "each",
-			source: "(121:20) {#each fiatCurrencies as currency}",
+			source: "(166:20) {#each fiatCurrencies as currency}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (141:20) {#each fiatCurrencies as currency}
-	function create_each_block_3(ctx) {
-		let option_1;
-		let t_value = /*currency*/ ctx[33] + "";
-		let t;
-
-		const block = {
-			c: function create() {
-				option_1 = element("option");
-				t = text(t_value);
-				option_1.__value = /*currency*/ ctx[33];
-				set_input_value(option_1, option_1.__value);
-				add_location(option_1, file$6, 141, 24, 4150);
-			},
-			m: function mount(target, anchor) {
-				insert_dev(target, option_1, anchor);
-				append_dev(option_1, t);
-			},
-			p: noop,
-			d: function destroy(detaching) {
-				if (detaching) {
-					detach_dev(option_1);
-				}
-			}
-		};
-
-		dispatch_dev("SvelteRegisterBlock", {
-			block,
-			id: create_each_block_3.name,
-			type: "each",
-			source: "(141:20) {#each fiatCurrencies as currency}",
-			ctx
-		});
-
-		return block;
-	}
-
-	// (158:8) {#if step === 3}
+	// (183:8) {#if step === 3}
 	function create_if_block_2$1(ctx) {
 		let div;
 		let h2;
@@ -4957,11 +4963,23 @@ var app = (function () {
 		let t9;
 		let select1;
 		let option3;
+		let t11;
+		let label2;
+		let t12;
+		let select2;
+		let option4;
 		let mounted;
 		let dispose;
-		let if_block0 = /*loanDetails*/ ctx[1].collateralType === "crypto" && create_if_block_4(ctx);
-		let if_block1 = /*loanDetails*/ ctx[1].collateralType === "real-world" && create_if_block_3(ctx);
-		let each_value = ensure_array_like_dev(/*durations*/ ctx[4]);
+		let if_block0 = /*loanDetails*/ ctx[3].collateralType === "crypto" && create_if_block_4(ctx);
+		let if_block1 = /*loanDetails*/ ctx[3].collateralType === "real-world" && create_if_block_3(ctx);
+		let each_value_1 = ensure_array_like_dev(/*durations*/ ctx[6]);
+		let each_blocks_1 = [];
+
+		for (let i = 0; i < each_value_1.length; i += 1) {
+			each_blocks_1[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
+		}
+
+		let each_value = ensure_array_like_dev(/*wallets*/ ctx[1]);
 		let each_blocks = [];
 
 		for (let i = 0; i < each_value.length; i += 1) {
@@ -4994,40 +5012,61 @@ var app = (function () {
 				option3 = element("option");
 				option3.textContent = "Select duration";
 
+				for (let i = 0; i < each_blocks_1.length; i += 1) {
+					each_blocks_1[i].c();
+				}
+
+				t11 = space();
+				label2 = element("label");
+				t12 = text("Select Wallet:\n                ");
+				select2 = element("select");
+				option4 = element("option");
+				option4.textContent = "Select a wallet";
+
 				for (let i = 0; i < each_blocks.length; i += 1) {
 					each_blocks[i].c();
 				}
 
 				attr_dev(h2, "class", "svelte-1djcpp2");
-				add_location(h2, file$6, 159, 12, 4642);
+				add_location(h2, file$6, 184, 12, 5432);
 				option0.__value = "";
 				set_input_value(option0, option0.__value);
 				option0.disabled = true;
-				add_location(option0, file$6, 163, 20, 4825);
+				add_location(option0, file$6, 188, 20, 5615);
 				option1.__value = "crypto";
 				set_input_value(option1, option1.__value);
-				add_location(option1, file$6, 164, 20, 4894);
+				add_location(option1, file$6, 189, 20, 5684);
 				option2.__value = "real-world";
 				set_input_value(option2, option2.__value);
-				add_location(option2, file$6, 165, 20, 4953);
+				add_location(option2, file$6, 190, 20, 5743);
 				select0.required = true;
 				attr_dev(select0, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].collateralType === void 0) add_render_callback(() => /*select0_change_handler_1*/ ctx[19].call(select0));
-				add_location(select0, file$6, 162, 16, 4747);
+				if (/*loanDetails*/ ctx[3].collateralType === void 0) add_render_callback(() => /*select0_change_handler_1*/ ctx[21].call(select0));
+				add_location(select0, file$6, 187, 16, 5537);
 				attr_dev(label0, "class", "svelte-1djcpp2");
-				add_location(label0, file$6, 160, 12, 4690);
+				add_location(label0, file$6, 185, 12, 5480);
 				option3.__value = "";
 				set_input_value(option3, option3.__value);
 				option3.disabled = true;
-				add_location(option3, file$6, 216, 20, 6729);
+				add_location(option3, file$6, 241, 20, 7519);
 				select1.required = true;
 				attr_dev(select1, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].duration === void 0) add_render_callback(() => /*select1_change_handler_1*/ ctx[23].call(select1));
-				add_location(select1, file$6, 215, 16, 6657);
+				if (/*loanDetails*/ ctx[3].duration === void 0) add_render_callback(() => /*select1_change_handler_1*/ ctx[25].call(select1));
+				add_location(select1, file$6, 240, 16, 7447);
 				attr_dev(label1, "class", "svelte-1djcpp2");
-				add_location(label1, file$6, 213, 12, 6602);
+				add_location(label1, file$6, 238, 12, 7392);
+				option4.__value = "";
+				set_input_value(option4, option4.__value);
+				option4.disabled = true;
+				add_location(option4, file$6, 251, 20, 7898);
+				select2.required = true;
+				attr_dev(select2, "class", "svelte-1djcpp2");
+				if (/*selectedWallet*/ ctx[2] === void 0) add_render_callback(() => /*select2_change_handler*/ ctx[26].call(select2));
+				add_location(select2, file$6, 250, 16, 7832);
+				attr_dev(label2, "class", "svelte-1djcpp2");
+				add_location(label2, file$6, 248, 12, 7777);
 				attr_dev(div, "class", "form-step");
-				add_location(div, file$6, 158, 8, 4606);
+				add_location(div, file$6, 183, 8, 5396);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, div, anchor);
@@ -5039,7 +5078,7 @@ var app = (function () {
 				append_dev(select0, option0);
 				append_dev(select0, option1);
 				append_dev(select0, option2);
-				select_option(select0, /*loanDetails*/ ctx[1].collateralType, true);
+				select_option(select0, /*loanDetails*/ ctx[3].collateralType, true);
 				append_dev(div, t6);
 				if (if_block0) if_block0.m(div, null);
 				append_dev(div, t7);
@@ -5050,29 +5089,43 @@ var app = (function () {
 				append_dev(label1, select1);
 				append_dev(select1, option3);
 
-				for (let i = 0; i < each_blocks.length; i += 1) {
-					if (each_blocks[i]) {
-						each_blocks[i].m(select1, null);
+				for (let i = 0; i < each_blocks_1.length; i += 1) {
+					if (each_blocks_1[i]) {
+						each_blocks_1[i].m(select1, null);
 					}
 				}
 
-				select_option(select1, /*loanDetails*/ ctx[1].duration, true);
+				select_option(select1, /*loanDetails*/ ctx[3].duration, true);
+				append_dev(div, t11);
+				append_dev(div, label2);
+				append_dev(label2, t12);
+				append_dev(label2, select2);
+				append_dev(select2, option4);
+
+				for (let i = 0; i < each_blocks.length; i += 1) {
+					if (each_blocks[i]) {
+						each_blocks[i].m(select2, null);
+					}
+				}
+
+				select_option(select2, /*selectedWallet*/ ctx[2], true);
 
 				if (!mounted) {
 					dispose = [
-						listen_dev(select0, "change", /*select0_change_handler_1*/ ctx[19]),
-						listen_dev(select1, "change", /*select1_change_handler_1*/ ctx[23])
+						listen_dev(select0, "change", /*select0_change_handler_1*/ ctx[21]),
+						listen_dev(select1, "change", /*select1_change_handler_1*/ ctx[25]),
+						listen_dev(select2, "change", /*select2_change_handler*/ ctx[26])
 					];
 
 					mounted = true;
 				}
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select0, /*loanDetails*/ ctx[1].collateralType);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select0, /*loanDetails*/ ctx[3].collateralType);
 				}
 
-				if (/*loanDetails*/ ctx[1].collateralType === "crypto") {
+				if (/*loanDetails*/ ctx[3].collateralType === "crypto") {
 					if (if_block0) {
 						if_block0.p(ctx, dirty);
 					} else {
@@ -5085,7 +5138,7 @@ var app = (function () {
 					if_block0 = null;
 				}
 
-				if (/*loanDetails*/ ctx[1].collateralType === "real-world") {
+				if (/*loanDetails*/ ctx[3].collateralType === "real-world") {
 					if (if_block1) {
 						if_block1.p(ctx, dirty);
 					} else {
@@ -5098,8 +5151,35 @@ var app = (function () {
 					if_block1 = null;
 				}
 
-				if (dirty[0] & /*durations*/ 16) {
-					each_value = ensure_array_like_dev(/*durations*/ ctx[4]);
+				if (dirty[0] & /*durations*/ 64) {
+					each_value_1 = ensure_array_like_dev(/*durations*/ ctx[6]);
+					let i;
+
+					for (i = 0; i < each_value_1.length; i += 1) {
+						const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
+
+						if (each_blocks_1[i]) {
+							each_blocks_1[i].p(child_ctx, dirty);
+						} else {
+							each_blocks_1[i] = create_each_block_1$1(child_ctx);
+							each_blocks_1[i].c();
+							each_blocks_1[i].m(select1, null);
+						}
+					}
+
+					for (; i < each_blocks_1.length; i += 1) {
+						each_blocks_1[i].d(1);
+					}
+
+					each_blocks_1.length = each_value_1.length;
+				}
+
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select1, /*loanDetails*/ ctx[3].duration);
+				}
+
+				if (dirty[0] & /*wallets*/ 2) {
+					each_value = ensure_array_like_dev(/*wallets*/ ctx[1]);
 					let i;
 
 					for (i = 0; i < each_value.length; i += 1) {
@@ -5110,7 +5190,7 @@ var app = (function () {
 						} else {
 							each_blocks[i] = create_each_block$1(child_ctx);
 							each_blocks[i].c();
-							each_blocks[i].m(select1, null);
+							each_blocks[i].m(select2, null);
 						}
 					}
 
@@ -5121,8 +5201,8 @@ var app = (function () {
 					each_blocks.length = each_value.length;
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select1, /*loanDetails*/ ctx[1].duration);
+				if (dirty[0] & /*selectedWallet, wallets*/ 6) {
+					select_option(select2, /*selectedWallet*/ ctx[2]);
 				}
 			},
 			d: function destroy(detaching) {
@@ -5132,6 +5212,7 @@ var app = (function () {
 
 				if (if_block0) if_block0.d();
 				if (if_block1) if_block1.d();
+				destroy_each(each_blocks_1, detaching);
 				destroy_each(each_blocks, detaching);
 				mounted = false;
 				run_all(dispose);
@@ -5142,14 +5223,14 @@ var app = (function () {
 			block,
 			id: create_if_block_2$1.name,
 			type: "if",
-			source: "(158:8) {#if step === 3}",
+			source: "(183:8) {#if step === 3}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (170:12) {#if loanDetails.collateralType === "crypto"}
+	// (195:12) {#if loanDetails.collateralType === "crypto"}
 	function create_if_block_4(ctx) {
 		let label0;
 		let t0;
@@ -5161,11 +5242,11 @@ var app = (function () {
 		let input;
 		let mounted;
 		let dispose;
-		let each_value_2 = ensure_array_like_dev(/*tokens*/ ctx[2]);
+		let each_value_3 = ensure_array_like_dev(/*tokens*/ ctx[4]);
 		let each_blocks = [];
 
-		for (let i = 0; i < each_value_2.length; i += 1) {
-			each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
+		for (let i = 0; i < each_value_3.length; i += 1) {
+			each_blocks[i] = create_each_block_3(get_each_context_3(ctx, each_value_3, i));
 		}
 
 		const block = {
@@ -5187,20 +5268,20 @@ var app = (function () {
 				option_1.__value = "";
 				set_input_value(option_1, option_1.__value);
 				option_1.disabled = true;
-				add_location(option_1, file$6, 173, 20, 5278);
+				add_location(option_1, file$6, 198, 20, 6068);
 				select.required = true;
 				attr_dev(select, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].cryptoCollateralToken === void 0) add_render_callback(() => /*select_change_handler_1*/ ctx[20].call(select));
-				add_location(select, file$6, 172, 16, 5193);
+				if (/*loanDetails*/ ctx[3].cryptoCollateralToken === void 0) add_render_callback(() => /*select_change_handler_1*/ ctx[22].call(select));
+				add_location(select, file$6, 197, 16, 5983);
 				attr_dev(label0, "class", "svelte-1djcpp2");
-				add_location(label0, file$6, 170, 12, 5124);
+				add_location(label0, file$6, 195, 12, 5914);
 				attr_dev(input, "type", "number");
 				attr_dev(input, "placeholder", "Enter amount to pledge");
 				input.required = true;
 				attr_dev(input, "class", "svelte-1djcpp2");
-				add_location(input, file$6, 182, 16, 5582);
+				add_location(input, file$6, 207, 16, 6372);
 				attr_dev(label1, "class", "svelte-1djcpp2");
-				add_location(label1, file$6, 180, 12, 5523);
+				add_location(label1, file$6, 205, 12, 6313);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, label0, anchor);
@@ -5214,34 +5295,34 @@ var app = (function () {
 					}
 				}
 
-				select_option(select, /*loanDetails*/ ctx[1].cryptoCollateralToken, true);
+				select_option(select, /*loanDetails*/ ctx[3].cryptoCollateralToken, true);
 				insert_dev(target, t2, anchor);
 				insert_dev(target, label1, anchor);
 				append_dev(label1, t3);
 				append_dev(label1, input);
-				set_input_value(input, /*loanDetails*/ ctx[1].cryptoCollateralAmount);
+				set_input_value(input, /*loanDetails*/ ctx[3].cryptoCollateralAmount);
 
 				if (!mounted) {
 					dispose = [
-						listen_dev(select, "change", /*select_change_handler_1*/ ctx[20]),
-						listen_dev(input, "input", /*input_input_handler*/ ctx[21])
+						listen_dev(select, "change", /*select_change_handler_1*/ ctx[22]),
+						listen_dev(input, "input", /*input_input_handler*/ ctx[23])
 					];
 
 					mounted = true;
 				}
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*tokens*/ 4) {
-					each_value_2 = ensure_array_like_dev(/*tokens*/ ctx[2]);
+				if (dirty[0] & /*tokens*/ 16) {
+					each_value_3 = ensure_array_like_dev(/*tokens*/ ctx[4]);
 					let i;
 
-					for (i = 0; i < each_value_2.length; i += 1) {
-						const child_ctx = get_each_context_2(ctx, each_value_2, i);
+					for (i = 0; i < each_value_3.length; i += 1) {
+						const child_ctx = get_each_context_3(ctx, each_value_3, i);
 
 						if (each_blocks[i]) {
 							each_blocks[i].p(child_ctx, dirty);
 						} else {
-							each_blocks[i] = create_each_block_2(child_ctx);
+							each_blocks[i] = create_each_block_3(child_ctx);
 							each_blocks[i].c();
 							each_blocks[i].m(select, null);
 						}
@@ -5251,15 +5332,15 @@ var app = (function () {
 						each_blocks[i].d(1);
 					}
 
-					each_blocks.length = each_value_2.length;
+					each_blocks.length = each_value_3.length;
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select, /*loanDetails*/ ctx[1].cryptoCollateralToken);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select, /*loanDetails*/ ctx[3].cryptoCollateralToken);
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6 && to_number(input.value) !== /*loanDetails*/ ctx[1].cryptoCollateralAmount) {
-					set_input_value(input, /*loanDetails*/ ctx[1].cryptoCollateralAmount);
+				if (dirty[0] & /*loanDetails, tokens*/ 24 && to_number(input.value) !== /*loanDetails*/ ctx[3].cryptoCollateralAmount) {
+					set_input_value(input, /*loanDetails*/ ctx[3].cryptoCollateralAmount);
 				}
 			},
 			d: function destroy(detaching) {
@@ -5279,26 +5360,26 @@ var app = (function () {
 			block,
 			id: create_if_block_4.name,
 			type: "if",
-			source: "(170:12) {#if loanDetails.collateralType === \\\"crypto\\\"}",
+			source: "(195:12) {#if loanDetails.collateralType === \\\"crypto\\\"}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (175:20) {#each tokens as token}
-	function create_each_block_2(ctx) {
+	// (200:20) {#each tokens as token}
+	function create_each_block_3(ctx) {
 		let option_1;
-		let t_value = /*token*/ ctx[30] + "";
+		let t_value = /*token*/ ctx[37] + "";
 		let t;
 
 		const block = {
 			c: function create() {
 				option_1 = element("option");
 				t = text(t_value);
-				option_1.__value = /*token*/ ctx[30];
+				option_1.__value = /*token*/ ctx[37];
 				set_input_value(option_1, option_1.__value);
-				add_location(option_1, file$6, 175, 24, 5396);
+				add_location(option_1, file$6, 200, 24, 6186);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option_1, anchor);
@@ -5314,16 +5395,16 @@ var app = (function () {
 
 		dispatch_dev("SvelteRegisterBlock", {
 			block,
-			id: create_each_block_2.name,
+			id: create_each_block_3.name,
 			type: "each",
-			source: "(175:20) {#each tokens as token}",
+			source: "(200:20) {#each tokens as token}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (192:12) {#if loanDetails.collateralType === "real-world"}
+	// (217:12) {#if loanDetails.collateralType === "real-world"}
 	function create_if_block_3(ctx) {
 		let label0;
 		let t0;
@@ -5335,11 +5416,11 @@ var app = (function () {
 		let input;
 		let mounted;
 		let dispose;
-		let each_value_1 = ensure_array_like_dev(/*realWorldCollateralOptions*/ ctx[5]);
+		let each_value_2 = ensure_array_like_dev(/*realWorldCollateralOptions*/ ctx[7]);
 		let each_blocks = [];
 
-		for (let i = 0; i < each_value_1.length; i += 1) {
-			each_blocks[i] = create_each_block_1$1(get_each_context_1$1(ctx, each_value_1, i));
+		for (let i = 0; i < each_value_2.length; i += 1) {
+			each_blocks[i] = create_each_block_2(get_each_context_2(ctx, each_value_2, i));
 		}
 
 		const block = {
@@ -5361,20 +5442,20 @@ var app = (function () {
 				option_1.__value = "";
 				set_input_value(option_1, option_1.__value);
 				option_1.disabled = true;
-				add_location(option_1, file$6, 195, 20, 6053);
+				add_location(option_1, file$6, 220, 20, 6843);
 				select.required = true;
 				attr_dev(select, "class", "svelte-1djcpp2");
-				if (/*loanDetails*/ ctx[1].realWorldDescription === void 0) add_render_callback(() => /*select_change_handler_2*/ ctx[22].call(select));
-				add_location(select, file$6, 194, 16, 5969);
+				if (/*loanDetails*/ ctx[3].realWorldDescription === void 0) add_render_callback(() => /*select_change_handler_2*/ ctx[24].call(select));
+				add_location(select, file$6, 219, 16, 6759);
 				attr_dev(label0, "class", "svelte-1djcpp2");
-				add_location(label0, file$6, 192, 12, 5910);
+				add_location(label0, file$6, 217, 12, 6700);
 				attr_dev(input, "type", "file");
 				attr_dev(input, "accept", "image/*");
 				input.required = true;
 				attr_dev(input, "class", "svelte-1djcpp2");
-				add_location(input, file$6, 204, 16, 6376);
+				add_location(input, file$6, 229, 16, 7166);
 				attr_dev(label1, "class", "svelte-1djcpp2");
-				add_location(label1, file$6, 202, 12, 6322);
+				add_location(label1, file$6, 227, 12, 7112);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, label0, anchor);
@@ -5388,7 +5469,7 @@ var app = (function () {
 					}
 				}
 
-				select_option(select, /*loanDetails*/ ctx[1].realWorldDescription, true);
+				select_option(select, /*loanDetails*/ ctx[3].realWorldDescription, true);
 				insert_dev(target, t2, anchor);
 				insert_dev(target, label1, anchor);
 				append_dev(label1, t3);
@@ -5396,25 +5477,25 @@ var app = (function () {
 
 				if (!mounted) {
 					dispose = [
-						listen_dev(select, "change", /*select_change_handler_2*/ ctx[22]),
-						listen_dev(input, "change", /*handlePhotoUpload*/ ctx[8], false, false, false, false)
+						listen_dev(select, "change", /*select_change_handler_2*/ ctx[24]),
+						listen_dev(input, "change", /*handlePhotoUpload*/ ctx[10], false, false, false, false)
 					];
 
 					mounted = true;
 				}
 			},
 			p: function update(ctx, dirty) {
-				if (dirty[0] & /*realWorldCollateralOptions*/ 32) {
-					each_value_1 = ensure_array_like_dev(/*realWorldCollateralOptions*/ ctx[5]);
+				if (dirty[0] & /*realWorldCollateralOptions*/ 128) {
+					each_value_2 = ensure_array_like_dev(/*realWorldCollateralOptions*/ ctx[7]);
 					let i;
 
-					for (i = 0; i < each_value_1.length; i += 1) {
-						const child_ctx = get_each_context_1$1(ctx, each_value_1, i);
+					for (i = 0; i < each_value_2.length; i += 1) {
+						const child_ctx = get_each_context_2(ctx, each_value_2, i);
 
 						if (each_blocks[i]) {
 							each_blocks[i].p(child_ctx, dirty);
 						} else {
-							each_blocks[i] = create_each_block_1$1(child_ctx);
+							each_blocks[i] = create_each_block_2(child_ctx);
 							each_blocks[i].c();
 							each_blocks[i].m(select, null);
 						}
@@ -5424,11 +5505,11 @@ var app = (function () {
 						each_blocks[i].d(1);
 					}
 
-					each_blocks.length = each_value_1.length;
+					each_blocks.length = each_value_2.length;
 				}
 
-				if (dirty[0] & /*loanDetails, tokens*/ 6) {
-					select_option(select, /*loanDetails*/ ctx[1].realWorldDescription);
+				if (dirty[0] & /*loanDetails, tokens*/ 24) {
+					select_option(select, /*loanDetails*/ ctx[3].realWorldDescription);
 				}
 			},
 			d: function destroy(detaching) {
@@ -5448,26 +5529,63 @@ var app = (function () {
 			block,
 			id: create_if_block_3.name,
 			type: "if",
-			source: "(192:12) {#if loanDetails.collateralType === \\\"real-world\\\"}",
+			source: "(217:12) {#if loanDetails.collateralType === \\\"real-world\\\"}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (197:20) {#each realWorldCollateralOptions as option}
-	function create_each_block_1$1(ctx) {
+	// (222:20) {#each realWorldCollateralOptions as option}
+	function create_each_block_2(ctx) {
 		let option_1;
-		let t_value = /*option*/ ctx[27] + "";
+		let t_value = /*option*/ ctx[34] + "";
 		let t;
 
 		const block = {
 			c: function create() {
 				option_1 = element("option");
 				t = text(t_value);
-				option_1.__value = /*option*/ ctx[27];
+				option_1.__value = /*option*/ ctx[34];
 				set_input_value(option_1, option_1.__value);
-				add_location(option_1, file$6, 197, 24, 6193);
+				add_location(option_1, file$6, 222, 24, 6983);
+			},
+			m: function mount(target, anchor) {
+				insert_dev(target, option_1, anchor);
+				append_dev(option_1, t);
+			},
+			p: noop,
+			d: function destroy(detaching) {
+				if (detaching) {
+					detach_dev(option_1);
+				}
+			}
+		};
+
+		dispatch_dev("SvelteRegisterBlock", {
+			block,
+			id: create_each_block_2.name,
+			type: "each",
+			source: "(222:20) {#each realWorldCollateralOptions as option}",
+			ctx
+		});
+
+		return block;
+	}
+
+	// (243:20) {#each durations as duration}
+	function create_each_block_1$1(ctx) {
+		let option_1;
+		let t_value = /*duration*/ ctx[31] + "";
+		let t;
+
+		const block = {
+			c: function create() {
+				option_1 = element("option");
+				t = text(t_value);
+				option_1.__value = /*duration*/ ctx[31];
+				set_input_value(option_1, option_1.__value);
+				add_location(option_1, file$6, 243, 24, 7644);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option_1, anchor);
@@ -5485,32 +5603,40 @@ var app = (function () {
 			block,
 			id: create_each_block_1$1.name,
 			type: "each",
-			source: "(197:20) {#each realWorldCollateralOptions as option}",
+			source: "(243:20) {#each durations as duration}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (218:20) {#each durations as duration}
+	// (253:20) {#each wallets as wallet}
 	function create_each_block$1(ctx) {
 		let option_1;
-		let t_value = /*duration*/ ctx[24] + "";
+		let t_value = /*wallet*/ ctx[28].id + "";
 		let t;
+		let option_1_value_value;
 
 		const block = {
 			c: function create() {
 				option_1 = element("option");
 				t = text(t_value);
-				option_1.__value = /*duration*/ ctx[24];
+				option_1.__value = option_1_value_value = /*wallet*/ ctx[28].id;
 				set_input_value(option_1, option_1.__value);
-				add_location(option_1, file$6, 218, 24, 6854);
+				add_location(option_1, file$6, 253, 24, 8019);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option_1, anchor);
 				append_dev(option_1, t);
 			},
-			p: noop,
+			p: function update(ctx, dirty) {
+				if (dirty[0] & /*wallets*/ 2 && t_value !== (t_value = /*wallet*/ ctx[28].id + "")) set_data_dev(t, t_value);
+
+				if (dirty[0] & /*wallets*/ 2 && option_1_value_value !== (option_1_value_value = /*wallet*/ ctx[28].id)) {
+					prop_dev(option_1, "__value", option_1_value_value);
+					set_input_value(option_1, option_1.__value);
+				}
+			},
 			d: function destroy(detaching) {
 				if (detaching) {
 					detach_dev(option_1);
@@ -5522,14 +5648,14 @@ var app = (function () {
 			block,
 			id: create_each_block$1.name,
 			type: "each",
-			source: "(218:20) {#each durations as duration}",
+			source: "(253:20) {#each wallets as wallet}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (227:12) {#if step > 1}
+	// (262:12) {#if step > 1}
 	function create_if_block_1$2(ctx) {
 		let button;
 		let mounted;
@@ -5541,13 +5667,13 @@ var app = (function () {
 				button.textContent = "Back";
 				attr_dev(button, "type", "button");
 				attr_dev(button, "class", "btn btn-secondary svelte-1djcpp2");
-				add_location(button, file$6, 227, 16, 7085);
+				add_location(button, file$6, 262, 16, 8252);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
 
 				if (!mounted) {
-					dispose = listen_dev(button, "click", /*handlePreviousStep*/ ctx[7], false, false, false, false);
+					dispose = listen_dev(button, "click", /*handlePreviousStep*/ ctx[9], false, false, false, false);
 					mounted = true;
 				}
 			},
@@ -5566,14 +5692,14 @@ var app = (function () {
 			block,
 			id: create_if_block_1$2.name,
 			type: "if",
-			source: "(227:12) {#if step > 1}",
+			source: "(262:12) {#if step > 1}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (233:12) {:else}
+	// (268:12) {:else}
 	function create_else_block$3(ctx) {
 		let button;
 		let mounted;
@@ -5585,13 +5711,13 @@ var app = (function () {
 				button.textContent = "Submit";
 				attr_dev(button, "type", "button");
 				attr_dev(button, "class", "btn btn-primary svelte-1djcpp2");
-				add_location(button, file$6, 233, 16, 7370);
+				add_location(button, file$6, 268, 16, 8537);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
 
 				if (!mounted) {
-					dispose = listen_dev(button, "click", /*handleSubmit*/ ctx[9], false, false, false, false);
+					dispose = listen_dev(button, "click", /*handleSubmit*/ ctx[11], false, false, false, false);
 					mounted = true;
 				}
 			},
@@ -5610,14 +5736,14 @@ var app = (function () {
 			block,
 			id: create_else_block$3.name,
 			type: "else",
-			source: "(233:12) {:else}",
+			source: "(268:12) {:else}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (231:12) {#if step < totalSteps}
+	// (266:12) {#if step < totalSteps}
 	function create_if_block$3(ctx) {
 		let button;
 		let mounted;
@@ -5629,13 +5755,13 @@ var app = (function () {
 				button.textContent = "Next";
 				attr_dev(button, "type", "button");
 				attr_dev(button, "class", "btn btn-primary svelte-1djcpp2");
-				add_location(button, file$6, 231, 16, 7248);
+				add_location(button, file$6, 266, 16, 8415);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, button, anchor);
 
 				if (!mounted) {
-					dispose = listen_dev(button, "click", /*handleNextStep*/ ctx[6], false, false, false, false);
+					dispose = listen_dev(button, "click", /*handleNextStep*/ ctx[8], false, false, false, false);
 					mounted = true;
 				}
 			},
@@ -5654,7 +5780,7 @@ var app = (function () {
 			block,
 			id: create_if_block$3.name,
 			type: "if",
-			source: "(231:12) {#if step < totalSteps}",
+			source: "(266:12) {#if step < totalSteps}",
 			ctx
 		});
 
@@ -5709,16 +5835,16 @@ var app = (function () {
 				if_block4.c();
 				attr_dev(div0, "class", "progress-bar-fill svelte-1djcpp2");
 				set_style(div0, "width", /*step*/ ctx[0] / totalSteps * 100 + "%");
-				add_location(div0, file$6, 50, 8, 1289);
+				add_location(div0, file$6, 75, 8, 2079);
 				attr_dev(div1, "class", "progress-bar svelte-1djcpp2");
-				add_location(div1, file$6, 49, 4, 1254);
+				add_location(div1, file$6, 74, 4, 2044);
 				attr_dev(h1, "class", "svelte-1djcpp2");
-				add_location(h1, file$6, 56, 4, 1418);
+				add_location(h1, file$6, 81, 4, 2208);
 				attr_dev(div2, "class", "form-navigation svelte-1djcpp2");
-				add_location(div2, file$6, 225, 8, 7012);
-				add_location(form, file$6, 57, 4, 1449);
+				add_location(div2, file$6, 260, 8, 8179);
+				add_location(form, file$6, 82, 4, 2239);
 				attr_dev(section, "class", "loan-form-container svelte-1djcpp2");
-				add_location(section, file$6, 47, 0, 1186);
+				add_location(section, file$6, 72, 0, 1976);
 			},
 			l: function claim(nodes) {
 				throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -5843,6 +5969,8 @@ var app = (function () {
 		let { $$slots: slots = {}, $$scope } = $$props;
 		validate_slots('LoanRequestForm', slots, []);
 		let step = 1;
+		let wallets = [];
+		let selectedWallet = "";
 
 		let loanDetails = {
 			amount: "",
@@ -5876,12 +6004,35 @@ var app = (function () {
 		}
 
 		function handlePhotoUpload(event) {
-			$$invalidate(1, loanDetails.realWorldPhoto = event.target.files[0], loanDetails);
+			$$invalidate(3, loanDetails.realWorldPhoto = event.target.files[0], loanDetails);
 		}
 
 		function handleSubmit() {
 			console.log("Loan Details Submitted:", loanDetails);
 		} // TODO: Submit `loanDetails` to the backend API for NFT deployment or loan processing.
+
+		async function fetchWallets() {
+			try {
+				const response = await fetch(`${urlRoot}/api/v1/wallets`);
+
+				if (response.ok) {
+					$$invalidate(1, wallets = await response.json());
+
+					errorMessage = wallets.length
+					? ""
+					: "No wallets found. Please create a wallet first.";
+				} else {
+					errorMessage = "Failed to fetch wallets. Please try again.";
+				}
+			} catch(error) {
+				errorMessage = "Error fetching wallets. Check your connection.";
+				console.error("Error fetching wallets:", error);
+			}
+		}
+
+		onMount(() => {
+			fetchWallets();
+		});
 
 		const writable_props = [];
 
@@ -5891,92 +6042,101 @@ var app = (function () {
 
 		function input0_input_handler() {
 			loanDetails.amount = to_number(this.value);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select_change_handler() {
 			loanDetails.token = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function input1_input_handler() {
 			loanDetails.age = to_number(this.value);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function input2_input_handler() {
 			loanDetails.occupation = this.value;
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function input0_input_handler_1() {
 			loanDetails.income = to_number(this.value);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select0_change_handler() {
 			loanDetails.incomeCurrency = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function input1_input_handler_1() {
 			loanDetails.expense = to_number(this.value);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select1_change_handler() {
 			loanDetails.expenseCurrency = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function textarea_input_handler() {
 			loanDetails.purpose = this.value;
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select0_change_handler_1() {
 			loanDetails.collateralType = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select_change_handler_1() {
 			loanDetails.cryptoCollateralToken = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function input_input_handler() {
 			loanDetails.cryptoCollateralAmount = to_number(this.value);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select_change_handler_2() {
 			loanDetails.realWorldDescription = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
 		}
 
 		function select1_change_handler_1() {
 			loanDetails.duration = select_value(this);
-			$$invalidate(1, loanDetails);
-			$$invalidate(2, tokens);
+			$$invalidate(3, loanDetails);
+			$$invalidate(4, tokens);
+		}
+
+		function select2_change_handler() {
+			selectedWallet = select_value(this);
+			$$invalidate(2, selectedWallet);
+			$$invalidate(1, wallets);
 		}
 
 		$$self.$capture_state = () => ({
 			onMount,
+			urlRoot,
 			step,
 			totalSteps,
+			wallets,
+			selectedWallet,
 			loanDetails,
 			tokens,
 			fiatCurrencies,
@@ -5985,12 +6145,15 @@ var app = (function () {
 			handleNextStep,
 			handlePreviousStep,
 			handlePhotoUpload,
-			handleSubmit
+			handleSubmit,
+			fetchWallets
 		});
 
 		$$self.$inject_state = $$props => {
 			if ('step' in $$props) $$invalidate(0, step = $$props.step);
-			if ('loanDetails' in $$props) $$invalidate(1, loanDetails = $$props.loanDetails);
+			if ('wallets' in $$props) $$invalidate(1, wallets = $$props.wallets);
+			if ('selectedWallet' in $$props) $$invalidate(2, selectedWallet = $$props.selectedWallet);
+			if ('loanDetails' in $$props) $$invalidate(3, loanDetails = $$props.loanDetails);
 		};
 
 		if ($$props && "$$inject" in $$props) {
@@ -5999,6 +6162,8 @@ var app = (function () {
 
 		return [
 			step,
+			wallets,
+			selectedWallet,
 			loanDetails,
 			tokens,
 			fiatCurrencies,
@@ -6021,7 +6186,8 @@ var app = (function () {
 			select_change_handler_1,
 			input_input_handler,
 			select_change_handler_2,
-			select1_change_handler_1
+			select1_change_handler_1,
+			select2_change_handler
 		];
 	}
 

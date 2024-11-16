@@ -1,8 +1,12 @@
 <script>
     import { onMount } from "svelte";
+    import { urlRoot } from "../constants.js";
 
     let step = 1;
     const totalSteps = 3;
+
+    let wallets = [];
+    let selectedWallet = "";
 
     let loanDetails = {
         amount: "",
@@ -43,6 +47,27 @@
         console.log("Loan Details Submitted:", loanDetails);
         // TODO: Submit `loanDetails` to the backend API for NFT deployment or loan processing.
     }
+
+    async function fetchWallets() {
+        try {
+            const response = await fetch(`${urlRoot}/api/v1/wallets`);
+            if (response.ok) {
+                wallets = await response.json();
+                errorMessage = wallets.length
+                    ? ""
+                    : "No wallets found. Please create a wallet first.";
+            } else {
+                errorMessage = "Failed to fetch wallets. Please try again.";
+            }
+        } catch (error) {
+            errorMessage = "Error fetching wallets. Check your connection.";
+            console.error("Error fetching wallets:", error);
+        }
+    }
+
+    onMount(() => {
+        fetchWallets();
+    });
 </script>
 
 <section class="loan-form-container">
@@ -217,6 +242,16 @@
                     <option value="" disabled>Select duration</option>
                     {#each durations as duration}
                         <option value={duration}>{duration}</option>
+                    {/each}
+                </select>
+            </label>
+
+            <label>
+                Select Wallet:
+                <select bind:value={selectedWallet} required>
+                    <option value="" disabled>Select a wallet</option>
+                    {#each wallets as wallet}
+                        <option value={wallet.id}>{wallet.id}</option>
                     {/each}
                 </select>
             </label>
