@@ -1,21 +1,20 @@
 <script>
-  // import Navbar from './components/Navbar.svelte';
-  // import Footer from './components/Footer.svelte';
   import Home from './routes/index.svelte';
-  import { Router, Route, link, navigate } from 'svelte-routing';
+  import Wallet from './routes/wallet/index.svelte';
+  import WalletCreate from './routes/wallet/create.svelte';
+  import { Router, Route } from 'svelte-routing';
 </script>
 
 <svelte:head>
   <title>Ezy Loan</title>
   <meta name="description" content="Ezy loan provides loan." />
 </svelte:head>
-<!-- <Navbar {isAuthenticated} on:logout={handleLogout} /> -->
 
 <Router>
   <Route path="/" component={Home} />
+  <Route path="/wallet" component={Wallet} />
+  <Route path="/wallet/create" component={WalletCreate} />
 </Router>
-
-<!-- <Footer /> -->
 
 <style>
   main {
