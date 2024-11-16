@@ -67,6 +67,9 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 - Loans, collateral management, and repayments are handled via secure smart contracts.
 - Smart contracts ensure transparency and automate processes like repayment validation and collateral release.
 
+# Slides
+Team's presentation slides can be accessed through this [Ezy Loan Slides] (https://docs.google.com/presentation/d/1C9sZ0NBmUS39uzxyK0Uam1W7iYt3JHzDwUwxw22mSk8/edit?usp=sharing)
+
 #  How to get started
 
 ### To run the backend;
