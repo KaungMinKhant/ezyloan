@@ -38,17 +38,6 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 | **Loan Management**       | Chainlink Automation, 1inch Portfolio API, Push Protocol| Loan tracking, automation of reminders, and updates.             |
 | **Loan Repayment**        | 1inch Fusion+, Chainlink Automation, Push Protocol      | Token swaps for repayments, automation of collateral release, and repayment updates. |
 
-### **Feature Prioritization**
-
-| **Feature**                   | **Priority** | **Notes**                                    |
-|-------------------------------|--------------|---------------------------------------------|
-| **User Onboarding**            | High         | Essential for creating wallets and KYC.     |
-| **Borrower Loan Request**      | High         | Core functionality for the demo.            |
-| **Collateral Submission**      | High         | Show both crypto and tokenized asset flows. |
-| **Loan Approval & Disbursement** | High         | End-to-end loan experience is key.          |
-| **Loan Management**             | Medium       | Manage and track the loan status.  |
-| **Loan Repayment**             | Medium       | Demonstrate token swap and repayment flow.  |
-
 ---
 ### **1. Wallet Creation and Management**
 - Users can create and manage blockchain wallets directly through the platform.
