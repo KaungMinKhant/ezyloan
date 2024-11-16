@@ -7,6 +7,8 @@ from fastapi import APIRouter, HTTPException, Query
 import json
 import cdp as cdp
 import os
+from cdp.transaction import Transaction
+from .feature_extraction import extract_features
 
 # Initialize FastAPI Router
 router = APIRouter()
@@ -96,14 +98,25 @@ async def get_wallet(wallet_id: str):
         
         print("Hydrated Wallet: ", hydrated_wallet)
 
-        # Prepare response data
-        return {
+        # Return the wallet details
+        transactions = Transaction.list(hydrated_wallet.default_address.network_id,
+                                        hydrated_wallet.default_address.address_id)
+        transactions = [list(transactions)]
+        transaction_features = extract_features(transactions[:3])
+        
+        wallet_details = {
             "id": wallet_id,
             "default_address": default_address,
             "balance": balance,
             "can_sign": hydrated_wallet.can_sign,
             "network_id": hydrated_wallet.network_id
         }
+
+        # Add the transaction features to the wallet details
+        wallet_details.update(transaction_features)
+
+        # Prepare response data
+        return wallet_details
 
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Error retrieving wallet: {str(e)}")

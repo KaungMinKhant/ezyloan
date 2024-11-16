@@ -7,3 +7,6 @@ passlib[bcrypt]
 python-jose
 pillow
 cdp-sdk
+joblib
+pandas
+scikit-learn
