@@ -22,7 +22,7 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 - Unified valuation of collateral in both crypto and real-world assets
 - Unique calculation on max available loans based on collateral and credit score
 - Instant loan request and approval - quick and efficient process 
-- Fair and Square interest benefits for lenders 
+- Fair and Square interest benefits for lenders and borrowers
 - Decentralized platform led by peers to peers 
 
 
