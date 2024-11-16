@@ -1575,14 +1575,14 @@ var app = (function () {
 				add_location(h1, file$6, 6, 4, 124);
 				add_location(p, file$6, 7, 4, 158);
 				attr_dev(a0, "href", "/wallet");
-				attr_dev(a0, "class", "btn btn-primary svelte-1sibes8");
+				attr_dev(a0, "class", "btn btn-primary svelte-1c9s08");
 				add_location(a0, file$6, 10, 8, 270);
 				attr_dev(a1, "href", "/wallet/create");
-				attr_dev(a1, "class", "btn btn-secondary svelte-1sibes8");
+				attr_dev(a1, "class", "btn btn-secondary svelte-1c9s08");
 				add_location(a1, file$6, 11, 8, 337);
-				attr_dev(div, "class", "actions svelte-1sibes8");
+				attr_dev(div, "class", "actions svelte-1c9s08");
 				add_location(div, file$6, 9, 4, 240);
-				attr_dev(section, "class", "home-container svelte-1sibes8");
+				attr_dev(section, "class", "home-container svelte-1c9s08");
 				add_location(section, file$6, 5, 0, 87);
 			},
 			l: function claim(nodes) {
@@ -2193,10 +2193,10 @@ var app = (function () {
 				div = element("div");
 				button = element("button");
 				t = text(t_value);
-				attr_dev(button, "class", "btn svelte-1w820z4");
+				attr_dev(button, "class", "btn svelte-htre7s");
 				button.disabled = /*loading*/ ctx[0];
 				add_location(button, file$3, 12, 4, 236);
-				attr_dev(div, "class", "wallet-form svelte-1w820z4");
+				attr_dev(div, "class", "wallet-form svelte-htre7s");
 				add_location(div, file$3, 11, 0, 206);
 			},
 			l: function claim(nodes) {
@@ -2510,7 +2510,7 @@ var app = (function () {
 			c: function create() {
 				div = element("div");
 				create_component(walletform.$$.fragment);
-				attr_dev(div, "class", "wallet-form svelte-1y75oh8");
+				attr_dev(div, "class", "wallet-form svelte-v4c3pd");
 				add_location(div, file$2, 36, 8, 1031);
 			},
 			m: function mount(target, anchor) {
@@ -2563,7 +2563,7 @@ var app = (function () {
 			c: function create() {
 				div = element("div");
 				create_component(walletcard.$$.fragment);
-				attr_dev(div, "class", "wallet-display svelte-1y75oh8");
+				attr_dev(div, "class", "wallet-display svelte-v4c3pd");
 				add_location(div, file$2, 32, 8, 931);
 			},
 			m: function mount(target, anchor) {
@@ -2635,11 +2635,11 @@ var app = (function () {
 				p.textContent = "Securely create a new wallet to manage your decentralized assets.";
 				t3 = space();
 				if_block.c();
-				attr_dev(h1, "class", "svelte-1y75oh8");
+				attr_dev(h1, "class", "svelte-v4c3pd");
 				add_location(h1, file$2, 28, 4, 803);
-				attr_dev(p, "class", "svelte-1y75oh8");
+				attr_dev(p, "class", "svelte-v4c3pd");
 				add_location(p, file$2, 29, 4, 832);
-				attr_dev(section, "class", "create-wallet-container svelte-1y75oh8");
+				attr_dev(section, "class", "create-wallet-container svelte-v4c3pd");
 				add_location(section, file$2, 27, 0, 757);
 			},
 			l: function claim(nodes) {

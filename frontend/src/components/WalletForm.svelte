@@ -28,8 +28,8 @@
 
     .btn {
         padding: 12px 24px;
-        background-color: #3498db;
-        color: white;
+        background-color: #FCE74A; /* Yellow button */
+        color: #000000; /* Black text */
         font-size: 1rem;
         font-weight: bold;
         border: none;
@@ -39,11 +39,12 @@
     }
 
     .btn:hover {
-        background-color: #2980b9;
+        background-color: #FFD93D; /* Slightly darker yellow for hover */
     }
 
     .btn:disabled {
-        background-color: #bdc3c7;
+        background-color: #E0E0E0; /* Light gray for disabled */
+        color: #A0A0A0; /* Gray text for disabled */
         cursor: not-allowed;
     }
 </style>

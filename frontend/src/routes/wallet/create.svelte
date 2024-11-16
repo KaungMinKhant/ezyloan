@@ -46,26 +46,50 @@
         margin: 40px auto;
         padding: 20px;
         text-align: center;
-        border: 1px solid #e0e0e0;
+        border: 1px solid #d3d3d3; /* Subtle gray for border */
         border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
+        background-color: #FFFFFF; /* White background */
     }
 
     h1 {
         font-size: 2rem;
         margin-bottom: 10px;
-        color: #333;
+        color: #000000; /* Black text */
     }
 
     p {
         font-size: 1rem;
         margin-bottom: 20px;
-        color: #555;
+        color: #555555; /* Gray text */
     }
 
     .wallet-display,
     .wallet-form {
         margin-top: 20px;
+    }
+
+    /* Button styling in WalletForm */
+    button {
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    button.btn-primary {
+        background-color: #FCE74A; /* Yellow button */
+        color: #000000; /* Black text */
+    }
+
+    button.btn-primary:hover {
+        opacity: 0.9; /* Slight hover effect */
     }
 </style>
