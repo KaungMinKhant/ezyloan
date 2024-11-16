@@ -12,6 +12,7 @@ from typing import Optional
 import os
 import uuid
 from .wallet import router as wallet_router
+from .users import router as login_router
 
 SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key")
 ALGORITHM = "HS256"
@@ -45,3 +46,4 @@ def get_db():
         db.close()
 
 app.include_router(wallet_router, prefix="/api/v1")
+app.include_router(login_router, prefix="/api/v1")
