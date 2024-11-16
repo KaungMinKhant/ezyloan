@@ -1,4 +1,7 @@
 #  Project Background
+
+Have you ever faced—or heard of—challenges in getting a loan, whether from a bank or a crypto exchange? For many, this is a frustrating reality.
+
 Two persons - May (SME Business Owner) and April (Individual Lender with tangible proof of assets). 
 
 May: She’s a small business owner with multiple assets, eager to expand her business. But her journey to secure a loan was far from easy. Traditional banks burdened her with endless paperwork and uncertainty. Crypto loans felt overwhelming due to her lack of expertise. Finally, she turned to informal lenders, exchanging assets for funds in a risky trust-based system. While she managed to get the loan, it came with unnecessary hardship & risks.
