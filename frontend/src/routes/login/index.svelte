@@ -3,7 +3,7 @@
     import { navigate } from "svelte-routing";
     import { urlRoot } from "../../constants";
     
-    let username = "";
+    let name = "";
     let email = "";
     const dispatch = createEventDispatcher();
     
@@ -14,7 +14,7 @@
     headers: {
     "Content-Type": "application/json",
     },
-    body: JSON.stringify({ username, email }),
+    body: JSON.stringify({ name, email }),
     });
     
     if (response.ok) {
@@ -33,7 +33,7 @@
     <form on:submit|preventDefault={login} class="login-form">
     <div class="form-group">
     <label for="username" style="color: white;">Username</label>
-    <input type="text" id="username" bind:value={username} placeholder="Username" required />
+    <input type="text" id="username" bind:value={name} placeholder="Username" required />
     </div>
     <div class="form-group">
     <label for="email" style="color: white;">Email</label>
