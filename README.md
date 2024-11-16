@@ -20,28 +20,56 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 
 #  Key Features 
 
-- Real-world assets as collateral
-- Flexible Token Swap 
-- Unified valuation of collateral in both crypto and real-world assets
-- Unique calculation on max available loans based on collateral and credit score
-- Instant loan request and approval - quick and efficient process 
-- Fair and Square interest benefits for lenders and borrowers
-- Decentralized platform led by peers to peers 
+1. **Wallet Management**  
+   - Create and manage wallets using the **cdp-sdk**.  
+   - Display wallet details, balances, and associated loan data.  
+
+2. **Loan Application**  
+   - Borrowers can apply for loans using real-world or crypto assets as collateral.  
+   - Collateral valuation is calculated dynamically.  
+
+3. **Loan Approval Process**  
+   - Match borrowers with lenders based on token type and loan valuation.  
+   - Support cross-token loan approvals by swapping tokens as needed.  
+
+4. **Lending Requests**  
+   - Lenders can create lending requests specifying loan tokens, amounts, and terms.  
+
+5. **Smart Contract Deployment**  
+   - Deploy ERC-20 smart contracts dynamically for loan tracking and repayment purposes.  
+
+6. **Loan Repayment**  
+   - Borrowers can repay loans in any token they choose.  
+   - Real-time exchange rate calculation to handle cross-token repayments.  
+
+7. **Cross-Token Flexibility**  
+   - Repayment amounts dynamically adjusted using token-to-token exchange rates via USD as a bridge.  
+
+8. **Loan Management Dashboard**  
+   - View all active loans linked to a wallet.  
+   - Details include loan status, amount, token, collateral value, and repayment history.  
+
+9. **Real-Time Interaction with Blockchain**  
+   - Handle token swaps, fund transfers, and smart contract interactions directly on the blockchain.  
 
 
-#  The Process 
-### **Summary of Technology Integrations**
+#  The Process
+## Project Summary
 
-| **Flow Step**             | **Tool/Technology**                                      | **Purpose**                                                      |
-|---------------------------|---------------------------------------------------------|------------------------------------------------------------------|
-| **User Onboarding**       | Coinbase, Push Protocol, vlayer                         | Wallet creation, KYC, and onboarding notifications.              |
-| **Borrower Requests Loan**| Chainlink Price Feeds, vlayer, Push Protocol            | Loan request processing, crypto valuation, and notifications.    |
-| **Collateral Submission** | Kinto, vlayer Web Proofs, Chainlink CCIP, Push Protocol | Secure collateral deposits, NFT tokenization, cross-chain collateral management, and updates. |
-| **Loan Approval & Disbursement** | Chainlink CCIP, 1inch Fusion+, Push Protocol           | Cross-chain loan disbursement, token swaps, and borrower notifications. |
-| **Loan Management**       | Chainlink Automation, 1inch Portfolio API, Push Protocol| Loan tracking, automation of reminders, and updates.             |
-| **Loan Repayment**        | 1inch Fusion+, Chainlink Automation, Push Protocol      | Token swaps for repayments, automation of collateral release, and repayment updates. |
+| **Feature/Component**       | **Technology Used**             | **Details**                                                                                                   |
+|------------------------------|----------------------------------|---------------------------------------------------------------------------------------------------------------|
+| **Frontend**                | **Svelte**                      | Developed responsive UI for wallet management, loan applications, and repayment workflows.                   |
+| **Backend**                 | **FastAPI**                     | Handled APIs for loan processing, wallet operations, and repayment workflows.                                |
+| **Wallet Management**       | **cdp-sdk**                     | Created and managed wallets, including balances and token transactions.                                       |
+| **Loan Application & Approval** | **FastAPI**, **Custom Logic**, **cdp-sdk**  | Allowed borrowers to apply for loans; matched loans with lenders based on token type and valuation.           |
+| **Loan Repayment**          | **cdp-sdk**, **Custom API**      | Supported repayments in multiple tokens, with real-time exchange rate calculations for cross-token repayments.|
+| **Smart Contracts**         | **ERC-20 Contracts via cdp-sdk**| Deployed and managed contracts dynamically to track loan balances and repayment status.                       |
+| **Exchange Rate Calculation**| **Custom API through chainlink data feed**                  | Implemented token-to-token exchange rates using USD as a bridge for flexibility in repayment options.         |
+| **Data Storage**            | **JSON Files**                  | Used for prototyping and testing, storing loan and wallet information temporarily.                           |
+| **Dynamic Loan Matching**   | **Custom Matching Algorithm**   | Prioritized same-token matches with fallback for cross-token conversions.                                    |
+| **Blockchain Interactions** | **cdp-sdk**                     | Enabled direct blockchain interactions, including trades, transfers, and token deployments.                  |
 
----
+
 ### **1. Wallet Creation and Management**
 - Users can create and manage blockchain wallets directly through the platform.
 - Wallets support multiple tokens, including ETH, USDC, and DAI.
@@ -67,8 +95,73 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 - Loans, collateral management, and repayments are handled via secure smart contracts.
 - Smart contracts ensure transparency and automate processes like repayment validation and collateral release.
 
+## How It’s Made
+
+This project focuses on creating a decentralized peer to peer lending and borrowing platform with a clear emphasis on flexibility, transparency, and ease of use. Here's how the platform was built, reflecting only the components and technologies we actually implemented together:
+
+---
+
+### **Technologies Used**
+
+1. **Frontend**
+   - **Svelte**: Used for building a responsive and interactive user interface, including wallet management, loan application forms, and repayment workflows.
+   - **Custom Styling**: Developed a clean and functional interface with lightweight custom CSS for a seamless user experience.
+
+2. **Backend**
+   - **FastAPI**: Served as the core backend framework for handling API requests, managing loan and repayment operations, and performing token-related logic.
+   - **JSON Files**: Used as a lightweight, temporary data storage solution to prototype and test features like loan approvals and repayments.
+
+3. **Blockchain Integrations**
+   - **cdp-sdk**: The central library used for interacting with blockchain functionalities, including:
+     - Wallet creation and management.
+     - Token deployment and swapping.
+     - Fund transfers between wallets.
+   - **ERC-20 Smart Contracts**: Used to handle token-based transactions and ensure transparency for loan agreements and repayments.
+
+4. **Exchange Rates**
+   - **Custom API Implementation**: Built an exchange rate API that calculates the value of tokens using USD as a bridge, supporting flexible repayments in multiple tokens by leveraging **chainlink data feed**.
+
+---
+
+### **How Components Are Connected**
+
+1. **Wallet Management**
+   - Wallets are created using **cdp-sdk** and can also display balance information for tokens like ETH, USDC, and DAI.
+   - Wallet data is dynamically fetched and displayed in a user-friendly dashboard.
+
+2. **Loan Application and Approval**
+   - Borrowers apply for loans by specifying the token type, collateral type, and amount.
+   - Collateral and loan values are calculated based on custom exchange rate logic.
+   - Lenders' offers are matched to borrowers based on token type and valuation using a custom algorithm.
+
+3. **Loan Repayment**
+   - Borrowers can repay loans flexibly in any supported token.
+   - If the repayment token differs from the loan token, a swap is performed using **cdp-sdk**.
+   - The smart contract is updated with repayment details, and the funds are transferred to the lender’s wallet.
+
+4. **Smart Contracts**
+   - Smart contracts (ERC-20) are deployed dynamically to manage loan terms.
+   - Contracts track balances and ensure repayment updates are recorded on-chain for transparency.
+
+---
+
+### **Notable Hacks & Customizations**
+
+1. **Dynamic Loan Matching**
+   - Implemented a custom algorithm to prioritize matching based on the same token type, with fallback logic for cross-token conversions.
+
+2. **Flexible Repayment Options**
+   - Designed a repayment system that allows borrowers to pay in any supported token, using real-time exchange rates to calculate equivalent repayment amounts.
+
+3. **Prototyping with JSON**
+   - Prototyped key functionalities, like loan applications and repayments, using JSON files before scaling up with more complex integrations.
+
+4. **Direct Blockchain Interactions**
+   - Used **cdp-sdk** for essential blockchain operations, such as deploying tokens, executing trades, and transferring funds, without relying on third-party wallet providers or protocols.
+
+
 # Slides
-Team's presentation slides can be accessed through this [Ezy Loan Slides] (https://docs.google.com/presentation/d/1C9sZ0NBmUS39uzxyK0Uam1W7iYt3JHzDwUwxw22mSk8/edit?usp=sharing)
+Team's presentation slides can be accessed through this [Ezy Loan Slides](https://docs.google.com/presentation/d/1C9sZ0NBmUS39uzxyK0Uam1W7iYt3JHzDwUwxw22mSk8/edit?usp=sharing)
 
 #  How to get started
 
@@ -86,6 +179,6 @@ Team's presentation slides can be accessed through this [Ezy Loan Slides] (https
 - in /frontend directory, run `yarn serve`
 
 # Team Members
-- Yamin Thazin Oo (Product Manager)
-- Kaung Min Khant (Fullstack Developer)
-- Khin Khant Khant Hlaing (Fullstack Developer)
+- [Yamin Thazin Oo (Product Manager/UX Designer)](https://github.com/KaungMinKhant)
+- [Kaung Min Khant (Fullstack Developer)](https://github.com/Yamin-TZO)
+- [Khin Khant Khant Hlaing (Fullstack Developer)](https://github.com/khinkhantkhanthlaing)
