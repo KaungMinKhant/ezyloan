@@ -1,6 +1,7 @@
 from decimal import Decimal
 from backend.app.schemas.nft_tokenization import NFTDeploymentRequest,\
     LoanRequest, LendRequest
+import datetime
 from web3 import Web3
 from fastapi import APIRouter, HTTPException, Query
 import json
@@ -360,7 +361,7 @@ async def loan_approve_reject(request: LoanRequest):
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Fund transfer failed: {str(e)}")
 
-        return {
+        result =  {
             "status": "approved",
             "approved_loan_amount": request.requested_loan_amount,
             "approved_loan_token": request.requested_loan_token,
@@ -368,7 +369,16 @@ async def loan_approve_reject(request: LoanRequest):
             "collateral_value_in_usd": collateral_value,
             "message": f"Loan approved. Funds transferred successfully.",
             "smart_contract_address": smart_contract.contract_address,
+            "lender_wallet_id": lender_wallet.id,
+            "borrower_wallet_id": borrower_wallet.id,
+            "transaction_hash": transfer_response.transaction_hash,
+            "transaction_link": transfer_response.transaction_link,
+            "network_id": transfer_response.network_id,
+            "timestamp": datetime.datetime.now().isoformat()
         }
+        save_request(result, file_path="data/approved_loans.json")
+        return result
+        
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing loan request: {str(e)}")
@@ -430,7 +440,7 @@ async def accept_reject_lend_request(wallet_id: str, request: LendRequest):
                 "loan_valuation_in_usd": loan_valuation,
                 "lender_address": wallet.get("default_address", {}).get("address_id")
             }
-            save_lend_request(lend_request_data)
+            save_request(lend_request_data)
             return {
                 "status": "accepted",
                 "message": f"Lend request approved. Loan amount is ${loan_valuation}."
@@ -440,7 +450,7 @@ async def accept_reject_lend_request(wallet_id: str, request: LendRequest):
         raise HTTPException(status_code=500, detail=f"Error processing lend request: {str(e)}")
 
 
-def save_lend_request(data, file_path="data/lend_requests.json"):
+def save_request(data, file_path="data/lend_requests.json"):
     try:
         if not os.path.exists("data"):
             os.makedirs("data")
