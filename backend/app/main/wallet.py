@@ -13,8 +13,10 @@ COINBASE_API_KEY = os.getenv("COINBASE_API_KEY")
 COINBASE_API_SECRET = os.getenv("COINBASE_API_SECRET")
 
 # Polygon RPC URL for interacting with Chainlink
-POLYGON_RPC_URL = "https://rpc.ankr.com/eth_sepolia"
-
+ETH_SEPOLIA_RPC_URL = os.getenv("ETH_SEPOLIA_RPC_URL")
+ETH_USD_CHAINLINK_ADDRESS = os.getenv("ETH_USD_CHAINLINK_ADDRESS")
+USDC_USD_CHAINLINK_ADDRESS = os.getenv("USDC_USD_CHAINLINK_ADDRESS")
+DAI_USD_CHAINLINK_ADDRESS = os.getenv("DAI_USD_CHAINLINK_ADDRESS")
 
 # Chainlink Price Feed Contract Addresses on Polygon
 CHAINLINK_PRICE_FEEDS = {
@@ -177,7 +179,7 @@ def get_token_price(pair: str) -> float:
         raise HTTPException(status_code=400, detail=f"Unsupported price pair: {pair}")
 
     try:
-        web3 = Web3(Web3.HTTPProvider(POLYGON_RPC_URL))
+        web3 = Web3(Web3.HTTPProvider(ETH_SEPOLIA_RPC_URL))
         print(web3)
         print("Address: ", CHAINLINK_PRICE_FEEDS[pair])
         feed_contract = web3.eth.contract(address=CHAINLINK_PRICE_FEEDS[pair], abi=CHAINLINK_PRICE_FEED_ABI)
