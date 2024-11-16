@@ -29,7 +29,7 @@
     const tokens = ["ETH", "USDC", "DAI"];
     const fiatCurrencies = ["USD", "EUR", "THB"];
     const durations = ["3 months", "6 months", "12 months"];
-    const realWorldCollateralOptions = ["Phone", "Laptop"];
+    const realWorldCollateralOptions = ["house", "car", "laptop", "phone"];
 
     function handleNextStep() {
         if (step < totalSteps) step++;
