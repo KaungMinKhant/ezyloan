@@ -2,6 +2,7 @@
   // import Navbar from './components/Navbar.svelte';
   // import Footer from './components/Footer.svelte';
   import Home from './routes/index.svelte';
+  import Login from './routes/login/index.svelte';
   import { Router, Route, link, navigate } from 'svelte-routing';
 </script>
 
@@ -13,6 +14,7 @@
 
 <Router>
   <Route path="/" component={Home} />
+  <Route path="/login" component={Login} />
 </Router>
 
 <!-- <Footer /> -->
