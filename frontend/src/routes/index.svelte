@@ -10,6 +10,7 @@
     <div class="actions">
         <a href="/wallet" class="btn btn-primary">View Wallets</a>
         <a href="/wallet/create" class="btn btn-secondary">Create a Wallet</a>
+        <a href="/loan/request" class="btn btn-tertiary">Request a Loan</a>
     </div>
 </section>
 
@@ -44,6 +45,11 @@
     .btn-secondary {
         background-color: #fce74a; /* Yellow button */
         color: #000000; /* Text color for yellow button */
+    }
+
+    .btn-tertiary {
+        background-color: #000000;
+        color: #FFFFFF;
     }
 
     .btn:hover {
