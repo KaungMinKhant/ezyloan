@@ -1,14 +1,14 @@
-#Project Background
+#  Project Background
 
-##Problem
+##  Problem
 
-##Solution
+##  Solution
 
-#Key Features 
+#  Key Features 
 
-#The Process 
+#  The Process 
 
-#How to get started
+#  How to get started
 
 ### To run the backend;
 - in root directory, run `docker-compose up -d`
