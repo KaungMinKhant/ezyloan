@@ -21,7 +21,7 @@
     const data = await response.json();
     localStorage.setItem("token", data.access_token);
     dispatch("login");
-    navigate("/admin");
+    navigate("/");
     } else {
     alert("Invalid credentials");
     }

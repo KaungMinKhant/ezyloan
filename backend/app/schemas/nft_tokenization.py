@@ -5,6 +5,9 @@ class NFTDeploymentRequest(BaseModel):
     name: str
     symbol: str
     base_uri: str
+    wallet_id: str
+    requested_loan_amount: float
+    requested_loan_token: str
 
 class FaucetTransactionResponse(BaseModel):
     transaction_hash: str

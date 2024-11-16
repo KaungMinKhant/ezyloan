@@ -135,17 +135,14 @@ async def list_wallets():
                 wallet = await get_wallet(wallet_id)
 
                 # Check if the wallet_id is a borrower_wallet_id in approved_loans
-                loan_details = next(
-                    (loan for loan in approved_loans if loan["borrower_wallet_id"] == wallet_id),
-                    None
-                )
+                loan_details = [
+                    {key: value for key, value in loan.items() if key != "contract_abi"}  # Exclude "contract_abi"
+                    for loan in approved_loans
+                    if loan["borrower_wallet_id"] == wallet_id
+                ]
 
                 # Add loan details to the wallet object if found
                 wallet["loan_details"] = loan_details if loan_details else None
-                
-                # remove abi_contract from loan_details
-                if wallet["loan_details"]:
-                    wallet["loan_details"].pop("contract_abi", None)
 
                 # Append the updated wallet object to the list
                 wallets.append(wallet)
@@ -192,8 +189,8 @@ def fetch_seed(wallet_id: str,
         raise Exception(f"Error fetching seed for wallet {wallet_id}: {str(e)}")
 
 
-@router.post("/wallet/{wallet_id}/deploy-nft")
-async def deploy_nft(wallet_id: str, request: NFTDeploymentRequest):
+@router.post("/wallet/{wallet_id}/nft-approve-reject-loan")
+async def approve_reject_loan_with_nft(wallet_id: str, request: NFTDeploymentRequest):
     try:
         # Fetch the wallet
         wallet = cdp.Wallet.fetch(wallet_id)
@@ -206,15 +203,127 @@ async def deploy_nft(wallet_id: str, request: NFTDeploymentRequest):
         print(f"Faucet transaction: {faucet_response.transaction_hash}")
         # Deploy NFT contract
         nft_contract = wallet.deploy_nft(request.name, request.symbol, request.base_uri)
-        print(nft_contract)
-        return {
-            "contract_address": nft_contract.contract_address,
-            "name": request.name,
-            "symbol": request.symbol,
-            "base_uri": request.base_uri
+        
+        # Validate required fields
+        if not request.wallet_id or not request.requested_loan_token or not request.requested_loan_amount:
+            raise HTTPException(status_code=400, detail="Missing required fields in the request.")
+
+        # Step 1: Calculate collateral valuation
+        collateral_valuation = await get_realworld_asset_valuation(
+            asset=request.name
+        )
+        loan_valuation = await get_crypto_valuation(
+            token=request.requested_loan_token,
+            amount=request.requested_loan_amount
+        )
+
+        if "usd_value" not in collateral_valuation:
+            raise HTTPException(status_code=500, detail="Failed to fetch collateral valuation.")
+
+        # Calculate maximum loan amount
+        collateral_value = collateral_valuation["usd_value"]
+        max_loan_amount = collateral_value * 0.7  # 70% of collateral value
+
+        if loan_valuation["usd_value"] > max_loan_amount:
+            return {
+                "status": "rejected",
+                "reason": "Requested loan amount exceeds the maximum allowable loan amount.",
+                "max_loan_amount_in_usd": max_loan_amount,
+                "collateral_value_in_usd": collateral_value,
+            }
+
+        # Step 2: Find matching lender
+        with open("data/lend_requests.json", "r") as file:
+            lend_requests = json.load(file)
+
+        print("Lend Requests: ", lend_requests)
+        # Prioritize lenders with the same token
+        matched_lender = next(
+            (lender for lender in lend_requests
+            if lender["loan_token"] == request.requested_loan_token and
+                lender["loan_valuation_in_usd"] >= loan_valuation["usd_value"]),
+            None
+        )
+
+        # If no exact token match is found, fallback to general match
+        if not matched_lender:
+            matched_lender = next(
+                (lender for lender in lend_requests
+                if lender["loan_valuation_in_usd"] >= loan_valuation["usd_value"]),
+                None
+            )
+
+        if not matched_lender:
+            return {"status": "rejected", "reason": "No matching lender found."}
+
+        # Fetch lender's wallet
+        lender_wallet = cdp.Wallet.fetch(matched_lender["wallet_id"])
+        lender_wallet = fetch_seed(matched_lender["wallet_id"], lender_wallet)
+
+        # Step 3: Handle token mismatch
+        if matched_lender["loan_token"] != request.requested_loan_token:
+            try:
+                from_asset_id = matched_lender["loan_token"].lower()
+                to_asset_id = request.requested_loan_token.lower()
+                trade_response = lender_wallet.trade(
+                    amount=request.requested_loan_amount,
+                    from_asset_id=from_asset_id,
+                    to_asset_id=to_asset_id
+                )
+                trade_response.wait()  # Wait for the trade to complete
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Token trade failed: {str(e)}")
+
+        # Step 4: Deploy a smart contract
+        try:
+            borrower_wallet = cdp.Wallet.fetch(request.wallet_id)
+            borrower_wallet = fetch_seed(request.wallet_id, borrower_wallet)
+            faucet_response = borrower_wallet.faucet(asset_id="eth")
+            faucet_response.wait()
+            # 1USDC = 1000 LTT
+            total_supply = int(request.requested_loan_amount * 1000)
+            smart_contract = borrower_wallet.deploy_token(
+                name="LoanTrackingToken",
+                symbol="LTT",
+                total_supply=total_supply
+            )
+            smart_contract.wait()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Smart contract deployment failed: {str(e)}")
+
+        # Step 5: Transfer funds to borrower
+        try:
+            transfer_response = lender_wallet.transfer(
+                amount=request.requested_loan_amount,
+                asset_id=request.requested_loan_token.lower(),
+                destination=borrower_wallet.default_address.address_id
+            )
+            transfer_response.wait()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Fund transfer failed: {str(e)}")
+
+        result =  {
+            "status": "approved",
+            "approved_loan_amount": request.requested_loan_amount,
+            "approved_loan_token": request.requested_loan_token,
+            "max_loan_amount_in_usd": max_loan_amount,
+            "collateral_value_in_usd": collateral_value,
+            "message": f"Loan approved. Funds transferred successfully.",
+            "smart_contract_address": smart_contract.contract_address,
+            "lender_wallet_id": lender_wallet.id,
+            "borrower_wallet_id": borrower_wallet.id,
+            "transaction_hash": transfer_response.transaction_hash,
+            "transaction_link": transfer_response.transaction_link,
+            "network_id": transfer_response.network_id,
+            "timestamp": datetime.datetime.now().isoformat(),
+            "contract_abi": smart_contract.abi
         }
+        save_request(result, file_path="data/approved_loans.json")
+        return result
+        
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Error deploying NFT: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing loan request: {str(e)}")
 
 
 def get_token_price(pair: str) -> float:
@@ -244,6 +353,35 @@ def get_token_price(pair: str) -> float:
         return price
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error fetching price for {pair}: {str(e)}")
+
+async def get_realworld_asset_valuation(
+    asset: str = Query(..., description="The real-world asset to evaluate (e.g., Gold, Silver, Real Estate)")
+):
+    """
+    Get the valuation of a pledged real-world asset.
+
+    Args:
+        asset (str): The asset being pledged (e.g., Gold, Silver, Real Estate).
+        amount (float): The amount of the asset.
+
+    Returns:
+        dict: The valuation details, including asset, amount, and USD value.
+    """
+    try:
+        # Fetch the valuation of the real-world asset
+        # For simplicity, we assume the valuation is 1/10th of the amount
+        if asset == "house":
+            usd_value = 100000
+        elif asset == "car":
+            usd_value = 5000
+        else:
+            usd_value = 1000
+        return {
+            "asset": asset,
+            "usd_value": usd_value,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error calculating valuation: {str(e)}")
 
 
 async def get_crypto_valuation(
