@@ -106,6 +106,26 @@ async def get_wallet(wallet_id: str):
         raise HTTPException(status_code=404, detail=f"Error retrieving wallet: {str(e)}")
 
 
+@router.get("/wallets")
+async def list_wallets():
+    """
+    List all locally stored wallets.
+    """
+    try:
+        wallets_dir = "data"  # Path where wallets are stored
+        wallet_files = [f for f in os.listdir(wallets_dir) if f.endswith(".json")]
+
+        wallets = []
+        for file in wallet_files:
+            # remove the .json extension to get the wallet ID
+            wallet_id = file.replace(".json", "")
+            wallet = await get_wallet(wallet_id)
+            wallets.append(wallet)
+        return wallets
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error listing wallets: {str(e)}")
+
+
 def fetch_seed(wallet_id: str,
                wallet: any):
     """
