@@ -1,5 +1,16 @@
 <script>
+    import LoanRepayForm from "./LoanRepayForm.svelte";
     export let wallet = {};
+
+    let showRepayForm = false;
+
+    function toggleRepayForm() {
+        if (!wallet.loan_details) {
+            alert("No loan to repay.");
+            return;
+        }
+        showRepayForm = !showRepayForm;
+    }
 </script>
 
 <div class="card">
@@ -15,6 +26,34 @@
         <p><strong>Network:</strong> {wallet.network_id}</p>
         <p><strong>Address:</strong> {wallet.default_address.address_id}</p>
     </section>
+
+    {#if wallet.loan_details}
+        <section class="loan-details">
+            <h4>Loan Details</h4>
+            <p><strong>Status:</strong> {wallet.loan_details.status}</p>
+            <p><strong>Loan Amount:</strong> {wallet.loan_details.approved_loan_amount} {wallet.loan_details.approved_loan_token}</p>
+            <p><strong>Collateral Value (USD):</strong> ${wallet.loan_details.collateral_value_in_usd.toFixed(2)}</p>
+            <p><strong>Max Loan Amount (USD):</strong> ${wallet.loan_details.max_loan_amount_in_usd.toFixed(2)}</p>
+            <p><strong>Lender Wallet ID:</strong> {wallet.loan_details.lender_wallet_id}</p>
+            <p><strong>Smart Contract Address:</strong> {wallet.loan_details.smart_contract_address}</p>
+            <p>
+                <strong>Transaction:</strong> 
+                <a href="{wallet.loan_details.transaction_link}" target="_blank" rel="noopener noreferrer">
+                    View on Explorer
+                </a>
+            </p>
+            <p><strong>Timestamp:</strong> {new Date(wallet.loan_details.timestamp).toLocaleString()}</p>
+            <button class="btn btn-repay" on:click={toggleRepayForm}>
+                {showRepayForm ? "Cancel Repayment" : "Repay Loan"}
+            </button>
+        </section>
+    {/if}
+
+    {#if showRepayForm}
+        <LoanRepayForm wallet_address={wallet.default_address.address_id}
+                       loan_details={wallet.loan_details}
+        />
+    {/if}
 </div>
 
 <style>
@@ -36,5 +75,47 @@
     .card-body p {
         margin: 5px 0;
         line-height: 1.5;
+    }
+
+    .loan-details {
+        margin-top: 20px;
+        padding-top: 10px;
+        border-top: 1px solid #ddd;
+    }
+
+    .loan-details h4 {
+        margin-bottom: 10px;
+    }
+
+    .loan-details p {
+        margin: 5px 0;
+        line-height: 1.5;
+    }
+
+    .loan-details a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .loan-details a:hover {
+        text-decoration: underline;
+    }
+
+    .btn {
+        margin-top: 10px;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .btn-repay {
+        background-color: #000;
+        color: white;
+    }
+
+    .btn-repay:hover {
+        background-color: #333;
     }
 </style>

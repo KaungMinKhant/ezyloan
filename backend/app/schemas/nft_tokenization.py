@@ -32,3 +32,8 @@ class LoanRequest(BaseModel):
 class LendRequest(BaseModel):
     loan_amount: float
     loan_token: str
+
+class LoanRepay(BaseModel):
+    loan_details: dict
+    repayment_amount: float
+    repayment_token: str

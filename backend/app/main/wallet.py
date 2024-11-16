@@ -1,6 +1,6 @@
 from decimal import Decimal
 from backend.app.schemas.nft_tokenization import NFTDeploymentRequest,\
-    LoanRequest, LendRequest
+    LoanRequest, LendRequest, LoanRepay
 import datetime
 from web3 import Web3
 from fastapi import APIRouter, HTTPException, Query
@@ -112,22 +112,47 @@ async def get_wallet(wallet_id: str):
 @router.get("/wallets")
 async def list_wallets():
     """
-    List all locally stored wallets.
+    List all locally stored wallets and include associated loan details if the wallet is a borrower.
     """
     try:
         wallets_dir = "data"  # Path where wallets are stored
+        approved_loans_file = "data/approved_loans.json"  # File with approved loans
         wallet_files = [f for f in os.listdir(wallets_dir) if f.endswith(".json")]
+
+        # Load approved loans
+        if os.path.exists(approved_loans_file):
+            with open(approved_loans_file, "r") as f:
+                approved_loans = json.load(f)
+        else:
+            approved_loans = []
 
         wallets = []
         for file in wallet_files:
-            # remove the .json extension to get the wallet ID
+            # Remove the .json extension to get the wallet ID
             wallet_id = file.replace(".json", "")
             try:
+                # Fetch wallet details
                 wallet = await get_wallet(wallet_id)
+
+                # Check if the wallet_id is a borrower_wallet_id in approved_loans
+                loan_details = next(
+                    (loan for loan in approved_loans if loan["borrower_wallet_id"] == wallet_id),
+                    None
+                )
+
+                # Add loan details to the wallet object if found
+                wallet["loan_details"] = loan_details if loan_details else None
+                
+                # remove abi_contract from loan_details
+                if wallet["loan_details"]:
+                    wallet["loan_details"].pop("contract_abi", None)
+
+                # Append the updated wallet object to the list
                 wallets.append(wallet)
             except Exception as e:
-                print(f"Error fetching wallet")
+                print(f"Error fetching wallet {wallet_id}: {str(e)}")
                 continue
+
         return wallets
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error listing wallets: {str(e)}")
@@ -247,6 +272,53 @@ async def get_crypto_valuation(
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error calculating valuation: {str(e)}")
+
+
+@router.get("/exchange-rate/{from_token}/{to_token}")
+async def get_exchange_rate(
+    from_token: str,
+    to_token: str,
+):
+    """
+    Calculate the exchange rate between two tokens using USD as a middleman.
+
+    Args:
+        from_token (str): The token you are converting from (e.g., ETH, USDC, DAI).
+        to_token (str): The token you are converting to (e.g., ETH, USDC, DAI).
+
+    Returns:
+        dict: The exchange rate details, including from_token, to_token, and rate.
+
+    Raises:
+        HTTPException: If any error occurs while fetching the prices or calculating the rate.
+    """
+    try:
+        if from_token == to_token:
+            return {
+                "from_token": from_token,
+                "to_token": to_token,
+                "rate": 1.0,
+                "message": "Same token; exchange rate is 1.0",
+            }
+
+        # Fetch USD prices for both tokens
+        from_pair = f"{from_token}/USD"
+        to_pair = f"{to_token}/USD"
+
+        from_price = get_token_price(from_pair)  # Price of from_token in USD
+        to_price = get_token_price(to_pair)      # Price of to_token in USD
+
+        # Calculate exchange rate using USD as the middleman
+        exchange_rate = from_price / to_price
+
+        return {
+            "from_token": from_token,
+            "to_token": to_token,
+            "rate": exchange_rate,
+            "message": f"Exchange rate calculated: 1 {from_token} = {exchange_rate:.6f} {to_token}",
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error calculating exchange rate: {str(e)}")
 
 
 @router.post("/loan/crypto/approve-reject")
@@ -374,7 +446,8 @@ async def loan_approve_reject(request: LoanRequest):
             "transaction_hash": transfer_response.transaction_hash,
             "transaction_link": transfer_response.transaction_link,
             "network_id": transfer_response.network_id,
-            "timestamp": datetime.datetime.now().isoformat()
+            "timestamp": datetime.datetime.now().isoformat(),
+            "contract_abi": smart_contract.abi
         }
         save_request(result, file_path="data/approved_loans.json")
         return result
@@ -448,6 +521,156 @@ async def accept_reject_lend_request(wallet_id: str, request: LendRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing lend request: {str(e)}")
+
+
+@router.post("/loan/repay")
+async def loan_repay(
+    request: LoanRepay
+):
+    """
+    Handles loan repayment, including token swapping, updating the smart contract, and transferring funds to the lender.
+
+    Args:
+        loan_details (dict): Loan details including loan token, amount, and smart contract address.
+        repayment_amount (float): Amount being repaid.
+        repayment_token (str): Token used for repayment.
+
+    Returns:
+        dict: Confirmation and updated loan details.
+    """
+    loan_details = request.loan_details
+    repayment_amount = request.repayment_amount
+    repayment_token = request.repayment_token
+    try:
+        # Step 1: Validate inputs
+        if not loan_details or repayment_amount <= 0 or not repayment_token:
+            raise HTTPException(status_code=400, detail="Missing or invalid required fields.")
+
+        loan_id = loan_details["smart_contract_address"]
+        approved_loan_amount = Decimal(loan_details["approved_loan_amount"])
+        approved_loan_token = loan_details["approved_loan_token"]
+        borrower_wallet_id = loan_details["borrower_wallet_id"]
+        lender_wallet_id = loan_details["lender_wallet_id"]
+
+        if repayment_amount > approved_loan_amount:
+            raise HTTPException(status_code=400, detail="Repayment amount exceeds the outstanding loan amount.")
+
+        # Step 2: Fetch borrower and lender wallets
+        borrower_wallet = cdp.Wallet.fetch(borrower_wallet_id)
+        borrower_wallet = fetch_seed(borrower_wallet_id, borrower_wallet)
+
+        lender_wallet = cdp.Wallet.fetch(lender_wallet_id)
+        lender_wallet = fetch_seed(lender_wallet_id, lender_wallet)
+
+        # Step 3: Handle token mismatch and swap if needed
+        if repayment_token != approved_loan_token:
+            try:
+                trade_response = borrower_wallet.trade(
+                    amount=repayment_amount,
+                    from_asset_id=repayment_token.lower(),
+                    to_asset_id=approved_loan_token.lower()
+                )
+                trade_response.wait()
+                # Adjust repayment amount after swap
+                repayment_amount = Decimal(trade_response.to_amount)
+                repayment_token = approved_loan_token
+            except Exception as e:
+                raise HTTPException(status_code=500, detail=f"Token swap failed: {str(e)}")
+
+        approved_loans = load_json_file("data/approved_loans.json")
+        
+        for loan in approved_loans:
+            if loan["smart_contract_address"] == loan_id:
+                contract_abi = loan.get("contract_abi")
+                break
+        # Step 4: Update the smart contract (optional step)
+        try:
+            contract = cdp.SmartContract.read(
+                network_id=loan_details["network_id"],
+                contract_address=loan_id,
+                method="repayLoan",
+                abi=contract_abi,
+                args={
+                    "amount": float(repayment_amount),  # Ensure correct precision
+                    "token": repayment_token,
+                }
+            )
+            contract.broadcast()
+        except Exception as e:
+            print(f"Optional smart contract update failed: {str(e)}")
+            # Continue execution even if smart contract update fails
+
+        # Step 5: Deposit repayment to the lender's wallet
+        try:
+            transfer_response = borrower_wallet.transfer(
+                amount=float(repayment_amount),  # Convert to float for precision
+                asset_id=repayment_token.lower(),
+                destination=lender_wallet.default_address.address_id
+            )
+            transfer_response.wait()
+        except Exception as e:
+            raise HTTPException(status_code=500, detail=f"Fund transfer to lender failed: {str(e)}")
+
+        # Step 6: Update loan details in the approved loans JSON file
+
+        for loan in approved_loans:
+            if loan["smart_contract_address"] == loan_id:
+                loan["approved_loan_amount"] -= float(repayment_amount)
+                if loan["approved_loan_amount"] <= 0:
+                    loan["status"] = "fully repaid"
+                break
+
+        overwrite_request(approved_loans, file_path="data/approved_loans.json")
+        # Return updated loan details
+        return {
+            "message": "Loan repayment processed successfully.",
+            "updated_loan_details": loan
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing loan repayment: {str(e)}")
+
+
+def load_json_file(file_path):
+    """
+    Load JSON data from a file.
+
+    Args:
+        file_path (str): The path to the JSON file to load.
+
+    Returns:
+        list: The loaded JSON data.
+
+    Raises:
+        FileNotFoundError: If the file does not exist.
+        Exception: If any error occurs while loading the file.
+    """
+    try:
+        with open(file_path, "r") as file:
+            data = json.load(file)
+        return data
+    except FileNotFoundError as e:
+        raise e
+    except Exception as e:
+        raise Exception(f"Error loading JSON file: {str(e)}")
+
+
+def overwrite_request(data, file_path):
+    """
+    Overwrite the contents of a JSON file with new data.
+
+    Args:
+        data (list): The new data to write to the file.
+        file_path (str): The path to the JSON file to overwrite.
+
+    Raises:
+        Exception: If any error occurs while writing the file.
+    """
+    try:
+        with open(file_path, "w") as file:
+            json.dump(data, file, indent=4)
+    except Exception as e:
+        raise Exception(f"Error overwriting JSON file: {str(e)}")
 
 
 def save_request(data, file_path="data/lend_requests.json"):
