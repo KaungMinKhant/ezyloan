@@ -1,5 +1,7 @@
-from backend.app.schemas.nft_tokenization import NFTDeploymentRequest
-from fastapi import APIRouter, HTTPException
+from backend.app.schemas.nft_tokenization import NFTDeploymentRequest,\
+    LoanRequest
+from web3 import Web3
+from fastapi import APIRouter, HTTPException, Query
 import cdp as cdp
 import os
 
@@ -9,6 +11,20 @@ router = APIRouter()
 # Replace these with your actual Coinbase API credentials
 COINBASE_API_KEY = os.getenv("COINBASE_API_KEY")
 COINBASE_API_SECRET = os.getenv("COINBASE_API_SECRET")
+
+# Polygon RPC URL for interacting with Chainlink
+POLYGON_RPC_URL = "https://rpc.ankr.com/eth_sepolia"
+
+
+# Chainlink Price Feed Contract Addresses on Polygon
+CHAINLINK_PRICE_FEEDS = {
+    "ETH/USD": "0x694AA1769357215DE4FAC081bf1f309aDC325306",
+    "USDC/USD": "0xA2F78ab2355fe2f984D808B5CeE7FD0A93D5270E",
+    "DAI/USD": "0x14866185B1962B63C3Ea9E03Bc1da838bab34C19",
+}
+
+# Chainlink Price Feed ABI
+CHAINLINK_PRICE_FEED_ABI = '[{"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"description","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},{"inputs":[{"internalType":"uint80","name":"_roundId","type":"uint80"}],"name":"getRoundData","outputs":[{"internalType":"uint80","name":"roundId","type":"uint80"},{"internalType":"int256","name":"answer","type":"int256"},{"internalType":"uint256","name":"startedAt","type":"uint256"},{"internalType":"uint256","name":"updatedAt","type":"uint256"},{"internalType":"uint80","name":"answeredInRound","type":"uint80"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"latestRoundData","outputs":[{"internalType":"uint80","name":"roundId","type":"uint80"},{"internalType":"int256","name":"answer","type":"int256"},{"internalType":"uint256","name":"startedAt","type":"uint256"},{"internalType":"uint256","name":"updatedAt","type":"uint256"},{"internalType":"uint80","name":"answeredInRound","type":"uint80"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"version","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}]'
 
 cdp.Cdp.configure(COINBASE_API_KEY, COINBASE_API_SECRET)
 
@@ -142,3 +158,114 @@ async def deploy_nft(wallet_id: str, request: NFTDeploymentRequest):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error deploying NFT: {str(e)}")
+
+
+def get_token_price(pair: str) -> float:
+    """
+    Fetch the latest price of a token pair (e.g., ETH/USD) from Chainlink.
+
+    Args:
+        pair (str): The token pair (e.g., ETH/USD).
+
+    Returns:
+        float: The latest price of the token in USD.
+
+    Raises:
+        HTTPException: If the pair is not supported or the fetch fails.
+    """
+    if pair not in CHAINLINK_PRICE_FEEDS:
+        raise HTTPException(status_code=400, detail=f"Unsupported price pair: {pair}")
+
+    try:
+        web3 = Web3(Web3.HTTPProvider(POLYGON_RPC_URL))
+        print(web3)
+        print("Address: ", CHAINLINK_PRICE_FEEDS[pair])
+        feed_contract = web3.eth.contract(address=CHAINLINK_PRICE_FEEDS[pair], abi=CHAINLINK_PRICE_FEED_ABI)
+        print(feed_contract)
+        price_data = feed_contract.functions.latestRoundData().call()
+        price = price_data[1] / 10**8  # Convert price to USD
+        return price
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error fetching price for {pair}: {str(e)}")
+
+
+async def get_crypto_valuation(
+    token: str = Query(..., description="The token to evaluate (e.g., ETH, USDC, DAI)"),
+    amount: float = Query(..., description="The amount of the token being pledged"),
+):
+    """
+    Get the valuation of a pledged crypto token.
+
+    Args:
+        token (str): The token symbol (e.g., ETH, USDC, DAI).
+        amount (float): The amount of the token.
+
+    Returns:
+        dict: The valuation details, including token, amount, and USD value.
+    """
+    try:
+        pair = f"{token}/USD"
+        price = get_token_price(pair)
+        usd_value = price * amount
+        return {
+            "token": token,
+            "amount": amount,
+            "price_per_unit": price,
+            "usd_value": usd_value,
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error calculating valuation: {str(e)}")
+
+
+@router.post("/loan/crypto/approve-reject")
+async def loan_approve_reject(request: LoanRequest):
+    """
+    Approve or reject a loan request based on the value of crypto collateral.
+
+    Args:
+        request (LoanRequest): Loan request details, including collateral amount and loan amount.
+
+    Returns:
+        dict: Approval status and details.
+    """
+    try:
+        # Validate required fields
+        if not request.wallet_id or not request.requested_loan_token or not request.collateral_token or not request.collateral_amount or not request.requested_loan_amount:
+            raise HTTPException(status_code=400, detail="Missing required fields in the request.")
+
+        # Call valuation API or function to calculate collateral value
+        collateral_valuation = await get_crypto_valuation(
+            token=request.collateral_token,
+            amount=request.collateral_amount
+        )
+        
+        loan_valuation = await get_crypto_valuation(
+            token=request.requested_loan_token,
+            amount=request.requested_loan_amount
+        )
+
+        if "usd_value" not in collateral_valuation:
+            raise HTTPException(status_code=500, detail="Failed to fetch collateral valuation.")
+
+        # Calculate maximum loan amount
+        collateral_value = collateral_valuation["usd_value"]
+        max_loan_amount = collateral_value * 0.7  # 70% of collateral value
+
+        # Determine approval or rejection
+        if loan_valuation["usd_value"] <= max_loan_amount:
+            return {
+                "status": "approved",
+                "approved_loan_amount": request.requested_loan_amount,
+                "approved_loan_token": request.requested_loan_token,
+                "max_loan_amount_in_usd": max_loan_amount,
+                "collateral_value_in_usd": collateral_value,
+            }
+        else:
+            return {
+                "status": "rejected",
+                "reason": "Requested loan amount exceeds the maximum allowable loan amount.",
+                "max_loan_amount_in_usd": max_loan_amount,
+                "collateral_value_in_usd": collateral_value,
+            }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error processing loan request: {str(e)}")

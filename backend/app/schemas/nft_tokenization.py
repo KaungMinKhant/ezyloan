@@ -20,3 +20,10 @@ class SmartContract(BaseModel):
     transaction_hash: str
     transaction_link: str
     status: str
+
+class LoanRequest(BaseModel):
+    wallet_id: str
+    collateral_token: str
+    collateral_amount: float
+    requested_loan_amount: float
+    requested_loan_token: str
