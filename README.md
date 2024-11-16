@@ -1,5 +1,6 @@
 #  Project Background
 Two persons - May (SME Business Owner) and April (Individual Lender with tangible proof of assets). 
+
 May: She’s a small business owner with multiple assets, eager to expand her business. But her journey to secure a loan was far from easy. Traditional banks burdened her with endless paperwork and uncertainty. Crypto loans felt overwhelming due to her lack of expertise. Finally, she turned to informal lenders, exchanging assets for funds in a risky trust-based system. While she managed to get the loan, it came with unnecessary hardship & risks.
 
 April: She's an individual lender with extra funds earning low interest in a savings account. While she sees potential in lending locally, she worrys about scams and defaults. 
