@@ -4760,6 +4760,7 @@ var app = (function () {
 				add_location(label0, file$3, 89, 12, 2823);
 				attr_dev(input, "type", "number");
 				attr_dev(input, "placeholder", "Enter loan amount");
+				attr_dev(input, "step", "0.000000001");
 				input.required = true;
 				attr_dev(input, "class", "svelte-xosryq");
 				add_location(input, file$3, 101, 16, 3253);
@@ -4768,16 +4769,16 @@ var app = (function () {
 				option1.__value = "";
 				set_input_value(option1, option1.__value);
 				option1.disabled = true;
-				add_location(option1, file$3, 112, 20, 3596);
+				add_location(option1, file$3, 113, 20, 3635);
 				select1.required = true;
 				attr_dev(select1, "class", "svelte-xosryq");
 				if (/*loanDetails*/ ctx[2].token === void 0) add_render_callback(() => /*select1_change_handler*/ ctx[10].call(select1));
-				add_location(select1, file$3, 111, 16, 3527);
+				add_location(select1, file$3, 112, 16, 3566);
 				attr_dev(label2, "class", "svelte-xosryq");
-				add_location(label2, file$3, 109, 12, 3480);
+				add_location(label2, file$3, 110, 12, 3519);
 				attr_dev(button, "type", "submit");
 				attr_dev(button, "class", "btn btn-primary svelte-xosryq");
-				add_location(button, file$3, 119, 12, 3841);
+				add_location(button, file$3, 120, 12, 3880);
 				attr_dev(form, "class", "svelte-xosryq");
 				add_location(form, file$3, 88, 8, 2764);
 			},
@@ -5043,7 +5044,7 @@ var app = (function () {
 		return block;
 	}
 
-	// (114:20) {#each tokens as token}
+	// (115:20) {#each tokens as token}
 	function create_each_block(ctx) {
 		let option;
 		let t_value = /*token*/ ctx[12] + "";
@@ -5055,7 +5056,7 @@ var app = (function () {
 				t = text(t_value);
 				option.__value = /*token*/ ctx[12];
 				set_input_value(option, option.__value);
-				add_location(option, file$3, 114, 24, 3714);
+				add_location(option, file$3, 115, 24, 3753);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, option, anchor);
@@ -5073,14 +5074,14 @@ var app = (function () {
 			block,
 			id: create_each_block.name,
 			type: "each",
-			source: "(114:20) {#each tokens as token}",
+			source: "(115:20) {#each tokens as token}",
 			ctx
 		});
 
 		return block;
 	}
 
-	// (123:8) {#if resultMessage}
+	// (124:8) {#if resultMessage}
 	function create_if_block_2(ctx) {
 		let p;
 		let t;
@@ -5090,7 +5091,7 @@ var app = (function () {
 				p = element("p");
 				t = text(/*resultMessage*/ ctx[5]);
 				attr_dev(p, "class", "result-text svelte-xosryq");
-				add_location(p, file$3, 123, 12, 3960);
+				add_location(p, file$3, 124, 12, 3999);
 			},
 			m: function mount(target, anchor) {
 				insert_dev(target, p, anchor);
@@ -5110,7 +5111,7 @@ var app = (function () {
 			block,
 			id: create_if_block_2.name,
 			type: "if",
-			source: "(123:8) {#if resultMessage}",
+			source: "(124:8) {#if resultMessage}",
 			ctx
 		});
 

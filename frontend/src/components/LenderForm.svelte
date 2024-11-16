@@ -103,6 +103,7 @@
                     type="number"
                     bind:value={loanDetails.amount}
                     placeholder="Enter loan amount"
+                    step="0.000000001"
                     required
                 />
             </label>
