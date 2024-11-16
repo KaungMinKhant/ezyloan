@@ -7,15 +7,13 @@ class UserBase(BaseModel):
     email: str
 
 class UserCreate(UserBase):
-    name: str
-    email: str
+    pass
 
 class UserLogin(BaseModel):
-    name: str
-    email: str
+    pass
 
 class User(UserBase):
     id: int
 
-class Config:
-    orm_mode = True
+    class Config:
+        orm_mode = True

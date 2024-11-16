@@ -8,13 +8,12 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 @router.post("/login")
-async def login(username: str, email: str):
+async def login(user_data: UserCreate):
     """
     login method
     """
     try:
         print("logging in")
-        user_data = UserCreate(name=username, email=email)
         register_user(user_data)
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Error retrieving wallet: {str(e)}")
