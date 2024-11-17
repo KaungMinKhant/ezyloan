@@ -32,7 +32,10 @@ class InferenceRequest(BaseModel):
 @router.post("/predict")
 async def predict(request: InferenceRequest):
     try:
-        input_data = pd.DataFrame([request.dict()])
+        if hasattr(request, "dict"):
+            input_data = pd.DataFrame([request.dict()])
+        else:
+            input_data = pd.DataFrame([request])
         column_mapping = {'usr_id':'Customer_ID', 
                            'name':'Name',
                            'age':'Age',
@@ -49,7 +52,6 @@ async def predict(request: InferenceRequest):
                             'balance':'balance',
                             'can_sign':'can_sign',
                             'network_id':'network_id'}
-
         # Rename the columns using the mapping
         input_data.rename(columns=column_mapping, inplace=True)
         numeric_columns = [

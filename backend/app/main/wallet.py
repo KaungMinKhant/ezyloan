@@ -235,8 +235,9 @@ async def approve_reject_loan_with_nft(wallet_id: str, request: NFTDeploymentReq
             raise HTTPException(status_code=500, detail="Failed to fetch collateral valuation.")
         print("wallet data: ", wallet)
         # Calculate credit sccore
-        wallet_data = get_wallet(wallet_id)
+        wallet_data = await get_wallet(wallet_id)
         print("wallet data: ", wallet_data)
+
         personal_data = {"usr_id": "user_123",
                         "name": "John Doe",
                         "age": 30,
@@ -245,8 +246,21 @@ async def approve_reject_loan_with_nft(wallet_id: str, request: NFTDeploymentReq
                         "monthly_inhand_salary": 5000.0,
                         "type_of_Loan": "Personal"}
 
-        wallet_data.update(personal_data)
-        credit_score = predict(wallet_data)
+        # Extract the specified keys from wallet_data
+        temp = {'wallet_id': wallet_data['id'],
+                'num_transactions': wallet_data['num_transactions'],
+                'total_value': wallet_data['total_value'],
+                'avg_transaction_value': wallet_data['avg_transaction_value'],
+                'num_unique_addresses': wallet_data['num_unique_addresses'],
+                'default_address': wallet_data['default_address']['wallet_id'],
+                'balance': wallet_data['balance']['eth'],
+                'can_sign': wallet_data['can_sign'],
+                'network_id': wallet_data['network_id'] }
+
+
+        personal_data.update(temp)
+        print("predict data: ", personal_data )
+        credit_score = await predict(personal_data )
         print("credit score: ", credit_score)
 
 
