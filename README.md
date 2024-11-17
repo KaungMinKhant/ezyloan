@@ -97,6 +97,7 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 - Real-World Assets: Borrowers pledge real world assets as colletary and system tokenize it to NFT in order to represent in digital realm.
 - We combine the behavioral, personal and cryptocurrency data along with the collateral to dynamically calculate maximum available loan for each borrower using Artifical Intelligence.
 - Our AI model has 98% accuracy.
+- Please see our AI model used at [here](https://drive.google.com/file/d/13QOos4VH1bzJITNMbYbvU-OPPO456ApV/view?usp=sharing)
 - Loans are tied to specific collateral, with smart contracts managing the collateral and loan terms.
 
 ### **3. Lending Requests for Lenders**
