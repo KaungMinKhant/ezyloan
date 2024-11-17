@@ -77,7 +77,7 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 | **Frontend**                | **Svelte**                      | Developed responsive UI for wallet management, loan applications, and repayment workflows.                   |
 | **Backend**                 | **FastAPI**                     | Handled APIs for loan processing, wallet operations, and repayment workflows.                                |
 | **Wallet Management**       | **cdp-sdk**                     | Created and managed wallets, including balances and token transactions.                                       |
-| **Loan Application & Approval** | **FastAPI**, **Custom Logic**, **cdp-sdk**  | Allowed borrowers to apply for loans; matched loans with lenders based on token type and valuation.           |
+| **Loan Application & Approval** | **FastAPI**, **Custom Logic**, **cdp-sdk**, **random forest**, **scikit-learn**  | Allowed borrowers to apply for loans; matched loans with lenders based on token type and valuation. Use AI along with collateary in order to calculate maximum available loan for borrower.           |
 | **Loan Repayment**          | **cdp-sdk**, **Custom API**      | Supported repayments in multiple tokens, with real-time exchange rate calculations for cross-token repayments.|
 | **Smart Contracts**         | **ERC-20 Contracts via cdp-sdk**| Deployed and managed contracts dynamically to track loan balances and repayment status.                       |
 | **Exchange Rate Calculation**| **Custom API through chainlink data feed**                  | Implemented token-to-token exchange rates using USD as a bridge for flexibility in repayment options.         |
@@ -95,6 +95,8 @@ Unlike the other platforms, our system directly benefits lenders with higher ret
 - Borrowers can apply for loans using either crypto assets or tokenized real-world assets as collateral.
 - Crypto Assets: Borrowers can pledge cryptocurrencies such as ETH or USDT as collateral.
 - Real-World Assets: Borrowers pledge real world assets as colletary and system tokenize it to NFT in order to represent in digital realm.
+- We combine the behavioral, personal and cryptocurrency data along with the collateral to dynamically calculate maximum available loan for each borrower using Artifical Intelligence.
+- Our AI model has 98% accuracy.
 - Loans are tied to specific collateral, with smart contracts managing the collateral and loan terms.
 
 ### **3. Lending Requests for Lenders**
@@ -136,6 +138,9 @@ This project focuses on creating a decentralized peer to peer lending and borrow
 
 4. **Exchange Rates**
    - **Custom API Implementation**: Built an exchange rate API that calculates the value of tokens using USD as a bridge, supporting flexible repayments in multiple tokens by leveraging **chainlink data feed**.
+
+5. **Custom AI Model**
+   - **Random Forest Algorithm**: Used to predict the maximum available loan for borrowers based on their collateral and personal, behavioral, and cryptocurrency data.
 
 ---
 
