@@ -10,6 +10,22 @@ April: She's an individual lender with extra funds earning low interest in a sav
 
 **This kind of individual loan is popular in developing countries such as Myanmar.**
 
+# A Little Bit About Us
+### Our Mission 🚀
+To simplify and democratize the lending process, making it accessible and efficient for everyone.
+
+### Our Vision 🌍
+A world where financial barriers are broken down, and everyone has equal access to financial opportunities.
+
+### Our Values 💡
+- **Innovation**: Continuously pushing the boundaries of what's possible.
+- **Transparency**: Building trust through openness and honesty.
+- **Empowerment**: Enabling individuals to take control of their financial future.
+- **Community**: Fostering a supportive and inclusive environment.
+
+### Our Team 🌟
+We are three passionate individuals from Myanmar, where we've seen firsthand the challenges of accessing loans. This is our first time participating in a web3 hackathon, and our first web3 project. We're excited to learn, grow, and make a positive impact through our work.
+
 ##  Problem
 Both borrowers and lenders are stuck in an outdated, inefficient loan system.
 
