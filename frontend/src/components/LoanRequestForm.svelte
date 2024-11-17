@@ -29,7 +29,7 @@
     const tokens = ["ETH", "USDC", "DAI"];
     const fiatCurrencies = ["USD", "EUR", "THB"];
     const durations = ["3 months", "6 months", "12 months"];
-    const realWorldCollateralOptions = ["Phone", "Laptop"];
+    const realWorldCollateralOptions = ["house", "car", "laptop", "phone"];
 
     function handleNextStep() {
         if (step < totalSteps) step++;
@@ -44,7 +44,47 @@
     }
 
     async function handleSubmit() {
-        console.log("Loan Details Submitted:", loanDetails);
+        if (loanDetails.collateralType === "crypto") {
+            try {
+                const response = await fetch(`${urlRoot}/api/v1/loan/crypto/approve-reject`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        wallet_id: selectedWallet,
+                        collateral_token: loanDetails.cryptoCollateralToken,
+                        collateral_amount: loanDetails.cryptoCollateralAmount,
+                        requested_loan_amount: loanDetails.amount,
+                        requested_loan_token: loanDetails.token
+                    }),
+                });
+                // check if updated_loan_details is returned
+                alert("Loan Has been approved. Funding has been deposited into your account. Please see in dashboard.");
+            } catch (error) {
+                console.error("Error during repayment:", error);
+                alert("An error occurred during repayment.");
+            }
+        }
+        else if (loanDetails.collateralType === "real-world") {
+            try {
+                const response = await fetch(`${urlRoot}/api/v1/wallet/${selectedWallet}/nft-approve-reject-loan`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        name: loanDetails.realWorldDescription,
+                        symbol: loanDetails.realWorldDescription + "NFT",
+                        base_uri: "https://ipfs.io/ipfs/",
+                        wallet_id: selectedWallet,
+                        requested_loan_amount: loanDetails.amount,
+                        requested_loan_token: loanDetails.token
+                    }),
+                });
+                // check if updated_loan_details is returned
+                alert("Loan Has been approved. Funding has been deposited into your account. Please see in dashboard.");
+            } catch (error) {
+                console.error("Error during repayment:", error);
+                alert("An error occurred during repayment.");
+            }
+        }
         // TODO: Submit `loanDetails` to the backend API for NFT deployment or loan processing.
         const { age, amount, duration, occupation, token, income, expense, incomeCurrency, expenseCurrency,
             purpose, collateralType
