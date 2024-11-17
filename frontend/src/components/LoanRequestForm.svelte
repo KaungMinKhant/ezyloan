@@ -86,6 +86,43 @@
             }
         }
         // TODO: Submit `loanDetails` to the backend API for NFT deployment or loan processing.
+        const { age, amount, duration, occupation, token, income, expense, incomeCurrency, expenseCurrency,
+            purpose, collateralType
+         } = loanDetails;
+
+        const payload = {
+            amount: amount,
+            token: token,
+            age: age,
+            occupation: occupation,
+            monthly_income: income,
+            income_currency: incomeCurrency,
+            monthly_expense: expense,
+            expene_currency: expenseCurrency,
+            purpose_of_loan: purpose,
+            collateral_type: collateralType,
+            loan_duration: duration,
+            };
+        console.log('paylo', payload)
+
+        try {
+        const response = await fetch(`${urlRoot}/api/v1/loans/`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || "Failed to create loan.");
+        }
+
+        const data = await response.json();
+        alert("Loan created successfully!");
+        //fetchLoans(); // Refresh the loans list
+        } catch (err) {
+        //error = err.message;
+        }
     }
 
     async function fetchWallets() {

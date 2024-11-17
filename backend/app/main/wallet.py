@@ -7,6 +7,9 @@ from fastapi import APIRouter, HTTPException, Query
 import json
 import cdp as cdp
 import os
+from cdp.transaction import Transaction
+from .feature_extraction import extract_features
+from .predict import predict
 
 # Initialize FastAPI Router
 router = APIRouter()
@@ -96,14 +99,25 @@ async def get_wallet(wallet_id: str):
         
         print("Hydrated Wallet: ", hydrated_wallet)
 
-        # Prepare response data
-        return {
+        # Return the wallet details
+        transactions = Transaction.list(hydrated_wallet.default_address.network_id,
+                                        hydrated_wallet.default_address.address_id)
+        transactions = [list(transactions)]
+        transaction_features = extract_features(transactions[:3])
+        
+        wallet_details = {
             "id": wallet_id,
             "default_address": default_address,
             "balance": balance,
             "can_sign": hydrated_wallet.can_sign,
             "network_id": hydrated_wallet.network_id
         }
+
+        # Add the transaction features to the wallet details
+        wallet_details.update(transaction_features)
+
+        # Prepare response data
+        return wallet_details
 
     except Exception as e:
         raise HTTPException(status_code=404, detail=f"Error retrieving wallet: {str(e)}")
@@ -219,10 +233,45 @@ async def approve_reject_loan_with_nft(wallet_id: str, request: NFTDeploymentReq
 
         if "usd_value" not in collateral_valuation:
             raise HTTPException(status_code=500, detail="Failed to fetch collateral valuation.")
+        print("wallet data: ", wallet)
+        # Calculate credit sccore
+        wallet_data = await get_wallet(wallet_id)
+        print("wallet data: ", wallet_data)
+
+        personal_data = {"usr_id": "user_123",
+                        "name": "John Doe",
+                        "age": 30,
+                        "occupation": "Software Engineer",
+                        "annual_Income": 80000.0,
+                        "monthly_inhand_salary": 5000.0,
+                        "type_of_Loan": "Personal"}
+
+        # Extract the specified keys from wallet_data
+        temp = {'wallet_id': wallet_data['id'],
+                'num_transactions': wallet_data['num_transactions'],
+                'total_value': wallet_data['total_value'],
+                'avg_transaction_value': wallet_data['avg_transaction_value'],
+                'num_unique_addresses': wallet_data['num_unique_addresses'],
+                'default_address': wallet_data['default_address']['wallet_id'],
+                'balance': wallet_data['balance']['eth'],
+                'can_sign': wallet_data['can_sign'],
+                'network_id': wallet_data['network_id'] }
+
+
+        personal_data.update(temp)
+        print("predict data: ", personal_data )
+        credit_score = await predict(personal_data )
+        print("credit score: ", credit_score)
+
 
         # Calculate maximum loan amount
         collateral_value = collateral_valuation["usd_value"]
-        max_loan_amount = collateral_value * 0.7  # 70% of collateral value
+        threhold = 0.7
+        if credit_score["predictions"] == 2:
+            threhold = 0.8
+        elif credit_score["predictions"] == 0:
+            threhold = 0.6
+        max_loan_amount = collateral_value * threhold  # threhold% of collateral value
 
         if loan_valuation["usd_value"] > max_loan_amount:
             return {
