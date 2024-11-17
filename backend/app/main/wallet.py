@@ -9,6 +9,7 @@ import cdp as cdp
 import os
 from cdp.transaction import Transaction
 from .feature_extraction import extract_features
+from .predict import predict
 
 # Initialize FastAPI Router
 router = APIRouter()
@@ -232,10 +233,31 @@ async def approve_reject_loan_with_nft(wallet_id: str, request: NFTDeploymentReq
 
         if "usd_value" not in collateral_valuation:
             raise HTTPException(status_code=500, detail="Failed to fetch collateral valuation.")
+        print("wallet data: ", wallet)
+        # Calculate credit sccore
+        wallet_data = get_wallet(wallet_id)
+        print("wallet data: ", wallet_data)
+        personal_data = {"usr_id": "user_123",
+                        "name": "John Doe",
+                        "age": 30,
+                        "occupation": "Software Engineer",
+                        "annual_Income": 80000.0,
+                        "monthly_inhand_salary": 5000.0,
+                        "type_of_Loan": "Personal"}
+
+        wallet_data.update(personal_data)
+        credit_score = predict(wallet_data)
+        print("credit score: ", credit_score)
+
 
         # Calculate maximum loan amount
         collateral_value = collateral_valuation["usd_value"]
-        max_loan_amount = collateral_value * 0.7  # 70% of collateral value
+        threhold = 0.7
+        if credit_score["predictions"] == 2:
+            threhold = 0.8
+        elif credit_score["predictions"] == 0:
+            threhold = 0.6
+        max_loan_amount = collateral_value * threhold  # threhold% of collateral value
 
         if loan_valuation["usd_value"] > max_loan_amount:
             return {
